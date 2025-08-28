@@ -147,7 +147,7 @@ pub fn impl_service_impl(_args: TokenStream, input: TokenStream) -> TokenStream 
         // Add the auto-generated register_handlers method
         let register_handlers_method = quote! {
             /// Auto-generated handler registration - DO NOT MODIFY
-            pub async fn register_handlers(service: &rabbitmesh::MicroService) -> Result<(), Box<dyn std::error::Error>> {
+            pub async fn register_handlers(service: &rabbitmesh::MicroService) -> anyhow::Result<()> {
                 use rabbitmesh::{Message, RpcResponse};
                 
                 tracing::info!("🔧 Auto-registering service methods...");

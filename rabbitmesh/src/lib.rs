@@ -36,5 +36,8 @@ pub use connection::{ConnectionManager, ConnectionConfig};
 pub use message::{Message, MessageType, RpcRequest, RpcResponse};
 pub use rpc::{RpcHandler, RpcFramework};
 pub use service::{MicroService, ServiceConfig, ServiceClient as ServiceClientFromService};
+
+// Convenient alias for the main service
+pub use service::MicroService as Service;
 pub use client::ServiceClient;
 pub use error::{RabbitMeshError, Result};

@@ -21,7 +21,7 @@ pub fn impl_service_definition(_args: TokenStream, input: TokenStream) -> TokenS
             }
             
             /// Create and configure a microservice instance
-            pub async fn create_service(amqp_url: impl Into<String>) -> Result<rabbitmesh::MicroService, Box<dyn std::error::Error>> {
+            pub async fn create_service(amqp_url: impl Into<String>) -> anyhow::Result<rabbitmesh::MicroService> {
                 let service_name = Self::service_name();
                 let service = rabbitmesh::MicroService::new_simple(service_name, amqp_url).await?;
                 
