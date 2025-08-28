@@ -56,8 +56,14 @@ impl ServiceClient {
     /// Call a microservice method
     /// 
     /// This is how the API gateway calls microservices:
-    /// ```rust
+    /// ```rust,no_run
+    /// # use rabbitmesh::ServiceClient;
+    /// # #[tokio::main]
+    /// # async fn main() -> anyhow::Result<()> {
+    /// let client = ServiceClient::new("api-gateway", "amqp://localhost:5672").await?;
     /// let response = client.call("user-service", "get_user", 123).await?;
+    /// # Ok(())
+    /// # }
     /// ```
     pub async fn call(
         &self,

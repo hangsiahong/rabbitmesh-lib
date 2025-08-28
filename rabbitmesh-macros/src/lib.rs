@@ -11,7 +11,7 @@
 //!
 //! Write this simple code:
 //!
-//! ```rust,no_run
+//! ```rust,ignore
 //! use rabbitmesh_macros::{service_definition, service_impl};
 //! use serde::{Deserialize, Serialize};
 //!
@@ -70,7 +70,7 @@
 //!
 //! The macros intelligently handle different method signatures:
 //!
-//! ```rust,no_run
+//! ```rust,ignore
 //! # use rabbitmesh_macros::{service_definition, service_impl};
 //! # use serde::{Deserialize, Serialize};
 //! # #[derive(Deserialize)] pub struct CreateRequest { pub name: String }

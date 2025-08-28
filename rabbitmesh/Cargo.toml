@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["RabbitMesh Team <rabbitmesh@example.com>"]
 description = "Message-driven microservices framework using RabbitMQ for zero-port service mesh"
-license = "MIT OR Apache-2.0"
+license = "MIT"
 repository = "https://github.com/rabbitmesh/rabbitmesh"
 homepage = "https://github.com/rabbitmesh/rabbitmesh"
 documentation = "https://docs.rs/rabbitmesh"
@@ -44,3 +44,4 @@ chrono = { version = "0.4", features = ["serde"] }
 [dev-dependencies]
 tokio-test = { workspace = true }
 tracing-subscriber = { workspace = true }
+rabbitmesh-macros = { path = "../rabbitmesh-macros" }

@@ -116,4 +116,4 @@ See the [examples/ecommerce](examples/ecommerce) directory for a complete micros
 
 ## 📄 License
 
-Licensed under either of Apache License, Version 2.0 or MIT license at your option.
+MIT license

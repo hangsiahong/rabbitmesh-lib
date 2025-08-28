@@ -2028,6 +2028,7 @@ dependencies = [
  "chrono",
  "futures-util",
  "lapin",
+ "rabbitmesh-macros",
  "serde",
  "serde_json",
  "thiserror 1.0.69",

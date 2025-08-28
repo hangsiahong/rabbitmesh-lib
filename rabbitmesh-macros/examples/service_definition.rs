@@ -1,9 +1,14 @@
-//! Example showing how to use RabbitMesh macros for service definition
+//! RabbitMesh Macros - Syntax Example  
+//! 
+//! This file demonstrates RabbitMesh macro syntax for documentation purposes.
+//! It cannot be compiled within the macros crate due to circular dependencies.
 //!
-//! This demonstrates the three core macros:
-//! - #[service_definition]: Marks a struct as a RabbitMesh service
-//! - #[service_impl]: Processes impl blocks to auto-register methods
-//! - #[service_method]: Defines HTTP routes and RPC handlers
+//! For working examples, see:
+//! - `examples/simple-todo/` - Complete working service with full dependencies
+//! - `rabbitmesh/examples/simple_service.rs` - Basic working example
+
+// Example syntax (for documentation only):
+/*
 
 use rabbitmesh_macros::{service_definition, service_impl};
 use serde::{Deserialize, Serialize};
@@ -51,6 +56,34 @@ impl GreetingService {
     }
 }
 
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
+    // Create and start service using generated methods
+    let service = GreetingService::create_service("amqp://localhost:5672").await?;
+    
+    println!("🚀 GreetingService started!");
+    println!("✨ Auto-discovered routes:");
+    for (route, method) in GreetingService::get_routes() {
+        println!("   {} -> {}", method, route);
+    }
+    
+    service.start().await?;
+    Ok(())
+}
+
+*/
+
+fn main() {
+    // This example shows macro syntax only.
+    // For working examples, run:
+    //   cargo run --example simple_service (in rabbitmesh crate)
+    //   cargo run --bin todo-service (in examples/simple-todo)
+    println!("📖 This is a syntax documentation example.");
+    println!("🚀 See working examples in:");
+    println!("   - examples/simple-todo/ (complete service)");
+    println!("   - rabbitmesh/examples/ (basic examples)");
+}
+
 // The macros automatically generate:
 // - Service registration methods (create_service, service_name, etc.)
 // - Route discovery methods (get_routes)
@@ -58,19 +91,3 @@ impl GreetingService {
 // - HTTP route mapping
 // - Service discovery integration
 
-fn main() {
-    println!("RabbitMesh Service Definition Example");
-    println!("=====================================");
-    println!();
-    println!("The macros above automatically generate:");
-    println!("✅ Service registration: GreetingService::create_service()");
-    println!("✅ Service name: GreetingService::service_name()");  
-    println!("✅ Route discovery: GreetingService::get_routes()");
-    println!("✅ RPC handlers for: say_hello, get_greeting, health_check");
-    println!("✅ HTTP routes: POST /hello, GET /greeting/:name, GET /health");
-    println!("✅ RabbitMQ queues: rabbitmesh.GreetingService.*");
-    println!("✅ JSON serialization/deserialization");
-    println!("✅ Service discovery integration");
-    println!();
-    println!("All from just a few macro annotations! 🪄");
-}

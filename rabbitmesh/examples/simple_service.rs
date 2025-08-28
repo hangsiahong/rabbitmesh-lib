@@ -88,7 +88,7 @@ impl ItemService {
     /// Framework handles tuple parameters: (path_param, request_body)
     #[service_method("PUT /items/:id")]
     pub async fn update_item(params: (String, UpdateItemRequest)) -> Result<ItemResponse, String> {
-        let (item_id, request) = params;
+        let (item_id, _request) = params;
         println!("Updating item: {}", item_id);
         
         Ok(ItemResponse {

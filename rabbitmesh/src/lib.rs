@@ -167,9 +167,13 @@
 //! ```rust,no_run
 //! use rabbitmesh::ServiceClient;
 //!
+//! # #[tokio::main]
+//! # async fn main() -> anyhow::Result<()> {
 //! // From API Gateway or another service
 //! let client = ServiceClient::new("api-gateway", "amqp://localhost:5672").await?;
 //! let response = client.call("user-service", "get_user", "user123").await?;
+//! # Ok(())
+//! # }
 //! ```
 //!
 //! ## 🎯 Key Features
