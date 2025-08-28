@@ -41,7 +41,9 @@ anyhow = "1.0"
 # Time
 chrono = { version = "0.4", features = ["serde"] }
 
+# Proc macros
+rabbitmesh-macros = { path = "../rabbitmesh-macros" }
+
 [dev-dependencies]
 tokio-test = { workspace = true }
 tracing-subscriber = { workspace = true }
-rabbitmesh-macros = { path = "../rabbitmesh-macros" }
