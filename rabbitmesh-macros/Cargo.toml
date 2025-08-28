@@ -20,8 +20,8 @@ proc-macro2 = { workspace = true }
 quote = { workspace = true }
 syn = { workspace = true }
 
-# Service registry
-inventory = { workspace = true }
+# Service registry - removing inventory for simpler approach
+# inventory = { workspace = true }
 
 # Error handling
 thiserror = { workspace = true }

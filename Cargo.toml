@@ -8,7 +8,14 @@ members = [
     "examples/simple-demo",
     "examples/ecommerce-microservices/user-service",
     "examples/ecommerce-microservices/product-service", 
-    "examples/ecommerce-microservices/api-gateway"
+    "examples/ecommerce-microservices/api-gateway",
+    "examples/blog-platform/blog-common",
+    "examples/blog-platform/auth-service",
+    "examples/blog-platform/post-service",
+    "examples/blog-platform/comment-service",
+    "examples/blog-platform/api-gateway",
+    "examples/blog-platform/test-macro-service",
+    "examples/blog-platform/test-auto-service"
 ]
 
 [workspace.package]
@@ -69,6 +76,13 @@ syn = { version = "2.0", features = ["full", "extra-traits"] }
 
 # Time handling
 chrono = { version = "0.4", features = ["serde"] }
+
+# Password hashing
+bcrypt = "0.15"
+
+# OpenAPI documentation
+utoipa = { version = "4.0", features = ["axum_extras", "chrono"] }
+utoipa-swagger-ui = { version = "6.0", features = ["axum"] }
 
 # Configuration
 config = "0.14"

@@ -1,0 +1,133 @@
+warning: unused variable: `max_concurrent`
+   --> rabbitmesh/src/service.rs:163:13
+    |
+163 |         let max_concurrent = self.config.max_concurrent_messages;
+    |             ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_max_concurrent`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused `std::result::Result` in tuple element 0 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+    = note: `#[warn(unused_must_use)]` on by default
+
+warning: unused `std::result::Result` in tuple element 1 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: unused `std::result::Result` in tuple element 2 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: unused `std::result::Result` in tuple element 3 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: `rabbitmesh` (lib) generated 5 warnings
+warning: unused import: `proc_macro2::TokenStream as TokenStream2`
+ --> rabbitmesh-macros/src/service_definition.rs:2:5
+  |
+2 | use proc_macro2::TokenStream as TokenStream2;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused imports: `DeriveInput`, `Lit`, `Token`, and `parse::Parse`
+ --> rabbitmesh-macros/src/service_definition.rs:4:42
+  |
+4 | use syn::{parse_macro_input, ItemStruct, DeriveInput, parse::Parse, Token, Lit};
+  |                                          ^^^^^^^^^^^  ^^^^^^^^^^^^  ^^^^^  ^^^
+
+warning: unused import: `proc_macro2::TokenStream as TokenStream2`
+ --> rabbitmesh-macros/src/service_method.rs:2:5
+  |
+2 | use proc_macro2::TokenStream as TokenStream2;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Lit`, `Token`, and `punctuated::Punctuated`
+ --> rabbitmesh-macros/src/service_method.rs:5:32
+  |
+5 |     parse_macro_input, ItemFn, Lit, LitStr, 
+  |                                ^^^
+6 |     parse::Parse, Token, punctuated::Punctuated,
+  |                   ^^^^^  ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `ServiceDefinition` is never constructed
+ --> rabbitmesh-macros/src/registry.rs:8:12
+  |
+8 | pub struct ServiceDefinition {
+  |            ^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: struct `MethodDefinition` is never constructed
+  --> rabbitmesh-macros/src/registry.rs:15:12
+   |
+15 | pub struct MethodDefinition {
+   |            ^^^^^^^^^^^^^^^^
+
+warning: function `get_registered_services` is never used
+  --> rabbitmesh-macros/src/registry.rs:25:8
+   |
+25 | pub fn get_registered_services() -> Vec<&'static ServiceDefinition> {
+   |        ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `get_registered_methods` is never used
+  --> rabbitmesh-macros/src/registry.rs:30:8
+   |
+30 | pub fn get_registered_methods() -> Vec<&'static MethodDefinition> {
+   |        ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `rabbitmesh-macros` (lib) generated 8 warnings (run `cargo fix --lib -p rabbitmesh-macros` to apply 4 suggestions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+     Running `/Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/target/debug/blog-api-gateway`
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mblog_api_gateway[0m[2m:[0m 🌐 Starting Blog Platform API Gateway
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mblog_api_gateway[0m[2m:[0m 📝 Auto-generating REST APIs for all blog microservices!
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m 🔗 Creating service client: api-gateway
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://localhost:5672
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m ✅ Service client connected: api-gateway
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m ✅ Service client ready: api-gateway
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mblog_api_gateway[0m[2m:[0m ✅ Blog API Gateway running on http://0.0.0.0:3334
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mblog_api_gateway[0m[2m:[0m 📋 Interactive API Documentation: http://localhost:3334/docs
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mblog_api_gateway[0m[2m:[0m 🔗 OpenAPI Spec: http://localhost:3334/api-docs/openapi.json
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mblog_api_gateway[0m[2m:[0m 
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mblog_api_gateway[0m[2m:[0m 🚀 Zero-port microservices with service-to-service communication!
+[2m2025-08-28 05:35:55[0m [32m INFO[0m [2mblog_api_gateway[0m[2m:[0m 💬 All microservices communicate via RabbitMQ - no direct HTTP calls!

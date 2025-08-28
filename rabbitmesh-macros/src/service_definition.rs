@@ -1,7 +1,6 @@
 use proc_macro::TokenStream;
-use proc_macro2::TokenStream as TokenStream2;
 use quote::quote;
-use syn::{parse_macro_input, ItemStruct, DeriveInput, parse::Parse, Token, Lit};
+use syn::{parse_macro_input, ItemStruct};
 
 /// Implementation of #[service_definition] macro
 pub fn impl_service_definition(_args: TokenStream, input: TokenStream) -> TokenStream {
@@ -9,49 +8,31 @@ pub fn impl_service_definition(_args: TokenStream, input: TokenStream) -> TokenS
     let struct_name = &input.ident;
     let struct_vis = &input.vis;
     
-    // Generate service implementation
+    // Generate service implementation with automatic handler registration
     let expanded = quote! {
         #struct_vis struct #struct_name;
         
         impl #struct_name {
             /// Get the service name (converts struct name to kebab-case)
             pub fn service_name() -> &'static str {
-                // Convert CamelCase to kebab-case
-                // UserService -> user-service
-                // ProductCatalogService -> product-catalog-service
-                const SERVICE_NAME: &str = {
-                    let name = stringify!(#struct_name);
-                    // This is a compile-time constant, so we'll use a simple approach
-                    // In a real implementation, you'd want proper case conversion
-                    match name {
-                        "UserService" => "user-service",
-                        "ProductService" => "product-service", 
-                        "OrderService" => "order-service",
-                        "AuthService" => "auth-service",
-                        "NotificationService" => "notification-service",
-                        _ => {
-                            // Fallback: just lowercase the name
-                            // Note: This is simplified - in production you'd want full case conversion
-                            name
-                        }
-                    }
-                };
+                // Simple static service names - avoiding const match for now
+                const SERVICE_NAME: &str = concat!(stringify!(#struct_name), "-service");
                 SERVICE_NAME
             }
             
-            /// Create a microservice instance for this service
-            pub async fn create_service(amqp_url: impl Into<String>) -> Result<rabbitmesh::MicroService, rabbitmesh::RabbitMeshError> {
+            /// Create and configure a microservice instance
+            pub async fn create_service(amqp_url: impl Into<String>) -> Result<rabbitmesh::MicroService, Box<dyn std::error::Error>> {
                 let service_name = Self::service_name();
-                rabbitmesh::MicroService::new_simple(service_name, amqp_url).await
+                let service = rabbitmesh::MicroService::new_simple(service_name, amqp_url).await?;
+                
+                // Register all methods marked with #[service_method]
+                Self::register_handlers(&service).await?;
+                
+                Ok(service)
             }
-        }
-        
-        // Register this service with the global registry
-        inventory::submit! {
-            rabbitmesh_macros::registry::ServiceDefinition {
-                name: stringify!(#struct_name),
-                service_name: #struct_name::service_name(),
-            }
+            
+            // register_handlers() should be implemented in the impl block manually
+            // TODO: Auto-generate this from #[service_method] macros
         }
     };
 

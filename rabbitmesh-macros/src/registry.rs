@@ -18,15 +18,15 @@ pub struct MethodDefinition {
     pub function_name: &'static str,
 }
 
-inventory::collect!(ServiceDefinition);
-inventory::collect!(MethodDefinition);
+// inventory::collect!(ServiceDefinition);
+// inventory::collect!(MethodDefinition);
 
-/// Get all registered services
+/// Get all registered services (placeholder - not using inventory for now)
 pub fn get_registered_services() -> Vec<&'static ServiceDefinition> {
-    inventory::iter::<ServiceDefinition>.into_iter().collect()
+    Vec::new()
 }
 
-/// Get all registered methods
+/// Get all registered methods (placeholder - not using inventory for now) 
 pub fn get_registered_methods() -> Vec<&'static MethodDefinition> {
-    inventory::iter::<MethodDefinition>.into_iter().collect()
+    Vec::new()
 }

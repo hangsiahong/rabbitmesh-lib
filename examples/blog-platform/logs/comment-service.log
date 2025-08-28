@@ -1,0 +1,142 @@
+warning: unused variable: `max_concurrent`
+   --> rabbitmesh/src/service.rs:163:13
+    |
+163 |         let max_concurrent = self.config.max_concurrent_messages;
+    |             ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_max_concurrent`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused `std::result::Result` in tuple element 0 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+    = note: `#[warn(unused_must_use)]` on by default
+
+warning: unused `std::result::Result` in tuple element 1 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: unused `std::result::Result` in tuple element 2 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: unused `std::result::Result` in tuple element 3 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: `rabbitmesh` (lib) generated 5 warnings
+warning: constant `AUTH_SERVICE` is never used
+ --> examples/blog-platform/comment-service/src/config.rs:5:11
+  |
+5 | pub const AUTH_SERVICE: &str = "auth-service";
+  |           ^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: constant `POST_SERVICE` is never used
+ --> examples/blog-platform/comment-service/src/config.rs:6:11
+  |
+6 | pub const POST_SERVICE: &str = "post-service";
+  |           ^^^^^^^^^^^^
+
+warning: fields `id`, `username`, `email`, `created_at`, and `is_active` are never read
+  --> examples/blog-platform/comment-service/src/models.rs:42:9
+   |
+41 | pub struct UserProfile {
+   |            ----------- fields in this struct
+42 |     pub id: String,
+   |         ^^
+43 |     pub username: String,
+   |         ^^^^^^^^
+44 |     pub email: String,
+   |         ^^^^^
+45 |     pub created_at: String,
+   |         ^^^^^^^^^^
+46 |     pub is_active: bool,
+   |         ^^^^^^^^^
+   |
+   = note: `UserProfile` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: `comment-service` (bin "comment-service") generated 3 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+     Running `/Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/target/debug/comment-service`
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 🚀 Starting Comment Service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 💬 Handles blog comments with multi-service integration
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service::service[0m[2m:[0m ✅ Sample comments created
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: comment-service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m 🔗 Creating service client: comment-client
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://localhost:5672
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m ✅ Service client connected: comment-client
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m ✅ Service client ready: comment-client
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 🔗 Connected to other services via RabbitMQ
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_comment
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_comment
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_comments_by_post
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_comments
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_comment
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: ping
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m ✅ Comment service handlers registered
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 🎯 Listening to RabbitMQ queue: rabbitmesh.comment-service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 🔗 Available methods:
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    - create_comment: Create comment (requires auth + post verification)
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    - update_comment: Update comment (requires auth + ownership)
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    - get_comments_by_post: Get all comments for a specific post
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    - list_comments: Get all approved comments
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    - get_comment: Get specific comment by ID
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    - ping: Health check
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 🔐 This service communicates with:
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    - Auth Service: Token validation & user info
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    - Post Service: Post existence verification
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m 🌐 Multi-service workflow for creating comments:
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    1. Validate user token with Auth Service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    2. Verify post exists with Post Service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mcomment_service[0m[2m:[0m    3. Create comment in Comment Service database
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: comment-service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://localhost:5672
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.comment-service, rabbitmesh.comment-service.responses
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.comment-service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for comment-service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.comment-service.responses
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for comment-service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice comment-service is running and ready to process messages
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for comment-service
+[2m2025-08-28 05:35:53[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for comment-service

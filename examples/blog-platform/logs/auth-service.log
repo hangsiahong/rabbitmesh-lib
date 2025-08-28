@@ -1,0 +1,114 @@
+warning: unused variable: `max_concurrent`
+   --> rabbitmesh/src/service.rs:163:13
+    |
+163 |         let max_concurrent = self.config.max_concurrent_messages;
+    |             ^^^^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_max_concurrent`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused `std::result::Result` in tuple element 0 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+    = note: `#[warn(unused_must_use)]` on by default
+
+warning: unused `std::result::Result` in tuple element 1 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: unused `std::result::Result` in tuple element 2 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: unused `std::result::Result` in tuple element 3 that must be used
+   --> rabbitmesh/src/service.rs:145:9
+    |
+145 | /         tokio::try_join!(
+146 | |             request_processor,
+147 | |             response_processor, 
+148 | |             cleanup_task,
+149 | |             health_check_task,
+150 | |         )?;
+    | |__________^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: `rabbitmesh` (lib) generated 5 warnings
+warning: constant `JWT_SECRET` is never used
+ --> examples/blog-platform/auth-service/src/config.rs:5:11
+  |
+5 | pub const JWT_SECRET: &str = "your-secret-key-change-in-production";
+  |           ^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: constant `TOKEN_EXPIRY_HOURS` is never used
+ --> examples/blog-platform/auth-service/src/config.rs:6:11
+  |
+6 | pub const TOKEN_EXPIRY_HOURS: i64 = 24;
+  |           ^^^^^^^^^^^^^^^^^^
+
+warning: function `validate_token` is never used
+  --> examples/blog-platform/auth-service/src/utils.rs:21:8
+   |
+21 | pub fn validate_token(token: &str) -> Option<String> {
+   |        ^^^^^^^^^^^^^^
+
+warning: `auth-service` (bin "auth-service") generated 3 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.47s
+     Running `/Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/target/debug/auth-service`
+[2m2025-08-28 05:35:50[0m [32m INFO[0m [2mauth_service[0m[2m:[0m 🚀 Starting Auth Service
+[2m2025-08-28 05:35:50[0m [32m INFO[0m [2mauth_service[0m[2m:[0m 🔐 Handles user authentication, registration & token validation
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m ✅ Sample users created
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: auth-service
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: register
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: login
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: validate_token
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: ping
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service[0m[2m:[0m ✅ Auth service handlers registered
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service[0m[2m:[0m 🎯 Listening to RabbitMQ queue: rabbitmesh.auth-service
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service[0m[2m:[0m 🔗 Available methods:
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service[0m[2m:[0m    - register: Create new user account
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service[0m[2m:[0m    - login: Authenticate user and get token
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service[0m[2m:[0m    - validate_token: Validate token (used by other services)
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service[0m[2m:[0m    - get_user: Get user profile by ID
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mauth_service[0m[2m:[0m    - ping: Health check
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: auth-service
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://localhost:5672
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.auth-service, rabbitmesh.auth-service.responses
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.auth-service
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for auth-service
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.auth-service.responses
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for auth-service
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for auth-service
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice auth-service is running and ready to process messages
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+[2m2025-08-28 05:35:52[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for auth-service
