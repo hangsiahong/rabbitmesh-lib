@@ -1,0 +1,77 @@
+[workspace]
+resolver = "2"
+members = [
+    "rabbitmesh",
+    "rabbitmesh-macros", 
+    "rabbitmesh-gateway",
+    "examples/ecommerce",
+    "examples/simple-demo",
+    "examples/ecommerce-microservices/user-service",
+    "examples/ecommerce-microservices/product-service", 
+    "examples/ecommerce-microservices/api-gateway"
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/your-username/rabbitmesh"
+homepage = "https://github.com/your-username/rabbitmesh"
+documentation = "https://docs.rs/rabbitmesh"
+description = "Message-driven microservices framework using RabbitMQ for zero-port service mesh"
+keywords = ["microservices", "rabbitmq", "rpc", "async", "distributed"]
+categories = ["network-programming", "asynchronous", "web-programming::http-server"]
+
+[workspace.dependencies]
+# Core async runtime
+tokio = { version = "1.0", features = ["full"] }
+tokio-stream = "0.1"
+futures-util = "0.3"
+
+# AMQP client  
+lapin = "2.3"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Unique IDs
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+# Async traits
+async-trait = "0.1"
+
+# Logging and tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Service registry
+inventory = "0.3"
+
+# HTTP server for gateway
+axum = { version = "0.7", features = ["macros"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# GraphQL
+async-graphql = { version = "7.0", features = ["uuid"] }
+async-graphql-axum = "7.0"
+
+# Proc macros
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "2.0", features = ["full", "extra-traits"] }
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Configuration
+config = "0.14"
+
+# Testing
+tokio-test = "0.4"

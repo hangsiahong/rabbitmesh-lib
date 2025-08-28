@@ -1,0 +1,46 @@
+[package]
+name = "rabbitmesh-gateway"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+description = "Auto-generating API gateway for RabbitMesh microservices"
+keywords.workspace = true
+categories.workspace = true
+
+[dependencies]
+# Core framework
+rabbitmesh = { path = "../rabbitmesh" }
+rabbitmesh-macros = { path = "../rabbitmesh-macros" }
+
+# HTTP server
+axum = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+
+# GraphQL
+async-graphql = { workspace = true }
+async-graphql-axum = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Service registry
+inventory = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+[dev-dependencies]
+tracing-subscriber = { workspace = true }
