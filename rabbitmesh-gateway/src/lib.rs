@@ -5,12 +5,12 @@
 //!
 //! ## How It Works
 //!
-//! ```
+//! ```text
 //! Frontend/Client -> HTTP -> Gateway -> RabbitMQ -> Microservice
-//!                            ↑                        ↓
+//!                            |                        |
 //!                         Converts                Processes  
-//!                      HTTP to AMQP              business logic
-//!                            ↓                        ↑
+//!                      HTTP to RPC              Business Logic
+//!                            |                        |
 //!                    HTTP Response <- RabbitMQ <- RPC Response
 //! ```
 //!

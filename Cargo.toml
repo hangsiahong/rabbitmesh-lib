@@ -4,18 +4,7 @@ members = [
     "rabbitmesh",
     "rabbitmesh-macros", 
     "rabbitmesh-gateway",
-    "examples/ecommerce",
-    "examples/simple-demo",
-    "examples/ecommerce-microservices/user-service",
-    "examples/ecommerce-microservices/product-service", 
-    "examples/ecommerce-microservices/api-gateway",
-    "examples/blog-platform/blog-common",
-    "examples/blog-platform/auth-service",
-    "examples/blog-platform/post-service",
-    "examples/blog-platform/comment-service",
-    "examples/blog-platform/api-gateway",
-    "examples/blog-platform/test-macro-service",
-    "examples/blog-platform/test-auto-service"
+    "examples/simple-todo"
 ]
 
 [workspace.package]

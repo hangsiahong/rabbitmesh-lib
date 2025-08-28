@@ -1,0 +1,47 @@
+[package]
+name = "simple-todo"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+# Core async runtime
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+futures-util = { workspace = true }
+
+# RabbitMesh framework with macros
+rabbitmesh = { path = "../../rabbitmesh" }
+rabbitmesh-macros = { path = "../../rabbitmesh-macros" }
+rabbitmesh-gateway = { path = "../../rabbitmesh-gateway" }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Unique IDs
+uuid = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# Error handling
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+
+# Time handling
+chrono = { workspace = true }
+
+# OpenAPI documentation
+utoipa = { workspace = true }
+
+axum = { workspace = true}
+
+[[bin]]
+name = "todo-service"
+path = "src/main.rs"
+
+[[bin]]
+name = "todo-gateway"
+path = "src/gateway.rs"

@@ -1,44 +1,45 @@
 [package]
 name = "rabbitmesh"
-version.workspace = true
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
-repository.workspace = true
-homepage.workspace = true
-documentation.workspace = true
-description = "Core framework for message-driven microservices using RabbitMQ"
-keywords.workspace = true
-categories.workspace = true
+version = "0.1.0"
+edition = "2021"
+authors = ["RabbitMesh Team <rabbitmesh@example.com>"]
+description = "Message-driven microservices framework using RabbitMQ for zero-port service mesh"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rabbitmesh/rabbitmesh"
+homepage = "https://github.com/rabbitmesh/rabbitmesh"
+documentation = "https://docs.rs/rabbitmesh"
+keywords = ["microservices", "rabbitmq", "rpc", "async", "distributed"]
+categories = ["network-programming", "asynchronous", "web-programming::http-server"]
+readme = "../README.md"
 
 [dependencies]
 # Async runtime
-tokio = { workspace = true }
-tokio-stream = { workspace = true }
-futures-util = { workspace = true }
+tokio = { version = "1.0", features = ["full"] }
+tokio-stream = "0.1"
+futures-util = "0.3"
 
 # AMQP client
-lapin = { workspace = true }
+lapin = "2.3"
 
 # Serialization
-serde = { workspace = true }
-serde_json = { workspace = true }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 
 # Unique IDs  
-uuid = { workspace = true }
+uuid = { version = "1.0", features = ["v4", "serde"] }
 
 # Async traits
-async-trait = { workspace = true }
+async-trait = "0.1"
 
 # Logging
-tracing = { workspace = true }
+tracing = "0.1"
 
 # Error handling
-thiserror = { workspace = true }
-anyhow = { workspace = true }
+thiserror = "1.0"
+anyhow = "1.0"
 
 # Time
-chrono = { workspace = true }
+chrono = { version = "0.4", features = ["serde"] }
 
 [dev-dependencies]
 tokio-test = { workspace = true }
