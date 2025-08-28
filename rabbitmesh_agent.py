@@ -10,6 +10,7 @@ Usage: python rabbitmesh_agent.py
 
 import sys
 import os
+import subprocess
 from pathlib import Path
 
 # ASCII Art Banner
@@ -147,6 +148,8 @@ examples      - Show RabbitMesh code examples
 patterns      - Show common service patterns
 architecture  - Explain zero-port architecture
 magic         - Explain the framework magic
+create <name> - Create a new RabbitMesh project
+github        - Show GitHub repository and resources
 build <desc>  - Ask me to build something specific!
 
 🎯 Or just describe what you want to build:
@@ -240,8 +243,8 @@ RabbitMesh Architecture:
         print("""
 // Cargo.toml
 [dependencies]
-rabbitmesh = { path = "../../rabbitmesh" }
-rabbitmesh-macros = { path = "../../rabbitmesh-macros" }
+rabbitmesh = "0.1.0"
+rabbitmesh-macros = "0.1.0"
 serde = { version = "1.0", features = ["derive"] }
 uuid = { version = "1.0", features = ["v4", "serde"] }
 bcrypt = "0.15"
@@ -566,6 +569,462 @@ impl {service_name}Service {{
         print("  ✅ API Gateway integration")
         print("  ✅ Service discovery")
 
+    def create_project(self, project_name):
+        """Create a new RabbitMesh project with published crates"""
+        print(f"\n🚀 Creating new RabbitMesh project: {project_name}")
+        print("=" * 50)
+        
+        try:
+            # Create project directory
+            if os.path.exists(project_name):
+                print(f"❌ Directory '{project_name}' already exists!")
+                return
+                
+            os.makedirs(project_name, exist_ok=True)
+            os.chdir(project_name)
+            
+            # Initialize Cargo project
+            print("📦 Initializing Cargo project...")
+            subprocess.run(["cargo", "init", "--name", project_name], check=True)
+            
+            # Create Cargo.toml with RabbitMesh dependencies
+            cargo_toml = f"""[package]
+name = "{project_name}"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# RabbitMesh Framework (Published on crates.io)
+rabbitmesh = "0.1.0"
+rabbitmesh-macros = "0.1.0"
+
+# Serialization
+serde = {{ version = "1.0", features = ["derive"] }}
+serde_json = "1.0"
+
+# Async runtime  
+tokio = {{ version = "1.0", features = ["full"] }}
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Unique IDs
+uuid = {{ version = "1.0", features = ["v4", "serde"] }}
+
+# Time handling
+chrono = {{ version = "0.4", features = ["serde"] }}
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+[dev-dependencies]
+tokio-test = "0.4"
+"""
+            
+            with open("Cargo.toml", "w") as f:
+                f.write(cargo_toml)
+            
+            # Create basic service structure
+            print("🏗️ Creating service structure...")
+            
+            # Create src/models.rs
+            models_rs = '''//! Data models for the service
+
+use serde::{Deserialize, Serialize};
+use chrono::{DateTime, Utc};
+
+#[derive(Debug, Deserialize)]
+pub struct CreateItemRequest {
+    pub name: String,
+    pub description: Option<String>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct UpdateItemRequest {
+    pub name: Option<String>,
+    pub description: Option<String>,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub struct Item {
+    pub id: String,
+    pub name: String,
+    pub description: String,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
+}
+
+#[derive(Debug, Serialize)]
+pub struct ItemResponse {
+    pub success: bool,
+    pub message: String,
+    pub item: Option<Item>,
+}
+
+#[derive(Debug, Serialize)]
+pub struct ItemListResponse {
+    pub success: bool,
+    pub message: String,
+    pub items: Vec<Item>,
+    pub total: usize,
+}
+
+impl ItemResponse {
+    pub fn success(item: Item) -> Self {
+        Self {
+            success: true,
+            message: "Operation successful".to_string(),
+            item: Some(item),
+        }
+    }
+    
+    pub fn error(message: String) -> Self {
+        Self {
+            success: false,
+            message,
+            item: None,
+        }
+    }
+}
+'''
+            
+            # Create src/service.rs  
+            service_rs = f'''//! {project_name.title()} service implementation using RabbitMesh
+
+use rabbitmesh_macros::{{service_definition, service_impl}};
+use std::collections::HashMap;
+use std::sync::Arc;
+use tokio::sync::RwLock;
+use tracing::{{info, warn}};
+use anyhow::Result;
+use chrono::Utc;
+
+use crate::models::*;
+
+// In-memory storage for demo purposes
+type ItemStorage = Arc<RwLock<HashMap<String, Item>>>;
+
+#[service_definition]
+pub struct {project_name.title().replace("-", "").replace("_", "")}Service;
+
+static STORAGE: tokio::sync::OnceCell<ItemStorage> = tokio::sync::OnceCell::const_new();
+
+impl {project_name.title().replace("-", "").replace("_", "")}Service {{
+    pub async fn init() -> Result<()> {{
+        let storage = Arc::new(RwLock::new(HashMap::new()));
+        STORAGE.set(storage)
+            .map_err(|_| anyhow::anyhow!("Storage already initialized"))?;
+        Ok(())
+    }}
+
+    fn get_storage() -> &'static ItemStorage {{
+        STORAGE.get().expect("Storage not initialized")
+    }}
+}}
+
+#[service_impl]
+impl {project_name.title().replace("-", "").replace("_", "")}Service {{
+    /// Create a new item
+    #[service_method("POST /items")]
+    pub async fn create_item(request: CreateItemRequest) -> Result<ItemResponse, String> {{
+        info!("📝 Creating new item: {{}}", request.name);
+        
+        let item = Item {{
+            id: uuid::Uuid::new_v4().to_string(),
+            name: request.name,
+            description: request.description.unwrap_or_default(),
+            created_at: Utc::now(),
+            updated_at: Utc::now(),
+        }};
+        
+        let storage = Self::get_storage();
+        let mut storage = storage.write().await;
+        storage.insert(item.id.clone(), item.clone());
+        
+        info!("✅ Item created successfully: {{}}", item.id);
+        Ok(ItemResponse::success(item))
+    }}
+
+    /// Get an item by ID
+    #[service_method("GET /items/:id")]
+    pub async fn get_item(item_id: String) -> Result<ItemResponse, String> {{
+        info!("🔍 Getting item: {{}}", item_id);
+        
+        let storage = Self::get_storage();
+        let storage = storage.read().await;
+        
+        match storage.get(&item_id) {{
+            Some(item) => {{
+                info!("✅ Item found: {{}}", item_id);
+                Ok(ItemResponse::success(item.clone()))
+            }}
+            None => {{
+                warn!("❌ Item not found: {{}}", item_id);
+                Err("Item not found".to_string())
+            }}
+        }}
+    }}
+
+    /// List all items
+    #[service_method("GET /items")]
+    pub async fn list_items() -> Result<ItemListResponse, String> {{
+        info!("📋 Listing all items");
+        
+        let storage = Self::get_storage();
+        let storage = storage.read().await;
+        let items: Vec<Item> = storage.values().cloned().collect();
+        let total = items.len();
+        
+        info!("✅ Retrieved {{}} items", total);
+        
+        Ok(ItemListResponse {{
+            success: true,
+            message: format!("Retrieved {{}} items", total),
+            items,
+            total,
+        }})
+    }}
+
+    /// Update an item
+    #[service_method("PUT /items/:id")]
+    pub async fn update_item(params: (String, UpdateItemRequest)) -> Result<ItemResponse, String> {{
+        let (item_id, request) = params;
+        info!("✏️ Updating item: {{}}", item_id);
+        
+        let storage = Self::get_storage();
+        let mut storage = storage.write().await;
+        
+        match storage.get_mut(&item_id) {{
+            Some(item) => {{
+                if let Some(name) = request.name {{
+                    item.name = name;
+                }}
+                if let Some(description) = request.description {{
+                    item.description = description;
+                }}
+                item.updated_at = Utc::now();
+                
+                info!("✅ Item updated successfully: {{}}", item_id);
+                Ok(ItemResponse::success(item.clone()))
+            }}
+            None => {{
+                warn!("❌ Item not found for update: {{}}", item_id);
+                Err("Item not found".to_string())
+            }}
+        }}
+    }}
+
+    /// Delete an item
+    #[service_method("DELETE /items/:id")]
+    pub async fn delete_item(item_id: String) -> Result<ItemResponse, String> {{
+        info!("🗑️ Deleting item: {{}}", item_id);
+        
+        let storage = Self::get_storage();
+        let mut storage = storage.write().await;
+        
+        match storage.remove(&item_id) {{
+            Some(item) => {{
+                info!("✅ Item deleted successfully: {{}}", item_id);
+                Ok(ItemResponse::success(item))
+            }}
+            None => {{
+                warn!("❌ Item not found for deletion: {{}}", item_id);
+                Err("Item not found".to_string())
+            }}
+        }}
+    }}
+}}
+'''
+
+            # Create src/main.rs
+            main_rs = f'''//! {project_name.title()} - RabbitMesh Microservice
+
+mod models;
+mod service;
+
+use anyhow::Result;
+use tracing::{{info, error}};
+use tracing_subscriber;
+use service::{project_name.title().replace("-", "").replace("_", "")}Service;
+
+#[tokio::main]
+async fn main() -> Result<()> {{
+    // Initialize tracing
+    tracing_subscriber::fmt()
+        .with_env_filter("info,{project_name.replace("-", "_")}=debug,rabbitmesh=debug")
+        .with_target(false)
+        .with_thread_ids(true)
+        .init();
+
+    info!("🚀 Starting {project_name.title()} Service...");
+
+    // Initialize the service storage
+    {project_name.title().replace("-", "").replace("_", "")}Service::init().await?;
+    info!("✅ Service storage initialized");
+
+    // Get the RabbitMQ URL from environment or use default
+    let rabbitmq_url = std::env::var("RABBITMQ_URL")
+        .unwrap_or_else(|_| "amqp://guest:guest@localhost:5672/%2f".to_string());
+
+    info!("🐰 Connecting to RabbitMQ at: {{}}", rabbitmq_url);
+
+    // Create and start the service using the macro-generated methods
+    let service = {project_name.title().replace("-", "").replace("_", "")}Service::create_service(&rabbitmq_url).await?;
+    
+    info!("✅ {project_name.title()} Service started successfully");
+    info!("🎯 Service name: {{}}", {project_name.title().replace("-", "").replace("_", "")}Service::service_name());
+    
+    // Show auto-discovered routes
+    let routes = {project_name.title().replace("-", "").replace("_", "")}Service::get_routes();
+    info!("📊 Auto-discovered {{}} HTTP routes:", routes.len());
+    for (route, method) in routes {{
+        info!("   {{}} -> {{}}", method, route);
+    }}
+    
+    info!("📞 Starting service listener...");
+    service.start().await?;
+    
+    Ok(())
+}}
+'''
+
+            # Write files
+            with open("src/models.rs", "w") as f:
+                f.write(models_rs)
+            with open("src/service.rs", "w") as f:
+                f.write(service_rs)
+            with open("src/main.rs", "w") as f:
+                f.write(main_rs)
+            
+            # Create README.md
+            readme_md = f"""# {project_name.title()}
+
+A RabbitMesh microservice built with zero-port architecture.
+
+## 🚀 Features
+
+- **Zero Port Management**: Services communicate via RabbitMQ only
+- **Auto-Generated APIs**: HTTP routes extracted from code annotations  
+- **Service Discovery**: Automatic via RabbitMQ queues
+- **Built-in Fault Tolerance**: Retry mechanisms and circuit breakers
+
+## 🏃 Quick Start
+
+1. **Start RabbitMQ**:
+```bash
+docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+```
+
+2. **Run the service**:
+```bash
+cargo run
+```
+
+3. **Test the service** (in another terminal):
+```bash
+# Create an item
+curl -X POST http://localhost:3000/items \\
+  -H "Content-Type: application/json" \\
+  -d '{{"name": "Test Item", "description": "A test item"}}'
+
+# List items  
+curl http://localhost:3000/items
+
+# Get specific item
+curl http://localhost:3000/items/<item_id>
+```
+
+## 🏗️ Architecture
+
+```
+Client → API Gateway (HTTP) → RabbitMQ → {project_name.title()} Service
+         :3000                                   (No Port!)
+```
+
+## 📦 Generated Routes
+
+The RabbitMesh macros automatically generate:
+- `POST /items` - Create item
+- `GET /items/:id` - Get item  
+- `GET /items` - List items
+- `PUT /items/:id` - Update item
+- `DELETE /items/:id` - Delete item
+
+## 🌐 RabbitMesh Framework
+
+Built with [RabbitMesh](https://github.com/hangsiahong/rabbitmesh-rs) - the zero-port microservices framework.
+
+Learn more: https://crates.io/crates/rabbitmesh
+"""
+
+            with open("README.md", "w") as f:
+                f.write(readme_md)
+            
+            # Create .gitignore
+            gitignore = """/target/
+**/*.rs.bk
+Cargo.lock
+.env
+"""
+            with open(".gitignore", "w") as f:
+                f.write(gitignore)
+            
+            print("✅ Project created successfully!")
+            print(f"\n🎯 Next steps:")
+            print(f"  cd {project_name}")
+            print("  cargo run")
+            print("\n📖 The service will:")
+            print("  • Connect to RabbitMQ")
+            print("  • Auto-register HTTP routes")
+            print("  • Start handling requests")
+            print("\n🔗 RabbitMesh GitHub: https://github.com/hangsiahong/rabbitmesh-rs")
+            
+        except subprocess.CalledProcessError as e:
+            print(f"❌ Error creating project: {{e}}")
+        except Exception as e:
+            print(f"❌ Unexpected error: {{e}}")
+
+    def show_github_info(self):
+        """Show GitHub repository and resources"""
+        print("""
+🐙 RabbitMesh GitHub Repository
+════════════════════════════════
+
+📦 Main Repository: https://github.com/hangsiahong/rabbitmesh-rs
+🦀 Crates.io: https://crates.io/crates/rabbitmesh
+📚 Documentation: https://docs.rs/rabbitmesh
+
+🎯 Published Crates:
+  • rabbitmesh = "0.1.0"           (Core framework)
+  • rabbitmesh-macros = "0.1.0"    (Procedural macros)  
+  • rabbitmesh-gateway = "0.1.0"   (API Gateway)
+
+🚀 Getting Started:
+  1. cargo new my-service
+  2. Add rabbitmesh = "0.1.0" to Cargo.toml
+  3. Use #[service_definition] and #[service_method] macros
+  4. cargo run
+
+🤝 Contributing:
+  • Issues: https://github.com/hangsiahong/rabbitmesh-rs/issues
+  • Pull Requests: https://github.com/hangsiahong/rabbitmesh-rs/pulls
+  • Discussions: https://github.com/hangsiahong/rabbitmesh-rs/discussions
+
+💡 Examples:
+  • Simple Todo: Working example included in repository
+  • Authentication: JWT-based auth service example
+  • E-commerce: Multi-service architecture demo
+
+🏗️ Architecture Highlights:
+  ✅ Zero-port microservices (RabbitMQ only)
+  ✅ Auto-generated HTTP routes from annotations
+  ✅ Built-in service discovery
+  ✅ Fault tolerance and retries
+  ✅ Production-ready async runtime
+""")
+
     def interactive_mode(self):
         """Interactive mode for continuous assistance"""
         self.display_banner()
@@ -589,6 +1048,14 @@ impl {service_name}Service {{
                     self.explain_magic()
                 elif user_input.lower() == 'architecture':
                     self.show_architecture()
+                elif user_input.lower() == 'github':
+                    self.show_github_info()
+                elif user_input.lower().startswith('create '):
+                    project_name = user_input[7:].strip()
+                    if project_name:
+                        self.create_project(project_name)
+                    else:
+                        print("❌ Please provide a project name: create my-service")
                 elif user_input.lower().startswith('build '):
                     description = user_input[6:]
                     self.build_service(description)
@@ -618,6 +1085,14 @@ def main():
             agent.explain_magic()
         elif command.lower() == 'architecture':
             agent.show_architecture()
+        elif command.lower() == 'github':
+            agent.show_github_info()
+        elif command.lower().startswith('create '):
+            project_name = command[7:].strip()
+            if project_name:
+                agent.create_project(project_name)
+            else:
+                print("❌ Please provide a project name: python rabbitmesh_agent.py create my-service")
         else:
             agent.build_service(command)
     else:

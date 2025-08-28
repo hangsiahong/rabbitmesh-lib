@@ -49,8 +49,30 @@ I understand the complete magic of RabbitMesh and will help you build microservi
 - **Zero Ports**: Services communicate via RabbitMQ only
 - **Auto-Discovery**: Services find each other automatically
 
-### 🎮 Example Commands:
+### 🎮 Available Commands:
 
+### 🚀 **Project Creation**
+```bash
+python rabbitmesh_agent.py create my-awesome-service
+```
+Creates a complete RabbitMesh project with published crates from crates.io!
+
+### 🤖 **Interactive Mode**
+```bash
+python rabbitmesh_agent.py
+```
+Enter interactive mode for continuous assistance.
+
+### 📖 **Information Commands**
+```bash
+python rabbitmesh_agent.py help        # Show all commands
+python rabbitmesh_agent.py examples    # Show code examples  
+python rabbitmesh_agent.py magic       # Explain the framework magic
+python rabbitmesh_agent.py architecture # Show zero-port architecture
+python rabbitmesh_agent.py github      # Show GitHub and crates.io links
+```
+
+### 🏗️ **Build Commands**
 > **"Build me a user authentication service"**
 > 
 > I'll create a complete auth service with login, registration, JWT tokens, and password hashing - all using clean RabbitMesh patterns.
@@ -147,8 +169,53 @@ I'm ready to help you build amazing microservices with RabbitMesh. Some examples
 
 ---
 
+## 📦 Published on Crates.io!
+
+RabbitMesh is now **live on crates.io** and ready for production use:
+
+### 🦀 **Available Crates:**
+```toml
+[dependencies]
+rabbitmesh = "0.1.0"           # Core framework
+rabbitmesh-macros = "0.1.0"    # Procedural macros  
+rabbitmesh-gateway = "0.1.0"   # API Gateway
+```
+
+### 🔗 **Resources:**
+- **📦 Crates.io**: https://crates.io/crates/rabbitmesh
+- **📚 Documentation**: https://docs.rs/rabbitmesh  
+- **🐙 GitHub**: https://github.com/hangsiahong/rabbitmesh-rs
+- **💬 Issues & Support**: https://github.com/hangsiahong/rabbitmesh-rs/issues
+
+### 🚀 **Quick Start:**
+```bash
+# Create new project using the agent
+python rabbitmesh_agent.py create my-service
+
+# Or manually:
+cargo new my-service
+cd my-service
+# Add rabbitmesh = "0.1.0" to Cargo.toml
+# Use #[service_definition] and #[service_method] macros
+cargo run
+```
+
+---
+
 ## 🎪 Ready to See the Magic?
 
 **What would you like to build today?** 
 
 I'll design it using RabbitMesh's full power - minimal code, maximum functionality, zero configuration, pure elegance! ✨
+
+### 🎯 **Try the Agent:**
+```bash
+# Interactive mode
+python rabbitmesh_agent.py
+
+# Create a project
+python rabbitmesh_agent.py create my-awesome-service
+
+# Get help
+python rabbitmesh_agent.py help
+```
