@@ -33,7 +33,7 @@ echo ""
 echo -e "${YELLOW}Step 1: Publishing rabbitmesh-macros${NC}"
 echo "======================================"
 cd rabbitmesh-macros
-if cargo publish; then
+if cargo publish --allow-dirty; then
     echo -e "${GREEN}✅ rabbitmesh-macros published successfully${NC}"
 else
     echo -e "${RED}❌ Failed to publish rabbitmesh-macros${NC}"
@@ -48,7 +48,7 @@ cd ../rabbitmesh
 # Update to use published version
 sed -i '' 's|rabbitmesh-macros = { path = "../rabbitmesh-macros" }|rabbitmesh-macros = "0.1.0"|g' Cargo.toml
 
-if cargo publish; then
+if cargo publish --allow-dirty; then
     echo -e "${GREEN}✅ rabbitmesh published successfully${NC}"
     # Revert to path dependency for development
     sed -i '' 's|rabbitmesh-macros = "0.1.0"|rabbitmesh-macros = { path = "../rabbitmesh-macros" }|g' Cargo.toml
@@ -68,7 +68,7 @@ cd ../rabbitmesh-gateway
 sed -i '' 's|rabbitmesh = { path = "../rabbitmesh" }|rabbitmesh = "0.1.0"|g' Cargo.toml
 sed -i '' 's|rabbitmesh-macros = { path = "../rabbitmesh-macros" }|rabbitmesh-macros = "0.1.0"|g' Cargo.toml
 
-if cargo publish; then
+if cargo publish --allow-dirty; then
     echo -e "${GREEN}✅ rabbitmesh-gateway published successfully${NC}"
     # Revert to path dependencies for development
     sed -i '' 's|rabbitmesh = "0.1.0"|rabbitmesh = { path = "../rabbitmesh" }|g' Cargo.toml

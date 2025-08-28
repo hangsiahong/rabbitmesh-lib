@@ -42,7 +42,7 @@ anyhow = "1.0"
 chrono = { version = "0.4", features = ["serde"] }
 
 # Proc macros
-rabbitmesh-macros = { path = "../rabbitmesh-macros" }
+rabbitmesh-macros = "0.1.0"
 
 [dev-dependencies]
 tokio-test = { workspace = true }

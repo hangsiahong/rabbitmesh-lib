@@ -13,8 +13,8 @@ categories = ["web-programming::http-server"]
 
 [dependencies]
 # Core framework
-rabbitmesh = { path = "../rabbitmesh" }
-rabbitmesh-macros = { path = "../rabbitmesh-macros" }
+rabbitmesh = "0.1.0"
+rabbitmesh-macros = "0.1.0"
 
 # HTTP server
 axum = { workspace = true }
