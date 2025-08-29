@@ -1,6 +1,20 @@
-# 🚀 RabbitMesh - Message-Driven Microservices Framework
+<div align="center">
 
-**Zero-port microservices with auto-generated APIs**
+![RabbitMesh Logo](rbm-logo.png)
+
+# RabbitMesh
+**Zero-Port Microservices Framework**
+
+*Write business logic, get REST + GraphQL APIs automatically*
+
+[![Crates.io](https://img.shields.io/crates/v/rabbitmesh?style=flat-square)](https://crates.io/crates/rabbitmesh)
+[![Documentation](https://img.shields.io/docsrs/rabbitmesh?style=flat-square)](https://docs.rs/rabbitmesh)
+[![GitHub](https://img.shields.io/github/stars/hangsiahong/rabbitmesh-rs?style=flat-square)](https://github.com/hangsiahong/rabbitmesh-rs)
+[![License](https://img.shields.io/crates/l/rabbitmesh?style=flat-square)](https://github.com/hangsiahong/rabbitmesh-rs#license)
+
+</div>
+
+---
 
 RabbitMesh eliminates traditional microservice complexity by using RabbitMQ for all inter-service communication. Write business logic, get REST + GraphQL APIs automatically.
 
@@ -112,8 +126,35 @@ async fn main() {
 
 ## 📋 Getting Started
 
-See the [examples/ecommerce](examples/ecommerce) directory for a complete microservices demo with user management, authentication, and API gateway.
+See the [examples/simple-todo](examples/simple-todo) directory for a complete working example, or use our AI agent to create new projects:
+
+```bash
+# Install the AI agent and create a new project
+python3 rabbitmesh_agent.py create my-awesome-service
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](https://github.com/hangsiahong/rabbitmesh-rs/blob/main/CONTRIBUTING.md) for details.
+
+- 🐛 [Report Bugs](https://github.com/hangsiahong/rabbitmesh-rs/issues)
+- 💡 [Request Features](https://github.com/hangsiahong/rabbitmesh-rs/issues)
+- 🔀 [Submit Pull Requests](https://github.com/hangsiahong/rabbitmesh-rs/pulls)
 
 ## 📄 License
 
-MIT license
+MIT license. See [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+
+![RabbitMesh Logo](rbm-logo.png)
+
+**Built with ❤️ by the RabbitMesh Team**
+
+[🦀 Crates.io](https://crates.io/crates/rabbitmesh) • [📚 Docs](https://docs.rs/rabbitmesh) • [🐙 GitHub](https://github.com/hangsiahong/rabbitmesh-rs) • [💬 Discussions](https://github.com/hangsiahong/rabbitmesh-rs/discussions)
+
+*The future of microservices is here - zero ports, maximum power, pure elegance* ✨
+
+</div>
