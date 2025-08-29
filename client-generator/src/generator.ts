@@ -23,6 +23,9 @@ export class ClientGenerator {
     // Generate package.json
     await this.generatePackageJson();
     
+    // Generate tsconfig.json
+    await this.generateTsConfig();
+    
     // Generate index.ts
     await this.generateIndex(services);
   }
@@ -450,6 +453,28 @@ ${serviceInit}
     fs.writeFileSync(
       path.join(this.config.outputDir, 'package.json'), 
       JSON.stringify(packageJson, null, 2)
+    );
+  }
+
+  private async generateTsConfig(): Promise<void> {
+    const tsConfig = {
+      compilerOptions: {
+        target: 'ES2018',
+        module: 'commonjs',
+        outDir: './',
+        rootDir: './',
+        strict: true,
+        esModuleInterop: true,
+        skipLibCheck: true,
+        forceConsistentCasingInFileNames: true,
+        declaration: true
+      },
+      include: ['*.ts']
+    };
+
+    fs.writeFileSync(
+      path.join(this.config.outputDir, 'tsconfig.json'), 
+      JSON.stringify(tsConfig, null, 2)
     );
   }
 

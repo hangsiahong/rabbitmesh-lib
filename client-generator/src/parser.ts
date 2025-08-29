@@ -6,14 +6,29 @@ export class ServiceParser {
 
   async parseServicesFromGateway(): Promise<ServiceDefinition[]> {
     try {
-      // Fetch service registry from gateway
-      const response = await axios.get(`${this.gatewayUrl}/services`);
-      const services = response.data;
+      // Fetch service registry from dynamic gateway
+      const response = await axios.get(`${this.gatewayUrl}/api/services`);
+      const gatewayData = response.data;
       
+      // Parse the dynamic gateway response format
+      if (!gatewayData.endpoints || !Array.isArray(gatewayData.endpoints)) {
+        throw new Error('Invalid gateway response: missing endpoints array');
+      }
+      
+      // Group endpoints by service
+      const serviceMap = new Map<string, any[]>();
+      for (const endpoint of gatewayData.endpoints) {
+        const serviceName = endpoint.service;
+        if (!serviceMap.has(serviceName)) {
+          serviceMap.set(serviceName, []);
+        }
+        serviceMap.get(serviceName)!.push(endpoint);
+      }
+      
+      // Convert to service definitions
       const serviceDefinitions: ServiceDefinition[] = [];
-      
-      for (const [serviceName, serviceInfo] of Object.entries(services as any)) {
-        const serviceDef = this.parseService(serviceName, serviceInfo);
+      for (const [serviceName, endpoints] of serviceMap.entries()) {
+        const serviceDef = this.parseServiceFromEndpoints(serviceName, endpoints);
         serviceDefinitions.push(serviceDef);
       }
       
@@ -21,6 +36,60 @@ export class ServiceParser {
     } catch (error) {
       throw new Error(`Failed to fetch services from gateway: ${error}`);
     }
+  }
+
+  private parseServiceFromEndpoints(serviceName: string, endpoints: any[]): ServiceDefinition {
+    const methods = endpoints.map(endpoint => this.parseEndpointToMethod(endpoint));
+    
+    return {
+      name: this.toCamelCase(serviceName.replace('-service', '')), // Remove -service suffix
+      methods,
+      version: '1.0.0',
+      description: `Auto-generated from ${serviceName}`
+    };
+  }
+
+  private parseEndpointToMethod(endpoint: any): ServiceMethod {
+    return {
+      name: this.toCamelCase(endpoint.handler),
+      httpMethod: endpoint.method.toUpperCase(),
+      path: endpoint.path,
+      responseType: 'any', // Dynamic discovery doesn't provide detailed type info yet
+      parameters: this.inferParametersFromPath(endpoint.path, endpoint.method),
+      description: `${endpoint.method} ${endpoint.path}`
+    };
+  }
+
+  private inferParametersFromPath(path: string, httpMethod: string): Parameter[] {
+    const parameters: Parameter[] = [];
+    
+    // Extract path parameters (like :id, :userId, etc.)
+    const pathParamMatches = path.match(/:(\w+)/g);
+    if (pathParamMatches) {
+      for (const match of pathParamMatches) {
+        const paramName = match.substring(1); // Remove the ':'
+        parameters.push({
+          name: paramName,
+          type: 'string',
+          required: true,
+          source: 'path',
+          description: `Path parameter: ${paramName}`
+        });
+      }
+    }
+    
+    // Add common body parameters for POST/PUT methods
+    if (httpMethod === 'POST' || httpMethod === 'PUT') {
+      parameters.push({
+        name: 'data',
+        type: 'any',
+        required: true,
+        source: 'body',
+        description: 'Request body data'
+      });
+    }
+    
+    return parameters;
   }
 
   private parseService(name: string, serviceInfo: any): ServiceDefinition {
@@ -97,6 +166,11 @@ export class ServiceParser {
       .replace(/^[A-Z]/, c => c.toLowerCase());
   }
 
+  // Manual service definitions for todo-app
+  getManualTodoAppServices(): ServiceDefinition[] {
+    return [this.getManualAuthService(), this.getManualTodoAppService(), this.getManualNotificationService()];
+  }
+
   // Manual service definitions for blog platform
   getManualBlogPlatformServices(): ServiceDefinition[] {
     return [this.getManualAuthService(), this.getManualBlogService()];
@@ -109,52 +183,42 @@ export class ServiceParser {
         {
           name: 'register',
           httpMethod: 'POST',
-          path: '/auth/register',
+          path: '/api/v1/auth-service/register',
           requestType: 'RegisterRequest',
-          responseType: 'AuthResponse',
+          responseType: 'any',
           parameters: [
-            { name: 'request', type: 'RegisterRequest', required: true, source: 'body' }
+            { name: 'username', type: 'string', required: true, source: 'body' },
+            { name: 'email', type: 'string', required: true, source: 'body' },
+            { name: 'password', type: 'string', required: true, source: 'body' }
           ]
         },
         {
           name: 'login',
           httpMethod: 'POST',
-          path: '/auth/login',
+          path: '/api/v1/auth-service/login',
           requestType: 'LoginRequest',
-          responseType: 'AuthResponse',
+          responseType: 'any',
           parameters: [
-            { name: 'request', type: 'LoginRequest', required: true, source: 'body' }
-          ]
-        },
-        {
-          name: 'validateToken',
-          httpMethod: 'POST',
-          path: '/auth/validate',
-          requestType: 'ValidateTokenRequest',
-          responseType: 'ValidateTokenResponse',
-          parameters: [
-            { name: 'request', type: 'ValidateTokenRequest', required: true, source: 'body' }
+            { name: 'username', type: 'string', required: true, source: 'body' },
+            { name: 'password', type: 'string', required: true, source: 'body' }
           ]
         },
         {
           name: 'getProfile',
           httpMethod: 'GET',
-          path: '/auth/profile/:user_id',
-          responseType: 'AuthResponse',
+          path: '/api/v1/auth-service/get_profile',
+          responseType: 'any',
           parameters: [
-            { name: 'user_id', type: 'string', required: true, source: 'path' }
+            { name: 'user_id', type: 'string', required: true, source: 'query' }
           ]
         },
         {
-          name: 'updateProfile',
-          httpMethod: 'PUT',
-          path: '/auth/profile/:user_id',
-          responseType: 'AuthResponse',
-          parameters: [
-            { name: 'user_id', type: 'string', required: true, source: 'path' },
-            { name: 'request', type: 'UpdateProfileRequest', required: true, source: 'body' }
-          ]
-        }
+          name: 'listUsers',
+          httpMethod: 'GET',
+          path: '/api/v1/auth-service/list_users',
+          responseType: 'any',
+          parameters: []
+        },
       ]
     };
   }
@@ -302,6 +366,116 @@ export class ServiceParser {
           name: 'getStats',
           httpMethod: 'GET',
           path: '/todos/stats',
+          responseType: 'any',
+          parameters: []
+        }
+      ]
+    };
+  }
+
+  getManualTodoAppService(): ServiceDefinition {
+    return {
+      name: 'todo',
+      methods: [
+        {
+          name: 'createTodo',
+          httpMethod: 'POST',
+          path: '/api/v1/todo-service/create_todo',
+          requestType: 'CreateTodoRequest',
+          responseType: 'any',
+          parameters: [
+            { name: 'title', type: 'string', required: true, source: 'body' },
+            { name: 'description', type: 'string', required: false, source: 'body' },
+            { name: 'priority', type: 'string', required: false, source: 'body' }
+          ]
+        },
+        {
+          name: 'getTodos',
+          httpMethod: 'GET',
+          path: '/api/v1/todo-service/get_todos',
+          responseType: 'any',
+          parameters: []
+        },
+        {
+          name: 'getTodo',
+          httpMethod: 'GET',
+          path: '/api/v1/todo-service/get_todo',
+          responseType: 'any',
+          parameters: [
+            { name: 'todo_id', type: 'string', required: true, source: 'query' }
+          ]
+        },
+        {
+          name: 'updateTodo',
+          httpMethod: 'PUT',
+          path: '/api/v1/todo-service/update_todo',
+          responseType: 'any',
+          parameters: [
+            { name: 'todo_id', type: 'string', required: true, source: 'body' },
+            { name: 'title', type: 'string', required: false, source: 'body' },
+            { name: 'description', type: 'string', required: false, source: 'body' },
+            { name: 'completed', type: 'boolean', required: false, source: 'body' }
+          ]
+        },
+        {
+          name: 'deleteTodo',
+          httpMethod: 'DELETE',
+          path: '/api/v1/todo-service/delete_todo',
+          responseType: 'any',
+          parameters: [
+            { name: 'todo_id', type: 'string', required: true, source: 'query' }
+          ]
+        },
+        {
+          name: 'getTodoStats',
+          httpMethod: 'GET',
+          path: '/api/v1/todo-service/get_todo_stats',
+          responseType: 'any',
+          parameters: []
+        }
+      ]
+    };
+  }
+
+  getManualNotificationService(): ServiceDefinition {
+    return {
+      name: 'notification',
+      methods: [
+        {
+          name: 'sendNotification',
+          httpMethod: 'POST',
+          path: '/api/v1/notification-service/send_notification',
+          requestType: 'SendNotificationRequest',
+          responseType: 'any',
+          parameters: [
+            { name: 'user_id', type: 'string', required: true, source: 'body' },
+            { name: 'type', type: 'string', required: true, source: 'body' },
+            { name: 'subject', type: 'string', required: true, source: 'body' },
+            { name: 'body', type: 'string', required: true, source: 'body' }
+          ]
+        },
+        {
+          name: 'getNotificationHistory',
+          httpMethod: 'GET',
+          path: '/api/v1/notification-service/get_notification_history',
+          responseType: 'any',
+          parameters: [
+            { name: 'user_id', type: 'string', required: true, source: 'query' }
+          ]
+        },
+        {
+          name: 'streamNotifications',
+          httpMethod: 'GET',
+          path: '/api/v1/notification-service/stream_notifications',
+          responseType: 'any',
+          parameters: [
+            { name: 'user_id', type: 'string', required: true, source: 'query' }
+          ]
+        },
+        {
+          name: 'getNotificationStats',
+          httpMethod: 'GET',
+          path: '/api/v1/notification-service/get_notification_stats',
           responseType: 'any',
           parameters: []
         }

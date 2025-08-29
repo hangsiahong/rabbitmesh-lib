@@ -13,13 +13,11 @@ program
   .version('1.0.0');
 
 program
-  .option('-u, --gateway-url <url>', 'Gateway URL', 'http://localhost:3000')
+  .option('-u, --gateway-url <url>', 'Gateway URL (default: http://localhost:8081)', 'http://localhost:8081')
   .option('-o, --output <dir>', 'Output directory', './generated-client')
   .option('-p, --package-name <name>', 'Package name', '@your-org/rabbitmesh-client')
   .option('--include-services <services>', 'Comma-separated list of services to include')
   .option('--exclude-services <services>', 'Comma-separated list of services to exclude')
-  .option('--manual', 'Use manual service definitions instead of fetching from gateway')
-  .option('--blog-platform', 'Use blog platform service definitions (auth + blog services)')
   .action(async (options) => {
     try {
       console.log('🚀 Starting RabbitMesh client generation...');
@@ -35,21 +33,18 @@ program
       const parser = new ServiceParser(config.gatewayUrl);
       const generator = new ClientGenerator(config);
 
+      console.log('🔍 Discovering services from dynamic gateway...');
+      console.log(`   Gateway URL: ${config.gatewayUrl}`);
+      
       let services;
-      if (options.blogPlatform) {
-        console.log('📝 Using blog platform service definitions...');
-        services = parser.getManualBlogPlatformServices();
-      } else if (options.manual) {
-        console.log('📝 Using manual service definitions...');
-        services = [parser.getManualTodoService()];
-      } else {
-        console.log('🔍 Discovering services from gateway...');
-        try {
-          services = await parser.parseServicesFromGateway();
-        } catch (error) {
-          console.log('⚠️  Failed to fetch from gateway, using manual definitions...');
-          services = [parser.getManualTodoService()];
-        }
+      try {
+        services = await parser.parseServicesFromGateway();
+        console.log(`✅ Successfully discovered ${services.length} services`);
+      } catch (error) {
+        console.error('❌ Failed to fetch services from gateway:', error);
+        console.log('💡 Make sure your dynamic gateway is running and accessible');
+        console.log(`   Try: curl ${config.gatewayUrl}/api/services`);
+        process.exit(1);
       }
 
       // Filter services if specified
