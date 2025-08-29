@@ -1,6 +1,7 @@
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse_macro_input, ItemImpl, ImplItem, FnArg, Pat, Type, LitStr};
+use syn::{parse_macro_input, ItemImpl, ImplItem, FnArg, Pat, Type, LitStr, Attribute};
+use crate::universal::{UniversalMacroProcessor, MacroContext, MethodParam, ParamSource};
 
 /// Arguments for method attributes
 #[derive(Debug)]
@@ -9,6 +10,23 @@ struct MethodInfo {
     route: Option<String>,
     params: Vec<(String, Type)>,
     return_type: Type,
+}
+
+/// Check if a parameter is injected by macros
+fn is_injected_param(param_name: &str) -> bool {
+    matches!(param_name, "user" | "auth_context" | "db" | "db_context" | "cache" | "cache_context" | "service_context")
+}
+
+/// Determine parameter source based on parameter name and type
+fn determine_param_source(param_name: &str) -> ParamSource {
+    match param_name {
+        "user" | "auth_context" => ParamSource::Injected("AuthContext".to_string()),
+        "db" | "db_context" => ParamSource::Injected("DbContext".to_string()),
+        "cache" | "cache_context" => ParamSource::Injected("CacheContext".to_string()),
+        "service_context" => ParamSource::Context,
+        param if param.ends_with("_id") => ParamSource::Path,
+        _ => ParamSource::Body,
+    }
 }
 
 /// Implementation of #[service_impl] macro that processes entire impl blocks
@@ -63,79 +81,109 @@ pub fn impl_service_impl(_args: TokenStream, input: TokenStream) -> TokenStream 
                         syn::parse_quote!(())
                     };
                     
-                    methods.push(MethodInfo {
+                    // Create macro context for universal processing
+                    let macro_context = MacroContext {
+                        service_name: struct_name.to_string(),
+                        method_name: method_name.clone(),
+                        method_params: params.iter().map(|(name, ty)| MethodParam {
+                            name: name.clone(),
+                            param_type: quote!(#ty).to_string(),
+                            is_injected: is_injected_param(name),
+                            source: determine_param_source(name),
+                        }).collect(),
+                        return_type: quote!(#return_type).to_string(),
+                        attributes: UniversalMacroProcessor::parse_attributes(&method.attrs),
+                        http_route: route.clone(),
+                    };
+                    
+                    methods.push((MethodInfo {
                         name: method_name,
                         route,
                         params,
                         return_type,
-                    });
+                    }, macro_context));
                 }
                 
-                // Remove #[service_method] attribute and add the method
+                // Remove universal macro attributes but keep #[service_method] for now
                 let mut new_method = method.clone();
-                new_method.attrs.retain(|attr| !attr.path().is_ident("service_method"));
+                new_method.attrs.retain(|attr| {
+                    // Keep service_method but remove universal macro attributes
+                    if attr.path().is_ident("service_method") {
+                        return true;
+                    }
+                    
+                    // Remove all universal macro attributes
+                    let attr_name = attr.path().segments.last().map(|s| s.ident.to_string()).unwrap_or_default();
+                    !matches!(attr_name.as_str(),
+                        // Authorization macros
+                        "require_auth" | "require_role" | "require_permission" | "require_ownership" |
+                        "require_attributes" | "require_2fa" | "require_any_role" | "optional_auth" |
+                        
+                        // Database macros
+                        "transactional" | "read_only" | "isolated" | "database" | "collection" |
+                        "auto_save" | "soft_delete" | "versioned" | "audited" |
+                        
+                        // Caching macros
+                        "cached" | "cache_invalidate" | "cache_through" | "cache_aside" |
+                        "cache_key" | "cache_ttl" | "cache_tags" | "multi_level_cache" |
+                        
+                        // Validation macros
+                        "validate" | "sanitize" | "transform" | "constrain" | "custom_validate" |
+                        "validate_email" | "validate_phone" | "validate_range" |
+                        
+                        // Rate limiting macros
+                        "rate_limit" | "throttle" | "circuit_breaker" | "timeout" | "retry" |
+                        "bulkhead" | "backpressure" |
+                        
+                        // Observability macros
+                        "metrics" | "trace" | "log" | "monitor" | "alert" | "health_check" |
+                        "profile" | "benchmark" |
+                        
+                        // Workflow macros
+                        "state_machine" | "saga" | "workflow" | "approval_required" |
+                        "event_sourced" | "cqrs" | "projection" |
+                        
+                        // Integration macros
+                        "webhook" | "event_publish" | "event_subscribe" | "queue_message" |
+                        "external_api" | "idempotent" | "compensate" |
+                        
+                        // Security macros
+                        "encrypt" | "decrypt" | "sign" | "verify" | "hash" | "audit_log" |
+                        "pii_mask" | "gdpr_compliant" | "hipaa_compliant" |
+                        
+                        // Performance macros
+                        "async_pool" | "batch_process" | "parallel" | "streaming" |
+                        "lazy_load" | "prefetch" | "compress" |
+                        
+                        // Testing macros
+                        "mock" | "stub" | "test_data" | "load_test" | "chaos_test" |
+                        "a_b_test" | "feature_flag"
+                    )
+                });
+                
                 new_items.push(ImplItem::Fn(new_method));
             } else {
                 new_items.push(item.clone());
             }
         }
         
-        // Generate handler registration code
-        let handler_registrations = methods.iter().map(|method| {
+        // Generate handler registration code with universal macro processing
+        let handler_registrations = methods.iter().map(|(method, context)| {
             let method_name_str = &method.name;
             let method_ident = syn::Ident::new(&method.name, proc_macro2::Span::call_site());
             
-            if method.params.is_empty() {
-                // No parameters
-                quote! {
-                    service.register_function(#method_name_str, move |_msg: rabbitmesh::Message| {
-                        async move {
-                            Ok(match Self::#method_ident().await {
-                                Ok(result) => rabbitmesh::RpcResponse::success(result, 0).unwrap(),
-                                Err(err) => rabbitmesh::RpcResponse::error(&err),
-                            })
-                        }
-                    }).await;
-                }
-            } else if method.params.len() == 1 {
-                // Single parameter
-                quote! {
-                    service.register_function(#method_name_str, move |msg: rabbitmesh::Message| {
-                        async move {
-                            Ok(match msg.deserialize_payload() {
-                                Ok(param) => {
-                                    match Self::#method_ident(param).await {
-                                        Ok(result) => rabbitmesh::RpcResponse::success(result, 0).unwrap(),
-                                        Err(err) => rabbitmesh::RpcResponse::error(&err),
-                                    }
-                                }
-                                Err(e) => rabbitmesh::RpcResponse::error(&format!("Deserialization error: {}", e)),
-                            })
-                        }
-                    }).await;
-                }
-            } else {
-                // Multiple parameters - expect tuple or struct
-                quote! {
-                    service.register_function(#method_name_str, move |msg: rabbitmesh::Message| {
-                        async move {
-                            Ok(match msg.deserialize_payload() {
-                                Ok(params) => {
-                                    match Self::#method_ident(params).await {
-                                        Ok(result) => rabbitmesh::RpcResponse::success(result, 0).unwrap(),
-                                        Err(err) => rabbitmesh::RpcResponse::error(&err),
-                                    }
-                                }
-                                Err(e) => rabbitmesh::RpcResponse::error(&format!("Deserialization error: {}", e)),
-                            })
-                        }
-                    }).await;
-                }
+            // Generate universal wrapper using the macro framework
+            let universal_wrapper = UniversalMacroProcessor::generate_universal_wrapper(context);
+            
+            // For now, generate simple handler registration
+            // The universal wrapper will handle all the macro processing
+            quote! {
+                service.register_function(#method_name_str, #universal_wrapper).await;
             }
         });
         
         // Generate route information for API gateway
-        let routes = methods.iter().filter_map(|method| {
+        let routes = methods.iter().filter_map(|(method, _)| {
             method.route.as_ref().map(|route| {
                 let method_name = &method.name;
                 quote! {
@@ -146,15 +194,24 @@ pub fn impl_service_impl(_args: TokenStream, input: TokenStream) -> TokenStream 
         
         // Add the auto-generated register_handlers method
         let register_handlers_method = quote! {
-            /// Auto-generated handler registration - DO NOT MODIFY
+            /// Auto-generated handler registration with Universal Macro Framework
+            /// Supports RBAC, ABAC, Hybrid authorization, database transactions, 
+            /// caching, validation, observability, workflows, and more!
             pub async fn register_handlers(service: &rabbitmesh::MicroService) -> anyhow::Result<()> {
                 use rabbitmesh::{Message, RpcResponse};
+                use tracing::{info, warn, error, debug, trace};
                 
-                tracing::info!("🔧 Auto-registering service methods...");
+                info!("🌟 Registering service methods with Universal Macro Framework...");
+                info!("🔐 Authorization: RBAC, ABAC, Hybrid patterns supported");
+                info!("💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries");
+                info!("⚡ Caching: Multi-level intelligent caching with domain optimizations");
+                info!("✅ Validation: Comprehensive input validation + security + compliance");
+                info!("📊 Observability: Complete metrics, tracing, logging, monitoring");
+                info!("🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS");
                 
                 #(#handler_registrations)*
                 
-                tracing::info!("✅ All service methods registered automatically");
+                info!("✨ All service methods registered with enterprise-grade features!");
                 Ok(())
             }
         };

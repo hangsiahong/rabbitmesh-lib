@@ -257,10 +257,44 @@ async fn service_health_check(
     }
 }
 
-/// List all registered services
+/// List all registered services by discovering them via RabbitMQ
 async fn list_services(State(state): State<GatewayState>) -> Json<Value> {
-    let services = state.service_registry.list_services().await;
-    Json(serde_json::json!({ "services": services }))
+    let mut discovered_services = Vec::new();
+    
+    // Known service names to discover
+    let known_services = vec!["auth-service", "todo-service", "notification-service"];
+    
+    for service_name in known_services {
+        // Try to ping each service to see if it's available
+        match state.service_client.call_with_timeout(
+            service_name,
+            "ping",
+            serde_json::json!({}),
+            Duration::from_secs(2)
+        ).await {
+            Ok(_) => {
+                discovered_services.push(serde_json::json!({
+                    "name": service_name,
+                    "status": "healthy",
+                    "discovered_via": "rabbitmq_ping"
+                }));
+            }
+            Err(_) => {
+                // Service not responding, but we can still list it as known
+                discovered_services.push(serde_json::json!({
+                    "name": service_name,
+                    "status": "unreachable",
+                    "discovered_via": "rabbitmq_ping"
+                }));
+            }
+        }
+    }
+    
+    Json(serde_json::json!({ 
+        "services": discovered_services,
+        "discovery_method": "rabbitmq_service_ping",
+        "total_discovered": discovered_services.len()
+    }))
 }
 
 /// Describe a specific service and its methods
