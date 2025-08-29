@@ -416,23 +416,36 @@ impl ServiceDiscovery {
                 }))
             }
             
+            use std::sync::Arc;
+            use tokio::sync::OnceCell;
+            
+            // Global singleton service client to avoid multiple consumers
+            static GATEWAY_CLIENT: OnceCell<Arc<rabbitmesh::ServiceClient>> = OnceCell::const_new();
+            
+            async fn get_or_create_client() -> Result<Arc<rabbitmesh::ServiceClient>, axum::http::StatusCode> {
+                GATEWAY_CLIENT.get_or_init(|| async {
+                    match rabbitmesh::ServiceClient::new("dynamic-gateway", "amqp://guest:guest@localhost:5672/%2f").await {
+                        Ok(client) => Arc::new(client),
+                        Err(e) => {
+                            tracing::error!("Failed to create RabbitMQ client: {}", e);
+                            panic!("Cannot initialize RabbitMQ client");
+                        }
+                    }
+                }).await;
+                
+                Ok(GATEWAY_CLIENT.get().unwrap().clone())
+            }
+            
             async fn handle_dynamic_service_call(
                 service_name: &str,
                 method_name: &str,
                 query_params: std::collections::HashMap<String, String>,
                 body: Option<axum::Json<serde_json::Value>>
             ) -> Result<axum::Json<serde_json::Value>, axum::http::StatusCode> {
-                use rabbitmesh::ServiceClient;
                 use tokio::time::Duration;
                 
-                // Create service client
-                let client = match ServiceClient::new("dynamic-gateway", "amqp://guest:guest@localhost:5672/%2f").await {
-                    Ok(client) => client,
-                    Err(_) => {
-                        tracing::error!("Failed to create RabbitMQ client");
-                        return Err(axum::http::StatusCode::INTERNAL_SERVER_ERROR);
-                    }
-                };
+                // Get the singleton service client
+                let client = get_or_create_client().await?;
                 
                 // Prepare parameters
                 let mut params = serde_json::Map::new();
