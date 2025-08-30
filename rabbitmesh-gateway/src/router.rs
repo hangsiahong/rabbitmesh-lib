@@ -78,6 +78,9 @@ pub async fn create_auto_router(amqp_url: impl Into<String>) -> Result<Router, R
         .route("/registry/services", get(list_services))
         .route("/registry/services/{service}", get(describe_service))
         
+        // Client generator compatible endpoint
+        .route("/api/services", get(list_services_for_client_generator))
+        
         .with_state(state);
 
     info!("✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices");
@@ -339,15 +342,164 @@ async fn discover_services_from_rabbitmq() -> Vec<String> {
     services
 }
 
+/// List services in format expected by client generator
+async fn list_services_for_client_generator(State(state): State<GatewayState>) -> Json<Value> {
+    let mut endpoints = Vec::new();
+    
+    // Dynamically discover services from RabbitMQ queues
+    let discovered_service_names = discover_services_from_rabbitmq().await;
+    
+    for service_name in discovered_service_names {
+        // Get methods for each service
+        let methods = discover_service_methods(&state, &service_name).await;
+        
+        // Convert each method to the endpoint format expected by client generator
+        for method in methods {
+            if let Some(method_obj) = method.as_object() {
+                let endpoint = serde_json::json!({
+                    "service": service_name,
+                    "handler": method_obj.get("name").unwrap_or(&serde_json::Value::String("unknown".to_string())),
+                    "method": method_obj.get("http_method").unwrap_or(&serde_json::Value::String("GET".to_string())),
+                    "path": method_obj.get("http_route").and_then(|hr| {
+                        if let Some(hr_obj) = hr.as_object() {
+                            hr_obj.get("gateway_path")
+                        } else {
+                            Some(hr)
+                        }
+                    }).unwrap_or(&serde_json::Value::String(format!("/api/v1/{}/unknown", service_name))),
+                    "description": method_obj.get("description").unwrap_or(&serde_json::Value::String("Auto-generated method".to_string())),
+                    "parameters": [],
+                    "response_type": "any"
+                });
+                endpoints.push(endpoint);
+            }
+        }
+    }
+    
+    Json(serde_json::json!({
+        "endpoints": endpoints,
+        "discovery_method": "dynamic_rabbitmq_discovery",
+        "total_endpoints": endpoints.len()
+    }))
+}
+
+/// Dynamically discover service methods by querying the service
+async fn discover_service_methods(state: &GatewayState, service_name: &str) -> Vec<serde_json::Value> {
+    // Try to call a schema or introspection method on the service
+    let methods = match state.service_client.call_with_timeout(
+        service_name,
+        "schema",
+        serde_json::json!({}),
+        Duration::from_secs(3)
+    ).await {
+        Ok(rabbitmesh::message::RpcResponse::Success { data, .. }) => {
+            // Service returned its schema
+            if let Ok(schema) = serde_json::from_value::<serde_json::Value>(data) {
+                if let Some(methods) = schema.get("methods").and_then(|m| m.as_array()) {
+                    return methods.iter()
+                        .filter_map(|method| {
+                            if let (Some(name), Some(route)) = (
+                                method.get("name").and_then(|n| n.as_str()),
+                                method.get("route").and_then(|r| r.as_str())
+                            ) {
+                                Some(serde_json::json!({
+                                    "name": name,
+                                    "original_route": route,
+                                    "http_route": convert_route_to_gateway_format(service_name, route),
+                                    "description": method.get("description")
+                                        .and_then(|d| d.as_str())
+                                        .unwrap_or(&format!("Method: {}", name))
+                                }))
+                            } else {
+                                None
+                            }
+                        })
+                        .collect();
+                }
+            }
+            Vec::new()
+        },
+        _ => {
+            // Service doesn't support schema introspection or failed
+            // Return basic ping method as fallback
+            vec![
+                serde_json::json!({
+                    "name": "ping",
+                    "http_method": "GET", 
+                    "http_route": format!("/api/v1/{}/ping", service_name),
+                    "original_route": "GET /ping",
+                    "description": "Health check endpoint"
+                })
+            ]
+        }
+    };
+
+    methods
+}
+
+/// Convert service route format to gateway route format
+/// e.g., "POST /users/:id" -> ("POST", "/api/v1/user-service/users/{id}")
+fn convert_route_to_gateway_format(service_name: &str, route: &str) -> serde_json::Value {
+    let parts: Vec<&str> = route.splitn(2, ' ').collect();
+    if parts.len() == 2 {
+        let method = parts[0];
+        let path = parts[1]
+            .replace(":id", "{id}")
+            .replace(":user_id", "{user_id}")
+            .replace(":order_id", "{order_id}")
+            .replace(":status", "{status}")
+            .replace(":email", "{email}");
+        
+        serde_json::json!({
+            "http_method": method,
+            "gateway_path": format!("/api/v1/{}{}", service_name, path)
+        })
+    } else {
+        serde_json::json!({
+            "http_method": "GET",
+            "gateway_path": format!("/api/v1/{}/unknown", service_name)
+        })
+    }
+}
+
 /// Describe a specific service and its methods
 async fn describe_service(
     State(state): State<GatewayState>,
     Path(service): Path<String>,
 ) -> Result<Json<Value>, GatewayError> {
-    match state.service_registry.get_service(&service).await {
-        Some(service_info) => Ok(Json(serde_json::json!(service_info))),
-        None => Err(GatewayError::ServiceNotFound(service)),
+    // First check the service registry
+    if let Some(service_info) = state.service_registry.get_service(&service).await {
+        return Ok(Json(serde_json::json!(service_info)));
     }
+    
+    // If not in registry, check if it's a dynamically discovered service
+    let discovered_services = discover_services_from_rabbitmq().await;
+    if discovered_services.contains(&service) {
+        // Try to ping the service to check its status
+        let status = match state.service_client.call_with_timeout(
+            &service,
+            "ping",
+            serde_json::json!({}),
+            Duration::from_secs(2)
+        ).await {
+            Ok(_) => "healthy",
+            Err(_) => "unreachable",
+        };
+        
+        // Try to get methods from the service
+        let methods = discover_service_methods(&state, &service).await;
+        
+        return Ok(Json(serde_json::json!({
+            "name": service,
+            "status": status,
+            "discovery_method": "rabbitmq_queue_discovery",
+            "description": format!("Dynamically discovered service: {}", service),
+            "methods": methods,
+            "total_methods": methods.len()
+        })));
+    }
+    
+    Err(GatewayError::ServiceNotFound(service))
 }
 
 /// Gateway-specific errors

@@ -52,8 +52,8 @@ async fn main() -> Result<()> {
     
     let microservice = MicroService::new(config).await?;
     
-    // TODO: Register service method handlers here
-    // The handlers will be registered via the service_method macros
+    // Register service method handlers via the service_impl macro
+    AuthService::register_handlers(&microservice).await?;
     
     tracing::info!("Starting microservice on RabbitMQ: {}", rabbitmq_url);
     microservice.start().await?;

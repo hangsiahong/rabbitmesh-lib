@@ -247,6 +247,7 @@ pub fn service_impl(_args: TokenStream, input: TokenStream) -> TokenStream {
 
     let mut generated_methods = Vec::new();
     let mut generated_registrations = Vec::new();
+    let mut service_methods = Vec::new();
 
     // Process each method in the impl block
     for item in &input.items {
@@ -265,10 +266,38 @@ pub fn service_impl(_args: TokenStream, input: TokenStream) -> TokenStream {
                 })
                 .collect();
                 
-            // Note: HTTP route extraction is now handled by dynamic_discovery.rs
+            // Check for service_method attribute and extract route info
+            let service_method_route = method.attrs.iter()
+                .find(|attr| attr.path().is_ident("service_method"))
+                .and_then(|attr| {
+                    if let Ok(lit_str) = attr.parse_args::<syn::LitStr>() {
+                        Some(lit_str.value())
+                    } else {
+                        None
+                    }
+                });
+
+            if let Some(ref route) = service_method_route {
+                let parts: Vec<&str> = route.splitn(2, ' ').collect();
+                let (http_method, path) = if parts.len() == 2 {
+                    (parts[0], parts[1])
+                } else {
+                    ("POST", route.as_str())
+                };
+                
+                service_methods.push(quote! {
+                    serde_json::json!({
+                        "name": #method_name,
+                        "route": #route,
+                        "http_method": #http_method,
+                        "path": #path,
+                        "description": format!("Auto-generated from {}", #method_name)
+                    })
+                });
+            }
 
             // Generate universal wrapper for this method
-            if !macro_attrs.is_empty() {
+            if !macro_attrs.is_empty() || service_method_route.is_some() {
                 let universal_wrapper = generate_universal_wrapper(&service_name, &method_name, &macro_attrs);
                 
                 // Create method registration with error conversion
@@ -277,7 +306,10 @@ pub fn service_impl(_args: TokenStream, input: TokenStream) -> TokenStream {
                     service.register_function(#method_name, |msg: rabbitmesh::Message| async move {
                         #universal_wrapper
                         match Self::#method_ident(msg).await {
-                            Ok(response) => Ok(response),
+                            Ok(response) => Ok(rabbitmesh::message::RpcResponse::Success {
+                                data: response,
+                                processing_time_ms: 0
+                            }),
                             Err(e) => Err(rabbitmesh::error::RabbitMeshError::Handler(e)),
                         }
                     }).await;
@@ -287,6 +319,39 @@ pub fn service_impl(_args: TokenStream, input: TokenStream) -> TokenStream {
                 generated_methods.push(method);
             }
         }
+    }
+    
+    // Generate schema method registration
+    if !service_methods.is_empty() {
+        let kebab_service_name = service_name
+            .chars()
+            .enumerate()
+            .map(|(i, c)| {
+                if c.is_uppercase() && i > 0 {
+                    format!("-{}", c.to_lowercase())
+                } else {
+                    c.to_lowercase().to_string()
+                }
+            })
+            .collect::<String>()
+            .trim_end_matches("-service")
+            .to_string() + "-service";
+        
+        generated_registrations.push(quote! {
+            service.register_function("schema", |_msg: rabbitmesh::Message| async move {
+                let schema = serde_json::json!({
+                    "service": #kebab_service_name,
+                    "version": "1.0.0",
+                    "description": format!("Auto-generated schema for {}", #service_name),
+                    "methods": [#(#service_methods),*]
+                });
+                Ok(rabbitmesh::message::RpcResponse::Success { 
+                    data: schema, 
+                    processing_time_ms: 0 
+                })
+            }).await;
+            tracing::info!("Auto-generated schema method registered for service: {}", #kebab_service_name);
+        });
     }
 
     // Generate the enhanced impl block

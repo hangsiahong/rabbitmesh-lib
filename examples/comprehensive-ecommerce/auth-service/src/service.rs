@@ -1,6 +1,6 @@
 use rabbitmesh_macros::{
     audit_log, cached, metrics, rate_limit, require_auth, require_permission,
-    service_method, validate
+    service_impl, service_method, validate
 };
 use rabbitmesh::Message;
 use serde_json::Value;
@@ -15,6 +15,7 @@ pub struct AuthService {
     handler: Arc<AuthHandler>,
 }
 
+#[service_impl]
 impl AuthService {
     pub fn new(handler: AuthHandler) -> Self {
         Self {

@@ -19,6 +19,10 @@ export class ServiceParser {
       const serviceMap = new Map<string, any[]>();
       for (const endpoint of gatewayData.endpoints) {
         const serviceName = endpoint.service;
+        if (!serviceName) {
+          console.error('Endpoint missing service name:', endpoint);
+          continue;
+        }
         if (!serviceMap.has(serviceName)) {
           serviceMap.set(serviceName, []);
         }
@@ -42,10 +46,10 @@ export class ServiceParser {
     const methods = endpoints.map(endpoint => this.parseEndpointToMethod(endpoint));
     
     return {
-      name: this.toCamelCase(serviceName.replace('-service', '')), // Remove -service suffix
+      name: this.toCamelCase((serviceName || 'unknown').replace('-service', '')), // Remove -service suffix
       methods,
       version: '1.0.0',
-      description: `Auto-generated from ${serviceName}`
+      description: `Auto-generated from ${serviceName || 'unknown service'}`
     };
   }
 

@@ -1,6 +1,6 @@
 use rabbitmesh_macros::{
     audit_log, cached, metrics, rate_limit, require_auth, require_permission,
-    service_method, transactional, validate
+    service_impl, service_method, transactional, validate
 };
 use rabbitmesh::Message;
 use serde_json::Value;
@@ -15,12 +15,14 @@ pub struct UserService {
     handler: Arc<UserHandler>,
 }
 
+#[service_impl]
 impl UserService {
     pub fn new(handler: UserHandler) -> Self {
         Self {
             handler: Arc::new(handler),
         }
     }
+
 
     #[service_method("POST /users")]
     #[validate]

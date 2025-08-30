@@ -19,3 +19,4 @@ chrono = { workspace = true }
 mongodb = { workspace = true }
 bcrypt = { workspace = true }
 config = { workspace = true }
+jsonwebtoken = { workspace = true }

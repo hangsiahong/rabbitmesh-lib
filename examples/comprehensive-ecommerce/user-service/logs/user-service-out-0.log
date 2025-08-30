@@ -107,3 +107,138 @@
 2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.362907Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
 2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.362910Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
 2025-08-30 17:32:55 +07:00: [2m2025-08-30T10:32:55.830535Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: ping
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.957036Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.957356Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.957986Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.958024Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.958086Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.958091Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.958093Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.970516Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.970542Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.973494Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.974432Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.974479Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.976532Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.976537Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.976539Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.976541Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.976549Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-08-30 17:38:28 +07:00: [2m2025-08-30T10:38:28.976551Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.780623Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.780918Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.781542Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.781546Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.781593Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.781599Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.781600Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.795221Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.795239Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.798552Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.799119Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.799173Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.800978Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.800984Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.800989Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.800991Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.801002Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-08-30 17:47:21 +07:00: [2m2025-08-30T10:47:21.801025Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.041713Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.042048Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.042663Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.042666Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.042688Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.042691Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.042692Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.056088Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.056101Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.060023Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.060581Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.060644Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.061878Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.061882Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.061884Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.061886Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.061897Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-08-30 17:51:41 +07:00: [2m2025-08-30T10:51:41.061927Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-08-30 17:51:45 +07:00: [2m2025-08-30T10:51:45.403193Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: schema
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.716708Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.717006Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.717572Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.717579Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.717946Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.717953Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.717955Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.729702Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.729707Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.734107Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.734714Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.734755Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.736018Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.736024Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.736023Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.736025Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.736050Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-08-30 17:54:19 +07:00: [2m2025-08-30T10:54:19.736061Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-08-30 17:55:47 +07:00: [2m2025-08-30T10:55:47.642789Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: schema
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.899329Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.899671Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.900299Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.900302Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.900322Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.900452Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.900455Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.913967Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.913993Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.917346Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.917836Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.917881Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.919078Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.919084Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.919086Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.919097Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.919102Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-08-30 18:06:43 +07:00: [2m2025-08-30T11:06:43.919100Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-08-30 18:06:47 +07:00: [2m2025-08-30T11:06:47.008062Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: schema
+2025-08-30 18:07:02 +07:00: [2m2025-08-30T11:07:02.828049Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: schema
+2025-08-30 18:08:17 +07:00: [2m2025-08-30T11:08:17.441923Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: schema
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.900542Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.900875Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901393Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901398Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901431Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901532Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901534Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901536Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901573Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901595Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901600Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901604Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901610Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901615Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901633Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901635Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901636Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901637Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901639Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901641Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901642Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901643Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901644Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901645Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901647Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901648Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901649Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901652Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.901653Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.917874Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.917896Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.922388Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.922935Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.922951Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.925270Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.925276Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.925278Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.925293Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.925307Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-08-30 18:10:27 +07:00: [2m2025-08-30T11:10:27.925311Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service

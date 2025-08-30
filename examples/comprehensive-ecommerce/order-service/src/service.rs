@@ -1,7 +1,7 @@
 use rabbitmesh_macros::{
     audit_log, cached, event_publish, metrics, rate_limit, redis_cache,
     require_auth, require_ownership, require_permission,
-    service_method, transactional, validate
+    service_impl, service_method, transactional, validate
 };
 use rabbitmesh::Message;
 use serde_json::Value;
@@ -17,6 +17,7 @@ pub struct OrderService {
     handler: Arc<Mutex<OrderHandler>>,
 }
 
+#[service_impl]
 impl OrderService {
     pub fn new(handler: OrderHandler) -> Self {
         Self {
