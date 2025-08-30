@@ -3,8 +3,7 @@ resolver = "2"
 members = [
     "rabbitmesh",
     "rabbitmesh-macros", 
-    "rabbitmesh-gateway",
-    "examples/simple-todo"
+    "rabbitmesh-gateway"
 ]
 
 [workspace.package]

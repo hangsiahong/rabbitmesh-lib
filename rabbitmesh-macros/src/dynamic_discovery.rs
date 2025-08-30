@@ -352,15 +352,16 @@ impl ServiceDiscovery {
                 };
                 routes.push(route_registration);
                 
-                // Generate handler function
+                // Generate handler function with universal auth support
                 let service_name = &service.name;
                 let method_name = &method.name;
                 let handler_func = quote! {
                     async fn #handler_ident(
                         axum::extract::Query(query_params): axum::extract::Query<std::collections::HashMap<String, String>>,
+                        headers: axum::http::HeaderMap,
                         body: Option<axum::Json<serde_json::Value>>
                     ) -> Result<axum::Json<serde_json::Value>, axum::http::StatusCode> {
-                        handle_dynamic_service_call(#service_name, #method_name, query_params, body).await
+                        handle_dynamic_service_call(#service_name, #method_name, query_params, body, headers).await
                     }
                 };
                 handlers.push(handler_func);
@@ -440,7 +441,8 @@ impl ServiceDiscovery {
                 service_name: &str,
                 method_name: &str,
                 query_params: std::collections::HashMap<String, String>,
-                body: Option<axum::Json<serde_json::Value>>
+                body: Option<axum::Json<serde_json::Value>>,
+                headers: axum::http::HeaderMap
             ) -> Result<axum::Json<serde_json::Value>, axum::http::StatusCode> {
                 use tokio::time::Duration;
                 
@@ -449,6 +451,26 @@ impl ServiceDiscovery {
                 
                 // Prepare parameters
                 let mut params = serde_json::Map::new();
+                
+                // UNIVERSAL AUTH: Extract JWT token from Authorization header
+                let mut message_headers = std::collections::HashMap::new();
+                if let Some(auth_header) = headers.get("authorization") {
+                    if let Ok(auth_value) = auth_header.to_str() {
+                        message_headers.insert("authorization".to_string(), auth_value.to_string());
+                        tracing::debug!("🔐 Passing Authorization header to service: {}", service_name);
+                    }
+                }
+                
+                // Also extract other important headers for universal use
+                for (header_name, header_value) in headers.iter() {
+                    if let Ok(value_str) = header_value.to_str() {
+                        let key = header_name.as_str().to_lowercase();
+                        // Pass through common auth/security headers
+                        if key.starts_with("x-") || key == "user-agent" || key == "x-forwarded-for" {
+                            message_headers.insert(key, value_str.to_string());
+                        }
+                    }
+                }
                 
                 // Add query parameters
                 for (key, value) in query_params {
@@ -466,11 +488,16 @@ impl ServiceDiscovery {
                     }
                 }
                 
+                // Add auth headers to params for universal authentication
+                if !message_headers.is_empty() {
+                    params.insert("_headers".to_string(), serde_json::json!(message_headers));
+                }
+                
                 let params_value = serde_json::Value::Object(params);
                 
-                tracing::debug!("📞 Calling service: {} method: {}", service_name, method_name);
+                tracing::debug!("📞 Calling service: {} method: {} (with {} headers)", service_name, method_name, message_headers.len());
                 
-                // Call service via RabbitMQ
+                // Call service via RabbitMQ with headers embedded in params
                 match client.call_with_timeout(service_name, method_name, params_value, Duration::from_secs(30)).await {
                     Ok(rabbitmesh::message::RpcResponse::Success { data, .. }) => {
                         tracing::debug!("✅ Service call successful: {}.{}", service_name, method_name);

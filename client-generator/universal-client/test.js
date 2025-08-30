@@ -11,11 +11,16 @@ async function testClient() {
   });
   
   try {
+    // Generate unique username to avoid conflicts
+    const timestamp = Date.now();
+    const username = `testuser_${timestamp}`;
+    const email = `test_${timestamp}@example.com`;
+    
     // Test auth service registration
     console.log('📝 Testing user registration...');
     const user = await client.auth.register({
-      username: 'testuser3',
-      email: 'test3@example.com', 
+      username: username,
+      email: email,
       password: 'password123'
     });
     console.log('✅ User registered:', user);
@@ -23,7 +28,7 @@ async function testClient() {
     // Test auth service login
     console.log('🔐 Testing user login...');
     const authResult = await client.auth.login({
-      username: 'testuser3',
+      username: username,
       password: 'password123'
     });
     console.log('✅ User logged in:', authResult);
@@ -35,6 +40,18 @@ async function testClient() {
       description: 'This todo was created using the UNIVERSAL client generator that works with ANY project!'
     });
     console.log('✅ Todo created:', todo);
+    
+    // Test notification service
+    console.log('🔔 Testing send notification...');
+    const notification = await client.notification.sendNotification({
+      user_id: user.user_id,
+      title: 'Test Notification',
+      message: 'Test notification from Universal Client',
+      recipient: email,
+      notification_type: 'WelcomeMessage',
+      metadata: {}
+    });
+    console.log('✅ Notification sent:', notification);
     
     console.log('🎉 ALL TESTS PASSED! Universal client generator works perfectly!');
     
