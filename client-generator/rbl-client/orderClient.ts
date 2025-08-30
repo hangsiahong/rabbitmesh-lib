@@ -4,8 +4,8 @@ import * as Types from './types';
 export class OrderClient {
   constructor(private http: AxiosInstance) {}
 
-  async createOrder(): Promise<any> {
-    const response = await this.http.get(`/api/v1/order-service/orders`);
+  async createOrder(data: any): Promise<any> {
+    const response = await this.http.post(`/api/v1/order-service/orders`, data);
     return response.data;
   }
 
@@ -14,13 +14,13 @@ export class OrderClient {
     return response.data;
   }
 
-  async updateOrder(): Promise<any> {
-    const response = await this.http.get(`/api/v1/order-service/orders/{id}`);
+  async updateOrder(data: any): Promise<any> {
+    const response = await this.http.put(`/api/v1/order-service/orders/{id}`, data);
     return response.data;
   }
 
   async deleteOrder(): Promise<any> {
-    const response = await this.http.get(`/api/v1/order-service/orders/{id}`);
+    const response = await this.http.delete(`/api/v1/order-service/orders/{id}`);
     return response.data;
   }
 
@@ -34,13 +34,13 @@ export class OrderClient {
     return response.data;
   }
 
-  async confirmOrder(): Promise<any> {
-    const response = await this.http.get(`/api/v1/order-service/orders/{id}/confirm`);
+  async confirmOrder(data: any): Promise<any> {
+    const response = await this.http.post(`/api/v1/order-service/orders/{id}/confirm`, data);
     return response.data;
   }
 
-  async cancelOrder(): Promise<any> {
-    const response = await this.http.get(`/api/v1/order-service/orders/{id}/cancel`);
+  async cancelOrder(data: any): Promise<any> {
+    const response = await this.http.post(`/api/v1/order-service/orders/{id}/cancel`, data);
     return response.data;
   }
 }

@@ -356,17 +356,21 @@ async fn list_services_for_client_generator(State(state): State<GatewayState>) -
         // Convert each method to the endpoint format expected by client generator
         for method in methods {
             if let Some(method_obj) = method.as_object() {
+                // Get route and convert path parameters from :param to {param}
+                let original_path = method_obj.get("path").and_then(|p| p.as_str()).unwrap_or("/unknown");
+                let gateway_path = format!("/api/v1/{}{}", service_name, original_path
+                    .replace(":id", "{id}")
+                    .replace(":user_id", "{user_id}")
+                    .replace(":order_id", "{order_id}")
+                    .replace(":status", "{status}")
+                    .replace(":email", "{email}")
+                );
+                
                 let endpoint = serde_json::json!({
                     "service": service_name,
                     "handler": method_obj.get("name").unwrap_or(&serde_json::Value::String("unknown".to_string())),
                     "method": method_obj.get("http_method").unwrap_or(&serde_json::Value::String("GET".to_string())),
-                    "path": method_obj.get("http_route").and_then(|hr| {
-                        if let Some(hr_obj) = hr.as_object() {
-                            hr_obj.get("gateway_path")
-                        } else {
-                            Some(hr)
-                        }
-                    }).unwrap_or(&serde_json::Value::String(format!("/api/v1/{}/unknown", service_name))),
+                    "path": gateway_path,
                     "description": method_obj.get("description").unwrap_or(&serde_json::Value::String("Auto-generated method".to_string())),
                     "parameters": [],
                     "response_type": "any"
@@ -386,55 +390,55 @@ async fn list_services_for_client_generator(State(state): State<GatewayState>) -
 /// Dynamically discover service methods by querying the service
 async fn discover_service_methods(state: &GatewayState, service_name: &str) -> Vec<serde_json::Value> {
     // Try to call a schema or introspection method on the service
-    let methods = match state.service_client.call_with_timeout(
+    match state.service_client.call_with_timeout(
         service_name,
         "schema",
         serde_json::json!({}),
         Duration::from_secs(3)
     ).await {
         Ok(rabbitmesh::message::RpcResponse::Success { data, .. }) => {
-            // Service returned its schema
-            if let Ok(schema) = serde_json::from_value::<serde_json::Value>(data) {
-                if let Some(methods) = schema.get("methods").and_then(|m| m.as_array()) {
-                    return methods.iter()
-                        .filter_map(|method| {
-                            if let (Some(name), Some(route)) = (
-                                method.get("name").and_then(|n| n.as_str()),
-                                method.get("route").and_then(|r| r.as_str())
-                            ) {
-                                Some(serde_json::json!({
-                                    "name": name,
-                                    "original_route": route,
-                                    "http_route": convert_route_to_gateway_format(service_name, route),
-                                    "description": method.get("description")
-                                        .and_then(|d| d.as_str())
-                                        .unwrap_or(&format!("Method: {}", name))
-                                }))
-                            } else {
-                                None
-                            }
-                        })
-                        .collect();
-                }
+            // Service returned its schema - data is the JSON object directly
+            if let Some(methods) = data.get("methods").and_then(|m| m.as_array()) {
+                return methods.iter()
+                    .filter_map(|method| {
+                        if let (Some(name), Some(route)) = (
+                            method.get("name").and_then(|n| n.as_str()),
+                            method.get("route").and_then(|r| r.as_str())
+                        ) {
+                            Some(serde_json::json!({
+                                "name": name,
+                                "route": route,
+                                "http_method": method.get("http_method").and_then(|h| h.as_str()).unwrap_or("GET"),
+                                "path": method.get("path").and_then(|p| p.as_str()).unwrap_or("/unknown"),
+                                "description": method.get("description")
+                                    .and_then(|d| d.as_str())
+                                    .unwrap_or(&format!("Method: {}", name))
+                            }))
+                        } else {
+                            None
+                        }
+                    })
+                    .collect();
             }
-            Vec::new()
         },
-        _ => {
-            // Service doesn't support schema introspection or failed
-            // Return basic ping method as fallback
-            vec![
-                serde_json::json!({
-                    "name": "ping",
-                    "http_method": "GET", 
-                    "http_route": format!("/api/v1/{}/ping", service_name),
-                    "original_route": "GET /ping",
-                    "description": "Health check endpoint"
-                })
-            ]
+        Ok(rabbitmesh::message::RpcResponse::Error { error, .. }) => {
+            tracing::warn!("Service {} schema call returned error: {}", service_name, error);
+        },
+        Err(e) => {
+            tracing::debug!("Schema call failed for service {}: {}", service_name, e);
         }
-    };
+    }
 
-    methods
+    // Fallback to basic ping method
+    vec![
+        serde_json::json!({
+            "name": "ping",
+            "route": "GET /ping",
+            "http_method": "GET", 
+            "path": "/ping",
+            "description": "Health check endpoint"
+        })
+    ]
 }
 
 /// Convert service route format to gateway route format

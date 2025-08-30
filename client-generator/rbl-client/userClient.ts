@@ -4,8 +4,8 @@ import * as Types from './types';
 export class UserClient {
   constructor(private http: AxiosInstance) {}
 
-  async createUser(): Promise<any> {
-    const response = await this.http.get(`/api/v1/user-service/users`);
+  async createUser(data: any): Promise<any> {
+    const response = await this.http.post(`/api/v1/user-service/users`, data);
     return response.data;
   }
 
@@ -14,13 +14,13 @@ export class UserClient {
     return response.data;
   }
 
-  async updateUser(): Promise<any> {
-    const response = await this.http.get(`/api/v1/user-service/users/{id}`);
+  async updateUser(data: any): Promise<any> {
+    const response = await this.http.put(`/api/v1/user-service/users/{id}`, data);
     return response.data;
   }
 
   async deleteUser(): Promise<any> {
-    const response = await this.http.get(`/api/v1/user-service/users/{id}`);
+    const response = await this.http.delete(`/api/v1/user-service/users/{id}`);
     return response.data;
   }
 
