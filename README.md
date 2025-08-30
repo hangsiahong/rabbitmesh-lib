@@ -23,8 +23,16 @@ RabbitMesh eliminates traditional microservice complexity by using RabbitMQ for 
 - **🔥 Zero Port Management** - Services only connect to RabbitMQ
 - **⚡ Never Blocks** - Every request spawns async task  
 - **🎯 Auto-Generated APIs** - Write service methods, get REST + GraphQL
+- **🎭 Universal Macros** - 50+ macros for auth, caching, validation, metrics
 - **🛡️ Production Ready** - Built-in retries, timeouts, load balancing
 - **🌍 Deploy Anywhere** - Docker, Kubernetes, bare metal
+
+## 📚 Documentation
+
+- **🚀 [Quick Start Guide](QUICK_START.md)** - Get started in 5 minutes
+- **📖 [Complete Developer Guide](docs/DEVELOPER_GUIDE.md)** - Comprehensive guide with real-world examples
+- **🏗️ [API Documentation](https://docs.rs/rabbitmesh)** - Full API reference
+- **📋 [Publishing Guide](PUBLISH_GUIDE.md)** - How to publish to crates.io
 
 ## 🚀 Quick Start
 
