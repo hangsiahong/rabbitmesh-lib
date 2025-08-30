@@ -1,5 +1,5 @@
 export { RabbitMeshClient } from './client';
 export * from './types';
 export { AuthClient } from './authClient';
-export { TodoClient } from './todoClient';
-export { NotificationClient } from './notificationClient';
+export { OrderClient } from './orderClient';
+export { UserClient } from './userClient';

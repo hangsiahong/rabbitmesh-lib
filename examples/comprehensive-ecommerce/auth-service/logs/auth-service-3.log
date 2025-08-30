@@ -471,3 +471,48 @@
 2025-08-30 18:20:30 +07:00: [2m2025-08-30T11:20:30.839173Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for auth-service
 2025-08-30 18:20:30 +07:00: [2m2025-08-30T11:20:30.839168Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
 2025-08-30 18:20:30 +07:00: [2m2025-08-30T11:20:30.839189Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.425873Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Starting Auth Service...
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.426197Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Configuration loaded
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.426209Z[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m 🔗 Creating service client: auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.445697Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.445767Z[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m ✅ Service client connected: auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454174Z[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m ✅ Service client ready: auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454180Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Connected to RabbitMQ for service communication
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454182Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Auth service initialized
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454185Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454189Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454190Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454191Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454192Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454193Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454194Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454195Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454197Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: login
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454198Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m Registered RPC handler for method: login
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454200Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: validate_token
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454201Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m Registered RPC handler for method: validate_token
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454202Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: refresh_token
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454203Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m Registered RPC handler for method: refresh_token
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454205Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: check_permission
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454206Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m Registered RPC handler for method: check_permission
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454208Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: logout
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454209Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m Registered RPC handler for method: logout
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454210Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_current_user
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454212Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m Registered RPC handler for method: get_current_user
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454213Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454214Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m Auto-generated schema method registered for service: auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454215Z[0m [32m INFO[0m [2mauth_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454216Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.454217Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.459433Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.459444Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.467009Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.auth-service, rabbitmesh.auth-service.responses
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.467912Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.467941Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.469125Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.auth-service.responses
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.469128Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.469181Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice auth-service is running and ready to process messages
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.469183Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.469134Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for auth-service
+2025-08-30 18:44:18 +07:00: [2m2025-08-30T11:44:18.469191Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for auth-service
+2025-08-30 18:44:22 +07:00: [2m2025-08-30T11:44:22.072762Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: ping

@@ -40,262 +40,103 @@ export class ClientGenerator {
   private extractTypes(services: ServiceDefinition[]): TypeDefinition[] {
     const types: TypeDefinition[] = [];
     
-    // Check if this is a blog platform generation
-    const hasAuthService = services.some(s => s.name === 'auth');
-    const hasBlogService = services.some(s => s.name === 'blog');
-    
-    if (hasAuthService || hasBlogService) {
-      // Add blog platform types
-      this.addBlogPlatformTypes(types);
-    } else {
-      // Add Todo service types (backward compatibility)
-      this.addTodoTypes(types);
+    // Dynamically extract types from service schemas
+    for (const service of services) {
+      for (const method of service.methods) {
+        // Extract request types from method parameters
+        if (method.parameters && method.parameters.length > 0) {
+          this.extractRequestType(types, method);
+        }
+        
+        // Extract response types - keep it generic, no hardcoded patterns
+        this.extractResponseType(types, method, service.name);
+      }
     }
+    
+    // Add common generic types
+    this.addGenericTypes(types);
 
     return types;
   }
 
-  private addBlogPlatformTypes(types: TypeDefinition[]): void {
-    // Auth service types
-    types.push({
-      name: 'UserRole',
-      fields: [
-        { name: 'Admin', type: '"admin"', optional: false },
-        { name: 'Editor', type: '"editor"', optional: false },
-        { name: 'Author', type: '"author"', optional: false },
-        { name: 'Reader', type: '"reader"', optional: false }
-      ]
-    });
+  private extractRequestType(types: TypeDefinition[], method: ServiceMethod): void {
+    const requestTypeName = this.getRequestTypeName(method.name);
+    
+    // Check if type already exists
+    if (types.some(t => t.name === requestTypeName)) {
+      return;
+    }
 
-    types.push({
-      name: 'UserInfo',
-      fields: [
-        { name: 'id', type: 'string', optional: false },
-        { name: 'username', type: 'string', optional: false },
-        { name: 'email', type: 'string', optional: false },
-        { name: 'full_name', type: 'string | null', optional: true },
-        { name: 'avatar_url', type: 'string | null', optional: true },
-        { name: 'role', type: 'UserRole', optional: false },
-        { name: 'created_at', type: 'string', optional: false }
-      ]
-    });
+    // Extract fields from actual method parameters only
+    const fields = method.parameters
+      .filter(p => p.source === 'body' || p.source === 'query')
+      .map(p => ({
+        name: p.name,
+        type: this.mapParameterType(p.type),
+        optional: !p.required,
+        description: p.description || `Parameter: ${p.name}`
+      }));
 
-    types.push({
-      name: 'RegisterRequest',
-      fields: [
-        { name: 'username', type: 'string', optional: false },
-        { name: 'email', type: 'string', optional: false },
-        { name: 'password', type: 'string', optional: false },
-        { name: 'full_name', type: 'string', optional: true }
-      ]
-    });
+    if (fields.length > 0) {
+      types.push({
+        name: requestTypeName,
+        fields,
+        description: `Request type for ${method.name}`
+      });
+    }
+  }
 
-    types.push({
-      name: 'LoginRequest',
-      fields: [
-        { name: 'email', type: 'string', optional: false },
-        { name: 'password', type: 'string', optional: false }
-      ]
-    });
+  private extractResponseType(types: TypeDefinition[], method: ServiceMethod, serviceName: string): void {
+    const responseTypeName = this.getResponseTypeName(method.name, serviceName);
+    
+    // Check if type already exists
+    if (types.some(t => t.name === responseTypeName)) {
+      return;
+    }
 
+    // Generic response type - no hardcoded patterns
     types.push({
-      name: 'AuthResponse',
+      name: responseTypeName,
       fields: [
-        { name: 'success', type: 'boolean', optional: false },
-        { name: 'message', type: 'string', optional: false },
-        { name: 'user', type: 'UserInfo | null', optional: true },
-        { name: 'token', type: 'string | null', optional: true }
-      ]
+        { name: 'data', type: 'any', optional: true, description: 'Response data' },
+        { name: 'success', type: 'boolean', optional: true, description: 'Operation success status' },
+        { name: 'message', type: 'string', optional: true, description: 'Response message' }
+      ],
+      description: `Response type for ${method.name}`
     });
+  }
 
-    types.push({
-      name: 'ValidateTokenRequest',
-      fields: [
-        { name: 'token', type: 'string', optional: false }
-      ]
-    });
 
+  private addGenericTypes(types: TypeDefinition[]): void {
     types.push({
-      name: 'ValidateTokenResponse',
+      name: 'ApiResponse',
       fields: [
-        { name: 'valid', type: 'boolean', optional: false },
-        { name: 'user_id', type: 'string | null', optional: true },
-        { name: 'role', type: 'UserRole | null', optional: true },
-        { name: 'username', type: 'string | null', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'UpdateProfileRequest',
-      fields: [
-        { name: 'full_name', type: 'string', optional: true },
-        { name: 'avatar_url', type: 'string', optional: true }
-      ]
-    });
-
-    // Blog service types
-    types.push({
-      name: 'PostStatus',
-      fields: [
-        { name: 'Draft', type: '"draft"', optional: false },
-        { name: 'Published', type: '"published"', optional: false },
-        { name: 'Archived', type: '"archived"', optional: false }
-      ]
-    });
-
-    types.push({
-      name: 'BlogPost',
-      fields: [
-        { name: 'id', type: 'string', optional: false },
-        { name: 'title', type: 'string', optional: false },
-        { name: 'content', type: 'string', optional: false },
-        { name: 'excerpt', type: 'string', optional: false },
-        { name: 'author_id', type: 'string', optional: false },
-        { name: 'author_name', type: 'string', optional: false },
-        { name: 'slug', type: 'string', optional: false },
-        { name: 'tags', type: 'string[]', optional: false },
-        { name: 'status', type: 'PostStatus', optional: false },
-        { name: 'view_count', type: 'number', optional: false },
-        { name: 'created_at', type: 'string', optional: false },
-        { name: 'updated_at', type: 'string', optional: false },
-        { name: 'published_at', type: 'string | null', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'CreatePostRequest',
-      fields: [
-        { name: 'title', type: 'string', optional: false },
-        { name: 'content', type: 'string', optional: false },
-        { name: 'tags', type: 'string[]', optional: false },
-        { name: 'status', type: 'PostStatus', optional: false }
-      ]
-    });
-
-    types.push({
-      name: 'UpdatePostRequest',
-      fields: [
-        { name: 'title', type: 'string', optional: true },
-        { name: 'content', type: 'string', optional: true },
-        { name: 'tags', type: 'string[]', optional: true },
-        { name: 'status', type: 'PostStatus', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'PostResponse',
-      fields: [
-        { name: 'success', type: 'boolean', optional: false },
-        { name: 'message', type: 'string', optional: false },
-        { name: 'post', type: 'BlogPost | null', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'PostListResponse',
-      fields: [
-        { name: 'success', type: 'boolean', optional: false },
-        { name: 'message', type: 'string', optional: false },
-        { name: 'posts', type: 'BlogPost[]', optional: false },
-        { name: 'total', type: 'number', optional: false },
-        { name: 'page', type: 'number', optional: false },
-        { name: 'per_page', type: 'number', optional: false }
-      ]
-    });
-
-    types.push({
-      name: 'Comment',
-      fields: [
-        { name: 'id', type: 'string', optional: false },
-        { name: 'post_id', type: 'string', optional: false },
-        { name: 'author_id', type: 'string', optional: false },
-        { name: 'author_name', type: 'string', optional: false },
-        { name: 'content', type: 'string', optional: false },
-        { name: 'parent_id', type: 'string | null', optional: true },
-        { name: 'created_at', type: 'string', optional: false },
-        { name: 'updated_at', type: 'string', optional: false }
-      ]
-    });
-
-    types.push({
-      name: 'CreateCommentRequest',
-      fields: [
-        { name: 'post_id', type: 'string', optional: false },
-        { name: 'content', type: 'string', optional: false },
-        { name: 'parent_id', type: 'string | null', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'CommentResponse',
-      fields: [
-        { name: 'success', type: 'boolean', optional: false },
-        { name: 'message', type: 'string', optional: false },
-        { name: 'comment', type: 'Comment | null', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'CommentListResponse',
-      fields: [
-        { name: 'success', type: 'boolean', optional: false },
-        { name: 'message', type: 'string', optional: false },
-        { name: 'comments', type: 'Comment[]', optional: false },
-        { name: 'total', type: 'number', optional: false }
+        { name: 'data', type: 'any', optional: true },
+        { name: 'success', type: 'boolean', optional: true },
+        { name: 'message', type: 'string', optional: true }
       ]
     });
   }
 
-  private addTodoTypes(types: TypeDefinition[]): void {
-    // Add common types for Todo service
-    types.push({
-      name: 'Todo',
-      fields: [
-        { name: 'id', type: 'string', optional: false },
-        { name: 'title', type: 'string', optional: false },
-        { name: 'description', type: 'string | null', optional: true },
-        { name: 'completed', type: 'boolean', optional: false },
-        { name: 'created_at', type: 'string', optional: false },
-        { name: 'updated_at', type: 'string', optional: false }
-      ]
-    });
-
-    types.push({
-      name: 'CreateTodoRequest',
-      fields: [
-        { name: 'title', type: 'string', optional: false },
-        { name: 'description', type: 'string', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'UpdateTodoRequest',
-      fields: [
-        { name: 'title', type: 'string', optional: true },
-        { name: 'description', type: 'string', optional: true },
-        { name: 'completed', type: 'boolean', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'TodoResponse',
-      fields: [
-        { name: 'success', type: 'boolean', optional: false },
-        { name: 'message', type: 'string', optional: false },
-        { name: 'todo', type: 'Todo | null', optional: true }
-      ]
-    });
-
-    types.push({
-      name: 'TodoListResponse',
-      fields: [
-        { name: 'success', type: 'boolean', optional: false },
-        { name: 'message', type: 'string', optional: false },
-        { name: 'todos', type: 'Todo[]', optional: false },
-        { name: 'total', type: 'number', optional: false }
-      ]
-    });
+  private getRequestTypeName(methodName: string): string {
+    return methodName.charAt(0).toUpperCase() + methodName.slice(1) + 'Request';
   }
+
+  private getResponseTypeName(methodName: string, serviceName: string): string {
+    return methodName.charAt(0).toUpperCase() + methodName.slice(1) + 'Response';
+  }
+
+  private mapParameterType(type: string): string {
+    switch (type.toLowerCase()) {
+      case 'string': return 'string';
+      case 'number': case 'int': case 'integer': return 'number';
+      case 'bool': case 'boolean': return 'boolean';
+      case 'array': return 'any[]';
+      default: return 'any';
+    }
+  }
+
+
 
   private generateTypesContent(types: TypeDefinition[]): string {
     const typeDefinitions = types.map(type => {
@@ -320,48 +161,173 @@ export class ClientGenerator {
   }
 
   private generateServiceClient(service: ServiceDefinition): string {
-    const methods = service.methods.map(method => this.generateMethod(method)).join('\n\n');
+    const queryHooks = service.methods
+      .filter(method => method.httpMethod === 'GET')
+      .map(method => this.generateQueryHook(method, service.name))
+      .join('\n\n');
     
-    return `import axios, { AxiosInstance } from 'axios';
+    const mutationHooks = service.methods
+      .filter(method => ['POST', 'PUT', 'DELETE'].includes(method.httpMethod))
+      .map(method => this.generateMutationHook(method, service.name))
+      .join('\n\n');
+    
+    return `import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
+import axios from 'axios';
 import * as Types from './types';
 
-export class ${this.capitalize(service.name)}Client {
-  constructor(private http: AxiosInstance) {}
+// Query Keys
+export const ${service.name}Keys = {
+${service.methods.filter(m => m.httpMethod === 'GET').map(method => 
+  `  ${method.name}: (${this.getQueryKeyParams(method)}) => ['${service.name}', '${method.name}'${this.getQueryKeyParamsUsage(method)}] as const,`
+).join('\n')}
+} as const;
 
-${methods}
-}`;
+// Query Hooks
+${queryHooks}
+
+// Mutation Hooks
+${mutationHooks}`;
   }
 
-  private generateMethod(method: ServiceMethod): string {
-    const params = this.generateMethodParams(method);
+  private generateQueryHook(method: ServiceMethod, serviceName: string): string {
+    const hookName = `use${this.capitalize(method.name)}`;
     const pathParams = method.parameters.filter(p => p.source === 'path');
-    const bodyParam = method.parameters.find(p => p.source === 'body');
     const queryParams = method.parameters.filter(p => p.source === 'query');
-
+    
     // Build path with parameter substitution
     let path = method.path;
     pathParams.forEach(param => {
-      path = path.replace(`:${param.name}`, `\${${param.name}}`);
+      path = path.replace(`{${param.name}}`, `\${${param.name}}`);
     });
 
-    // Build request config
-    const configParts = [];
-    if (queryParams.length > 0) {
-      const queryParamsStr = queryParams.map(p => `${p.name}`).join(', ');
-      configParts.push(`params: { ${queryParamsStr} }`);
+    const params = this.generateHookParams(method);
+    const responseType = this.getResponseTypeName(method.name, serviceName);
+    
+    return `export function ${hookName}(
+  ${params}
+  options?: Omit<UseQueryOptions<${responseType}>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: ${serviceName}Keys.${method.name}(${this.getQueryKeyParamsUsage(method).slice(2)}),
+    queryFn: async () => {
+      const response = await axios.get(\`${path}\`${this.buildQueryConfig(queryParams)});
+      return response.data;
+    },
+    ...options,
+  });
+}`;
+  }
+
+  private generateMutationHook(method: ServiceMethod, serviceName: string): string {
+    const hookName = `use${this.capitalize(method.name)}`;
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const bodyParam = method.parameters.find(p => p.source === 'body');
+    
+    // Build path with parameter substitution
+    let path = method.path;
+    pathParams.forEach(param => {
+      path = path.replace(`{${param.name}}`, `\${${param.name}}`);
+    });
+
+    const variablesType = this.getMutationVariablesType(method);
+    const responseType = this.getResponseTypeName(method.name, serviceName);
+    
+    return `export function ${hookName}(
+  options?: UseMutationOptions<${responseType}, Error, ${variablesType}>
+) {
+  return useMutation({
+    mutationFn: async (variables: ${variablesType}) => {
+      ${this.generateMutationBody(method, path)}
+    },
+    ...options,
+  });
+}`;
+  }
+
+  private generateMutationBody(method: ServiceMethod, path: string): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const bodyParam = method.parameters.find(p => p.source === 'body');
+    
+    // Extract path parameters from variables
+    const pathExtraction = pathParams.map(p => 
+      `const ${p.name} = variables.${p.name};`
+    ).join('\n      ');
+    
+    const httpMethod = method.httpMethod.toLowerCase();
+    const bodyArg = bodyParam ? ', variables.data' : '';
+    
+    return `${pathExtraction}
+      const response = await axios.${httpMethod}(\`${path}\`${bodyArg});
+      return response.data;`;
+  }
+
+  private getMutationVariablesType(method: ServiceMethod): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const bodyParam = method.parameters.find(p => p.source === 'body');
+    
+    const pathFields = pathParams.map(p => `${p.name}: string`);
+    const bodyFields = bodyParam ? ['data: any'] : [];
+    
+    const allFields = [...pathFields, ...bodyFields];
+    
+    if (allFields.length === 0) {
+      return 'void';
     }
     
-    const config = configParts.length > 0 ? `, { ${configParts.join(', ')} }` : '';
+    return `{ ${allFields.join('; ')} }`;
+  }
 
-    // Build method body
-    const methodBody = bodyParam 
-      ? `this.http.${method.httpMethod.toLowerCase()}(\`${path}\`, ${bodyParam.name}${config})`
-      : `this.http.${method.httpMethod.toLowerCase()}(\`${path}\`${config})`;
+  private generateHookParams(method: ServiceMethod): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const queryParams = method.parameters.filter(p => p.source === 'query');
+    
+    const allParams = [...pathParams, ...queryParams];
+    if (allParams.length === 0) {
+      return '';
+    }
+    
+    const paramList = allParams.map(p => {
+      const optional = p.required ? '' : '?';
+      return `${p.name}${optional}: ${this.mapParameterType(p.type)}`;
+    });
+    
+    return paramList.join(', ') + ',\n  ';
+  }
 
-    return `  async ${method.name}(${params}): Promise<${method.responseType}> {
-    const response = await ${methodBody};
-    return response.data;
-  }`;
+  private getQueryKeyParams(method: ServiceMethod): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const queryParams = method.parameters.filter(p => p.source === 'query');
+    
+    const allParams = [...pathParams, ...queryParams];
+    if (allParams.length === 0) {
+      return '';
+    }
+    
+    return allParams.map(p => {
+      const optional = p.required ? '' : '?';
+      return `${p.name}${optional}: ${this.mapParameterType(p.type)}`;
+    }).join(', ');
+  }
+
+  private getQueryKeyParamsUsage(method: ServiceMethod): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const queryParams = method.parameters.filter(p => p.source === 'query');
+    
+    const allParams = [...pathParams, ...queryParams];
+    if (allParams.length === 0) {
+      return '';
+    }
+    
+    return ', ' + allParams.map(p => p.name).join(', ');
+  }
+
+  private buildQueryConfig(queryParams: any[]): string {
+    if (queryParams.length === 0) {
+      return '';
+    }
+    
+    const paramObj = queryParams.map(p => `${p.name}`).join(', ');
+    return `, { params: { ${paramObj} } }`;
   }
 
   private generateMethodParams(method: ServiceMethod): string {
@@ -377,19 +343,14 @@ ${methods}
 
   private async generateMainClient(services: ServiceDefinition[]): Promise<void> {
     const serviceImports = services.map(service => 
-      `import { ${this.capitalize(service.name)}Client } from './${service.name}Client';`
+      `export * from './${service.name}Client';`
     ).join('\n');
 
-    const serviceProperties = services.map(service => 
-      `  readonly ${service.name}: ${this.capitalize(service.name)}Client;`
-    ).join('\n');
-
-    const serviceInit = services.map(service => 
-      `    this.${service.name} = new ${this.capitalize(service.name)}Client(this.http);`
-    ).join('\n');
-
-    const content = `import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+    const content = `// Re-export all service hooks
 ${serviceImports}
+
+// Axios configuration for the generated hooks
+import axios from 'axios';
 
 export interface RabbitMeshClientConfig {
   baseURL: string;
@@ -397,33 +358,30 @@ export interface RabbitMeshClientConfig {
   headers?: Record<string, string>;
 }
 
-export class RabbitMeshClient {
-  private http: AxiosInstance;
+// Configure axios defaults for all generated hooks
+export function configureRabbitMeshClient(config: RabbitMeshClientConfig | string) {
+  const clientConfig = typeof config === 'string' 
+    ? { baseURL: config }
+    : config;
 
-${serviceProperties}
-
-  constructor(config: RabbitMeshClientConfig | string) {
-    const clientConfig = typeof config === 'string' 
-      ? { baseURL: config }
-      : config;
-
-    this.http = axios.create({
-      baseURL: clientConfig.baseURL,
-      timeout: clientConfig.timeout || 10000,
-      headers: {
-        'Content-Type': 'application/json',
-        ...clientConfig.headers
-      }
-    });
-
-${serviceInit}
+  axios.defaults.baseURL = clientConfig.baseURL;
+  axios.defaults.timeout = clientConfig.timeout || 10000;
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
+  
+  if (clientConfig.headers) {
+    Object.assign(axios.defaults.headers.common, clientConfig.headers);
   }
+}
 
-  // Utility method to access underlying axios instance
-  getHttpClient(): AxiosInstance {
-    return this.http;
-  }
-}`;
+// Example usage:
+// import { configureRabbitMeshClient, useLogin, useCreateOrder } from '@your-org/rabbitmesh-client';
+// 
+// // Configure once in your app initialization
+// configureRabbitMeshClient('http://localhost:3333');
+// 
+// // Use React Query hooks in your components
+// const loginMutation = useLogin();
+// const { data: orders } = useGetUserOrders({ user_id: '123' });`;
 
     fs.writeFileSync(path.join(this.config.outputDir, 'client.ts'), content);
   }
@@ -432,20 +390,25 @@ ${serviceInit}
     const packageJson = {
       name: this.config.packageName,
       version: '1.0.0',
-      description: 'Auto-generated TypeScript client for RabbitMesh services',
+      description: 'Auto-generated React Query hooks for RabbitMesh services',
       main: 'index.js',
       types: 'index.d.ts',
       scripts: {
         build: 'tsc'
       },
       dependencies: {
-        axios: '^1.6.0'
+        axios: '^1.6.0',
+        '@tanstack/react-query': '^5.0.0'
+      },
+      peerDependencies: {
+        react: '>=16.8.0'
       },
       devDependencies: {
         typescript: '^5.0.0',
-        '@types/node': '^20.0.0'
+        '@types/node': '^20.0.0',
+        '@types/react': '^18.0.0'
       },
-      keywords: ['rabbitmesh', 'microservices', 'api-client', 'typescript'],
+      keywords: ['rabbitmesh', 'microservices', 'react-query', 'hooks', 'typescript'],
       author: 'RabbitMesh Client Generator',
       license: 'MIT'
     };
