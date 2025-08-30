@@ -1,0 +1,178 @@
+
+services:
+  # RabbitMQ Message Broker
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: rabbitmesh-rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"     # AMQP port
+      - "15672:15672"   # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - rabbitmesh-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: rabbitmesh-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: ecommerce
+    volumes:
+      - mongodb_data:/data/db
+      - ./scripts/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - rabbitmesh-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7.2-alpine
+    container_name: rabbitmesh-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    networks:
+      - rabbitmesh-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # User Service
+  # user-service:
+  #   build:
+  #     context: .
+  #     dockerfile: user-service/Dockerfile
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     mongodb:
+  #       condition: service_healthy
+  #   environment:
+  #     RUST_LOG: user_service=info,rabbitmesh=info
+  #     USER_SERVICE_DATABASE_URL: mongodb://admin:password@mongodb:27017
+  #     USER_SERVICE_DATABASE_NAME: ecommerce
+  #     USER_SERVICE_RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/%2f
+  #     USER_SERVICE_SERVICE_NAME: user-service
+  #     USER_SERVICE_SERVICE_VERSION: 0.1.0
+  #   networks:
+  #     - rabbitmesh-network
+  #   restart: unless-stopped
+  #   deploy:
+  #     replicas: 2
+
+  # # Auth Service
+  # auth-service:
+  #   build:
+  #     context: .
+  #     dockerfile: auth-service/Dockerfile
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     user-service:
+  #       condition: service_started
+  #   environment:
+  #     RUST_LOG: auth_service=info,rabbitmesh=info
+  #     AUTH_SERVICE_JWT_SECRET: your-super-secret-jwt-key-change-in-production
+  #     AUTH_SERVICE_JWT_EXPIRATION_HOURS: 24
+  #     AUTH_SERVICE_JWT_REFRESH_EXPIRATION_DAYS: 30
+  #     AUTH_SERVICE_RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/%2f
+  #     AUTH_SERVICE_SERVICE_NAME: auth-service
+  #     AUTH_SERVICE_SERVICE_VERSION: 0.1.0
+  #     AUTH_SERVICE_USER_SERVICE_URL: user-service
+  #   networks:
+  #     - rabbitmesh-network
+  #   restart: unless-stopped
+  #   deploy:
+  #     replicas: 2
+
+  # # Order Service
+  # order-service:
+  #   build:
+  #     context: .
+  #     dockerfile: order-service/Dockerfile
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     mongodb:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   environment:
+  #     RUST_LOG: order_service=info,rabbitmesh=info
+  #     ORDER_SERVICE_DATABASE_URL: mongodb://admin:password@mongodb:27017
+  #     ORDER_SERVICE_DATABASE_NAME: ecommerce
+  #     ORDER_SERVICE_REDIS_URL: redis://redis:6379
+  #     ORDER_SERVICE_REDIS_CACHE_TTL_SECONDS: 300
+  #     ORDER_SERVICE_RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/%2f
+  #     ORDER_SERVICE_SERVICE_NAME: order-service
+  #     ORDER_SERVICE_SERVICE_VERSION: 0.1.0
+  #   networks:
+  #     - rabbitmesh-network
+  #   restart: unless-stopped
+  #   deploy:
+  #     replicas: 3
+
+  # # API Gateway
+  # gateway:
+  #   build:
+  #     context: .
+  #     dockerfile: gateway/Dockerfile
+  #   container_name: rabbitmesh-gateway
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     user-service:
+  #       condition: service_started
+  #     auth-service:
+  #       condition: service_started
+  #     order-service:
+  #       condition: service_started
+  #   environment:
+  #     RUST_LOG: gateway=info,rabbitmesh_gateway=info,tower_http=info
+  #     GATEWAY_SERVER_BIND_ADDRESS: 0.0.0.0:3000
+  #     GATEWAY_SERVER_PORT: 3000
+  #     GATEWAY_RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/%2f
+  #     GATEWAY_GATEWAY_NAME: rabbitmesh-gateway
+  #     GATEWAY_GATEWAY_VERSION: 0.1.0
+  #     GATEWAY_GATEWAY_ENABLE_GRAPHQL: true
+  #     GATEWAY_GATEWAY_ENABLE_SWAGGER: true
+  #   networks:
+  #     - rabbitmesh-network
+  #   restart: unless-stopped
+
+volumes:
+  rabbitmq_data:
+    driver: local
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  rabbitmesh-network:
+    driver: bridge

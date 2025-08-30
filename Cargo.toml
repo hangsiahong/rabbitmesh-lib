@@ -3,14 +3,13 @@ resolver = "2"
 members = [
     "rabbitmesh",
     "rabbitmesh-macros", 
-    "rabbitmesh-gateway",
-    "examples/simple-todo"
+    "rabbitmesh-gateway"
 ]
 
 [workspace.package]
-version = "0.1.0"
-edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
+version = "0.1.1"
+edition = "2024"
+authors = ["Hangsia Hong <honghangsia@gmail.com"]
 license = "MIT"
 repository = "https://github.com/hangsihaong/rabbitmesh-rs"
 homepage = "https://github.com/hangsiahong/rabbitmesh-rs"
@@ -20,61 +19,65 @@ keywords = ["microservices", "rabbitmq", "rpc", "async", "distributed"]
 categories = ["network-programming", "asynchronous", "web-programming::http-server"]
 
 [workspace.dependencies]
-# Core async runtime
-tokio = { version = "1.0", features = ["full"] }
+# Core async runtime - Updated to latest stable
+tokio = { version = "1.40", features = ["full"] }
 tokio-stream = "0.1"
 futures-util = "0.3"
 
-# AMQP client  
-lapin = "2.3"
+# AMQP client - Updated to latest
+lapin = "2.5"
 
-# Serialization
+# Serialization - Latest stable
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
-# Unique IDs
-uuid = { version = "1.0", features = ["v4", "serde"] }
+# Unique IDs - Latest stable  
+uuid = { version = "1.11", features = ["v4", "serde"] }
 
-# Async traits
+# Async traits - Latest
 async-trait = "0.1"
 
-# Logging and tracing
+# Logging and tracing - Updated
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
-# Error handling
+# Error handling - Latest stable
 thiserror = "1.0"
 anyhow = "1.0"
 
-# Service registry
+# Service registry - Latest
 inventory = "0.3"
 
-# HTTP server for gateway
-axum = { version = "0.7", features = ["macros"] }
-tower = "0.4"
-tower-http = { version = "0.5", features = ["cors", "trace"] }
+# HTTP server for gateway - Updated to Axum 0.8
+axum = { version = "0.8", features = ["macros"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
 
-# GraphQL
+# GraphQL - Updated to latest
 async-graphql = { version = "7.0", features = ["uuid"] }
 async-graphql-axum = "7.0"
 
-# Proc macros
+# Proc macros - Latest stable
 proc-macro2 = "1.0"
 quote = "1.0"
 syn = { version = "2.0", features = ["full", "extra-traits"] }
 
-# Time handling
+# Time handling - Latest stable
 chrono = { version = "0.4", features = ["serde"] }
 
-# Password hashing
+# Password hashing - Updated
 bcrypt = "0.15"
 
-# OpenAPI documentation
-utoipa = { version = "4.0", features = ["axum_extras", "chrono"] }
-utoipa-swagger-ui = { version = "6.0", features = ["axum"] }
+# OpenAPI documentation - Updated to latest
+utoipa = { version = "5.0", features = ["axum_extras", "chrono"] }
+utoipa-swagger-ui = { version = "7.1", features = ["axum"] }
 
-# Configuration
+# Configuration - Updated
 config = "0.14"
 
-# Testing
+# Testing - Updated
 tokio-test = "0.4"
+
+# Additional dependencies we might need for newer versions
+http = "1.1"
+http-body-util = "0.1"

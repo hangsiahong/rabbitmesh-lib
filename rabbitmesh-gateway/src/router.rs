@@ -59,24 +59,27 @@ pub async fn create_auto_router(amqp_url: impl Into<String>) -> Result<Router, R
     let router = Router::new()
         // Health check endpoint
         .route("/health", get(health_check))
-        .route("/health/:service", get(service_health_check))
+        .route("/health/{service}", get(service_health_check))
         
         // Auto-generated REST API routes
         // Pattern: /api/v1/{service}/{method}/{params...}
-        .route("/api/v1/:service/:method", post(handle_rpc_call))
-        .route("/api/v1/:service/:method", get(handle_rpc_call))
-        .route("/api/v1/:service/:method", put(handle_rpc_call))
-        .route("/api/v1/:service/:method", delete(handle_rpc_call))
+        .route("/api/v1/{service}/{method}", post(handle_rpc_call))
+        .route("/api/v1/{service}/{method}", get(handle_rpc_call))
+        .route("/api/v1/{service}/{method}", put(handle_rpc_call))
+        .route("/api/v1/{service}/{method}", delete(handle_rpc_call))
         
         // Parameterized routes: /api/v1/user-service/users/123
-        .route("/api/v1/:service/:method/:param", get(handle_rpc_call_with_param))
-        .route("/api/v1/:service/:method/:param", post(handle_rpc_call_with_param))
-        .route("/api/v1/:service/:method/:param", put(handle_rpc_call_with_param))
-        .route("/api/v1/:service/:method/:param", delete(handle_rpc_call_with_param))
+        .route("/api/v1/{service}/{method}/{param}", get(handle_rpc_call_with_param))
+        .route("/api/v1/{service}/{method}/{param}", post(handle_rpc_call_with_param))
+        .route("/api/v1/{service}/{method}/{param}", put(handle_rpc_call_with_param))
+        .route("/api/v1/{service}/{method}/{param}", delete(handle_rpc_call_with_param))
         
         // Service registry endpoints
         .route("/registry/services", get(list_services))
-        .route("/registry/services/:service", get(describe_service))
+        .route("/registry/services/{service}", get(describe_service))
+        
+        // Client generator compatible endpoint
+        .route("/api/services", get(list_services_for_client_generator))
         
         .with_state(state);
 
@@ -257,10 +260,210 @@ async fn service_health_check(
     }
 }
 
-/// List all registered services
+/// List all registered services by discovering them via RabbitMQ
 async fn list_services(State(state): State<GatewayState>) -> Json<Value> {
-    let services = state.service_registry.list_services().await;
-    Json(serde_json::json!({ "services": services }))
+    let mut discovered_services = Vec::new();
+    
+    // Dynamically discover services from RabbitMQ queues
+    let discovered_service_names = discover_services_from_rabbitmq().await;
+    
+    for service_name in discovered_service_names {
+        // Try to ping each service to see if it's available
+        match state.service_client.call_with_timeout(
+            &service_name,
+            "ping",
+            serde_json::json!({}),
+            Duration::from_secs(2)
+        ).await {
+            Ok(_) => {
+                discovered_services.push(serde_json::json!({
+                    "name": service_name,
+                    "status": "healthy",
+                    "discovered_via": "rabbitmq_queue_discovery"
+                }));
+            }
+            Err(_) => {
+                // Service not responding, but queue exists
+                discovered_services.push(serde_json::json!({
+                    "name": service_name,
+                    "status": "unreachable",
+                    "discovered_via": "rabbitmq_queue_discovery"
+                }));
+            }
+        }
+    }
+    
+    Json(serde_json::json!({ 
+        "services": discovered_services,
+        "discovery_method": "rabbitmq_queue_discovery",
+        "total_discovered": discovered_services.len()
+    }))
+}
+
+/// Dynamically discover services by querying RabbitMQ management API
+async fn discover_services_from_rabbitmq() -> Vec<String> {
+    use reqwest;
+    
+    let mut services = Vec::new();
+    
+    // Query RabbitMQ management API for queues
+    let client = reqwest::Client::new();
+    match client
+        .get("http://localhost:15672/api/queues")
+        .basic_auth("guest", Some("guest"))
+        .send()
+        .await
+    {
+        Ok(response) => {
+            if let Ok(queues) = response.json::<Vec<serde_json::Value>>().await {
+                for queue in queues {
+                    if let Some(queue_name) = queue["name"].as_str() {
+                        // Extract service names from queue names
+                        // Format: rabbitmesh.{service-name} or rabbitmesh.{service-name}.responses
+                        if queue_name.starts_with("rabbitmesh.") && !queue_name.ends_with(".responses") {
+                            let service_name = queue_name
+                                .strip_prefix("rabbitmesh.")
+                                .unwrap_or(queue_name);
+                            
+                            // Avoid duplicates
+                            if !services.contains(&service_name.to_string()) {
+                                services.push(service_name.to_string());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Err(e) => {
+            error!("Failed to discover services from RabbitMQ: {}", e);
+        }
+    }
+    
+    services
+}
+
+/// List services in format expected by client generator
+async fn list_services_for_client_generator(State(state): State<GatewayState>) -> Json<Value> {
+    let mut endpoints = Vec::new();
+    
+    // Dynamically discover services from RabbitMQ queues
+    let discovered_service_names = discover_services_from_rabbitmq().await;
+    
+    for service_name in discovered_service_names {
+        // Get methods for each service
+        let methods = discover_service_methods(&state, &service_name).await;
+        
+        // Convert each method to the endpoint format expected by client generator
+        for method in methods {
+            if let Some(method_obj) = method.as_object() {
+                // Get route and convert path parameters from :param to {param}
+                let original_path = method_obj.get("path").and_then(|p| p.as_str()).unwrap_or("/unknown");
+                let gateway_path = format!("/api/v1/{}{}", service_name, original_path
+                    .replace(":id", "{id}")
+                    .replace(":user_id", "{user_id}")
+                    .replace(":order_id", "{order_id}")
+                    .replace(":status", "{status}")
+                    .replace(":email", "{email}")
+                );
+                
+                let endpoint = serde_json::json!({
+                    "service": service_name,
+                    "handler": method_obj.get("name").unwrap_or(&serde_json::Value::String("unknown".to_string())),
+                    "method": method_obj.get("http_method").unwrap_or(&serde_json::Value::String("GET".to_string())),
+                    "path": gateway_path,
+                    "description": method_obj.get("description").unwrap_or(&serde_json::Value::String("Auto-generated method".to_string())),
+                    "parameters": [],
+                    "response_type": "any"
+                });
+                endpoints.push(endpoint);
+            }
+        }
+    }
+    
+    Json(serde_json::json!({
+        "endpoints": endpoints,
+        "discovery_method": "dynamic_rabbitmq_discovery",
+        "total_endpoints": endpoints.len()
+    }))
+}
+
+/// Dynamically discover service methods by querying the service
+async fn discover_service_methods(state: &GatewayState, service_name: &str) -> Vec<serde_json::Value> {
+    // Try to call a schema or introspection method on the service
+    match state.service_client.call_with_timeout(
+        service_name,
+        "schema",
+        serde_json::json!({}),
+        Duration::from_secs(3)
+    ).await {
+        Ok(rabbitmesh::message::RpcResponse::Success { data, .. }) => {
+            // Service returned its schema - data is the JSON object directly
+            if let Some(methods) = data.get("methods").and_then(|m| m.as_array()) {
+                return methods.iter()
+                    .filter_map(|method| {
+                        if let (Some(name), Some(route)) = (
+                            method.get("name").and_then(|n| n.as_str()),
+                            method.get("route").and_then(|r| r.as_str())
+                        ) {
+                            Some(serde_json::json!({
+                                "name": name,
+                                "route": route,
+                                "http_method": method.get("http_method").and_then(|h| h.as_str()).unwrap_or("GET"),
+                                "path": method.get("path").and_then(|p| p.as_str()).unwrap_or("/unknown"),
+                                "description": method.get("description")
+                                    .and_then(|d| d.as_str())
+                                    .unwrap_or(&format!("Method: {}", name))
+                            }))
+                        } else {
+                            None
+                        }
+                    })
+                    .collect();
+            }
+        },
+        Ok(rabbitmesh::message::RpcResponse::Error { error, .. }) => {
+            tracing::warn!("Service {} schema call returned error: {}", service_name, error);
+        },
+        Err(e) => {
+            tracing::debug!("Schema call failed for service {}: {}", service_name, e);
+        }
+    }
+
+    // Fallback to basic ping method
+    vec![
+        serde_json::json!({
+            "name": "ping",
+            "route": "GET /ping",
+            "http_method": "GET", 
+            "path": "/ping",
+            "description": "Health check endpoint"
+        })
+    ]
+}
+
+/// Convert service route format to gateway route format
+/// e.g., "POST /users/:id" -> ("POST", "/api/v1/user-service/users/{id}")
+fn convert_route_to_gateway_format(service_name: &str, route: &str) -> serde_json::Value {
+    let parts: Vec<&str> = route.splitn(2, ' ').collect();
+    if parts.len() == 2 {
+        let method = parts[0];
+        let path = parts[1]
+            .replace(":id", "{id}")
+            .replace(":user_id", "{user_id}")
+            .replace(":order_id", "{order_id}")
+            .replace(":status", "{status}")
+            .replace(":email", "{email}");
+        
+        serde_json::json!({
+            "http_method": method,
+            "gateway_path": format!("/api/v1/{}{}", service_name, path)
+        })
+    } else {
+        serde_json::json!({
+            "http_method": "GET",
+            "gateway_path": format!("/api/v1/{}/unknown", service_name)
+        })
+    }
 }
 
 /// Describe a specific service and its methods
@@ -268,10 +471,39 @@ async fn describe_service(
     State(state): State<GatewayState>,
     Path(service): Path<String>,
 ) -> Result<Json<Value>, GatewayError> {
-    match state.service_registry.get_service(&service).await {
-        Some(service_info) => Ok(Json(serde_json::json!(service_info))),
-        None => Err(GatewayError::ServiceNotFound(service)),
+    // First check the service registry
+    if let Some(service_info) = state.service_registry.get_service(&service).await {
+        return Ok(Json(serde_json::json!(service_info)));
     }
+    
+    // If not in registry, check if it's a dynamically discovered service
+    let discovered_services = discover_services_from_rabbitmq().await;
+    if discovered_services.contains(&service) {
+        // Try to ping the service to check its status
+        let status = match state.service_client.call_with_timeout(
+            &service,
+            "ping",
+            serde_json::json!({}),
+            Duration::from_secs(2)
+        ).await {
+            Ok(_) => "healthy",
+            Err(_) => "unreachable",
+        };
+        
+        // Try to get methods from the service
+        let methods = discover_service_methods(&state, &service).await;
+        
+        return Ok(Json(serde_json::json!({
+            "name": service,
+            "status": status,
+            "discovery_method": "rabbitmq_queue_discovery",
+            "description": format!("Dynamically discovered service: {}", service),
+            "methods": methods,
+            "total_methods": methods.len()
+        })));
+    }
+    
+    Err(GatewayError::ServiceNotFound(service))
 }
 
 /// Gateway-specific errors

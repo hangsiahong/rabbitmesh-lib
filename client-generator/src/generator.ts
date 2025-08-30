@@ -1,0 +1,457 @@
+import fs from 'fs';
+import path from 'path';
+import { ServiceDefinition, ServiceMethod, TypeDefinition, GeneratorConfig } from './types';
+
+export class ClientGenerator {
+  constructor(private config: GeneratorConfig) {}
+
+  async generateClient(services: ServiceDefinition[]): Promise<void> {
+    // Create output directory
+    if (!fs.existsSync(this.config.outputDir)) {
+      fs.mkdirSync(this.config.outputDir, { recursive: true });
+    }
+
+    // Generate types file
+    await this.generateTypes(services);
+    
+    // Generate service clients
+    await this.generateServiceClients(services);
+    
+    // Generate main client class
+    await this.generateMainClient(services);
+    
+    // Generate package.json
+    await this.generatePackageJson();
+    
+    // Generate tsconfig.json
+    await this.generateTsConfig();
+    
+    // Generate index.ts
+    await this.generateIndex(services);
+  }
+
+  private async generateTypes(services: ServiceDefinition[]): Promise<void> {
+    const types = this.extractTypes(services);
+    const content = this.generateTypesContent(types);
+    
+    fs.writeFileSync(path.join(this.config.outputDir, 'types.ts'), content);
+  }
+
+  private extractTypes(services: ServiceDefinition[]): TypeDefinition[] {
+    const types: TypeDefinition[] = [];
+    
+    // Dynamically extract types from service schemas
+    for (const service of services) {
+      for (const method of service.methods) {
+        // Extract request types from method parameters
+        if (method.parameters && method.parameters.length > 0) {
+          this.extractRequestType(types, method);
+        }
+        
+        // Extract response types - keep it generic, no hardcoded patterns
+        this.extractResponseType(types, method, service.name);
+      }
+    }
+    
+    // Add common generic types
+    this.addGenericTypes(types);
+
+    return types;
+  }
+
+  private extractRequestType(types: TypeDefinition[], method: ServiceMethod): void {
+    const requestTypeName = this.getRequestTypeName(method.name);
+    
+    // Check if type already exists
+    if (types.some(t => t.name === requestTypeName)) {
+      return;
+    }
+
+    // Extract fields from actual method parameters only
+    const fields = method.parameters
+      .filter(p => p.source === 'body' || p.source === 'query')
+      .map(p => ({
+        name: p.name,
+        type: this.mapParameterType(p.type),
+        optional: !p.required,
+        description: p.description || `Parameter: ${p.name}`
+      }));
+
+    if (fields.length > 0) {
+      types.push({
+        name: requestTypeName,
+        fields,
+        description: `Request type for ${method.name}`
+      });
+    }
+  }
+
+  private extractResponseType(types: TypeDefinition[], method: ServiceMethod, serviceName: string): void {
+    const responseTypeName = this.getResponseTypeName(method.name, serviceName);
+    
+    // Check if type already exists
+    if (types.some(t => t.name === responseTypeName)) {
+      return;
+    }
+
+    // Generic response type - no hardcoded patterns
+    types.push({
+      name: responseTypeName,
+      fields: [
+        { name: 'data', type: 'any', optional: true, description: 'Response data' },
+        { name: 'success', type: 'boolean', optional: true, description: 'Operation success status' },
+        { name: 'message', type: 'string', optional: true, description: 'Response message' }
+      ],
+      description: `Response type for ${method.name}`
+    });
+  }
+
+
+  private addGenericTypes(types: TypeDefinition[]): void {
+    types.push({
+      name: 'ApiResponse',
+      fields: [
+        { name: 'data', type: 'any', optional: true },
+        { name: 'success', type: 'boolean', optional: true },
+        { name: 'message', type: 'string', optional: true }
+      ]
+    });
+  }
+
+  private getRequestTypeName(methodName: string): string {
+    return methodName.charAt(0).toUpperCase() + methodName.slice(1) + 'Request';
+  }
+
+  private getResponseTypeName(methodName: string, serviceName: string): string {
+    return methodName.charAt(0).toUpperCase() + methodName.slice(1) + 'Response';
+  }
+
+  private mapParameterType(type: string): string {
+    switch (type.toLowerCase()) {
+      case 'string': return 'string';
+      case 'number': case 'int': case 'integer': return 'number';
+      case 'bool': case 'boolean': return 'boolean';
+      case 'array': return 'any[]';
+      default: return 'any';
+    }
+  }
+
+
+
+  private generateTypesContent(types: TypeDefinition[]): string {
+    const typeDefinitions = types.map(type => {
+      const fields = type.fields.map(field => {
+        const optional = field.optional ? '?' : '';
+        return `  ${field.name}${optional}: ${field.type};`;
+      }).join('\n');
+
+      const description = type.description ? `/** ${type.description} */\n` : '';
+      return `${description}export interface ${type.name} {\n${fields}\n}`;
+    }).join('\n\n');
+
+    return `// Auto-generated types for RabbitMesh services\n// Do not edit this file manually\n\n${typeDefinitions}\n`;
+  }
+
+  private async generateServiceClients(services: ServiceDefinition[]): Promise<void> {
+    for (const service of services) {
+      const content = this.generateServiceClient(service);
+      const filename = `${service.name}Client.ts`;
+      fs.writeFileSync(path.join(this.config.outputDir, filename), content);
+    }
+  }
+
+  private generateServiceClient(service: ServiceDefinition): string {
+    const queryHooks = service.methods
+      .filter(method => method.httpMethod === 'GET')
+      .map(method => this.generateQueryHook(method, service.name))
+      .join('\n\n');
+    
+    const mutationHooks = service.methods
+      .filter(method => ['POST', 'PUT', 'DELETE'].includes(method.httpMethod))
+      .map(method => this.generateMutationHook(method, service.name))
+      .join('\n\n');
+    
+    return `import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
+import axios from 'axios';
+import * as Types from './types';
+
+// Query Keys
+export const ${service.name}Keys = {
+${service.methods.filter(m => m.httpMethod === 'GET').map(method => 
+  `  ${method.name}: (${this.getQueryKeyParams(method)}) => ['${service.name}', '${method.name}'${this.getQueryKeyParamsUsage(method)}] as const,`
+).join('\n')}
+} as const;
+
+// Query Hooks
+${queryHooks}
+
+// Mutation Hooks
+${mutationHooks}`;
+  }
+
+  private generateQueryHook(method: ServiceMethod, serviceName: string): string {
+    const hookName = `use${this.capitalize(method.name)}`;
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const queryParams = method.parameters.filter(p => p.source === 'query');
+    
+    // Build path with parameter substitution
+    let path = method.path;
+    pathParams.forEach(param => {
+      path = path.replace(`{${param.name}}`, `\${${param.name}}`);
+    });
+
+    const params = this.generateHookParams(method);
+    const responseType = this.getResponseTypeName(method.name, serviceName);
+    
+    return `export function ${hookName}(
+  ${params}
+  options?: Omit<UseQueryOptions<${responseType}>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: ${serviceName}Keys.${method.name}(${this.getQueryKeyParamsUsage(method).slice(2)}),
+    queryFn: async () => {
+      const response = await axios.get(\`${path}\`${this.buildQueryConfig(queryParams)});
+      return response.data;
+    },
+    ...options,
+  });
+}`;
+  }
+
+  private generateMutationHook(method: ServiceMethod, serviceName: string): string {
+    const hookName = `use${this.capitalize(method.name)}`;
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const bodyParam = method.parameters.find(p => p.source === 'body');
+    
+    // Build path with parameter substitution
+    let path = method.path;
+    pathParams.forEach(param => {
+      path = path.replace(`{${param.name}}`, `\${${param.name}}`);
+    });
+
+    const variablesType = this.getMutationVariablesType(method);
+    const responseType = this.getResponseTypeName(method.name, serviceName);
+    
+    return `export function ${hookName}(
+  options?: UseMutationOptions<${responseType}, Error, ${variablesType}>
+) {
+  return useMutation({
+    mutationFn: async (variables: ${variablesType}) => {
+      ${this.generateMutationBody(method, path)}
+    },
+    ...options,
+  });
+}`;
+  }
+
+  private generateMutationBody(method: ServiceMethod, path: string): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const bodyParam = method.parameters.find(p => p.source === 'body');
+    
+    // Extract path parameters from variables
+    const pathExtraction = pathParams.map(p => 
+      `const ${p.name} = variables.${p.name};`
+    ).join('\n      ');
+    
+    const httpMethod = method.httpMethod.toLowerCase();
+    const bodyArg = bodyParam ? ', variables.data' : '';
+    
+    return `${pathExtraction}
+      const response = await axios.${httpMethod}(\`${path}\`${bodyArg});
+      return response.data;`;
+  }
+
+  private getMutationVariablesType(method: ServiceMethod): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const bodyParam = method.parameters.find(p => p.source === 'body');
+    
+    const pathFields = pathParams.map(p => `${p.name}: string`);
+    const bodyFields = bodyParam ? ['data: any'] : [];
+    
+    const allFields = [...pathFields, ...bodyFields];
+    
+    if (allFields.length === 0) {
+      return 'void';
+    }
+    
+    return `{ ${allFields.join('; ')} }`;
+  }
+
+  private generateHookParams(method: ServiceMethod): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const queryParams = method.parameters.filter(p => p.source === 'query');
+    
+    const allParams = [...pathParams, ...queryParams];
+    if (allParams.length === 0) {
+      return '';
+    }
+    
+    const paramList = allParams.map(p => {
+      const optional = p.required ? '' : '?';
+      return `${p.name}${optional}: ${this.mapParameterType(p.type)}`;
+    });
+    
+    return paramList.join(', ') + ',\n  ';
+  }
+
+  private getQueryKeyParams(method: ServiceMethod): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const queryParams = method.parameters.filter(p => p.source === 'query');
+    
+    const allParams = [...pathParams, ...queryParams];
+    if (allParams.length === 0) {
+      return '';
+    }
+    
+    return allParams.map(p => {
+      const optional = p.required ? '' : '?';
+      return `${p.name}${optional}: ${this.mapParameterType(p.type)}`;
+    }).join(', ');
+  }
+
+  private getQueryKeyParamsUsage(method: ServiceMethod): string {
+    const pathParams = method.parameters.filter(p => p.source === 'path');
+    const queryParams = method.parameters.filter(p => p.source === 'query');
+    
+    const allParams = [...pathParams, ...queryParams];
+    if (allParams.length === 0) {
+      return '';
+    }
+    
+    return ', ' + allParams.map(p => p.name).join(', ');
+  }
+
+  private buildQueryConfig(queryParams: any[]): string {
+    if (queryParams.length === 0) {
+      return '';
+    }
+    
+    const paramObj = queryParams.map(p => `${p.name}`).join(', ');
+    return `, { params: { ${paramObj} } }`;
+  }
+
+  private generateMethodParams(method: ServiceMethod): string {
+    if (method.parameters.length === 0) return '';
+    
+    const params = method.parameters.map(param => {
+      const optional = param.required ? '' : '?';
+      return `${param.name}${optional}: ${param.type}`;
+    });
+    
+    return params.join(', ');
+  }
+
+  private async generateMainClient(services: ServiceDefinition[]): Promise<void> {
+    const serviceImports = services.map(service => 
+      `export * from './${service.name}Client';`
+    ).join('\n');
+
+    const content = `// Re-export all service hooks
+${serviceImports}
+
+// Axios configuration for the generated hooks
+import axios from 'axios';
+
+export interface RabbitMeshClientConfig {
+  baseURL: string;
+  timeout?: number;
+  headers?: Record<string, string>;
+}
+
+// Configure axios defaults for all generated hooks
+export function configureRabbitMeshClient(config: RabbitMeshClientConfig | string) {
+  const clientConfig = typeof config === 'string' 
+    ? { baseURL: config }
+    : config;
+
+  axios.defaults.baseURL = clientConfig.baseURL;
+  axios.defaults.timeout = clientConfig.timeout || 10000;
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
+  
+  if (clientConfig.headers) {
+    Object.assign(axios.defaults.headers.common, clientConfig.headers);
+  }
+}
+
+// Example usage:
+// import { configureRabbitMeshClient, useLogin, useCreateOrder } from '@your-org/rabbitmesh-client';
+// 
+// // Configure once in your app initialization
+// configureRabbitMeshClient('http://localhost:3333');
+// 
+// // Use React Query hooks in your components
+// const loginMutation = useLogin();
+// const { data: orders } = useGetUserOrders({ user_id: '123' });`;
+
+    fs.writeFileSync(path.join(this.config.outputDir, 'client.ts'), content);
+  }
+
+  private async generatePackageJson(): Promise<void> {
+    const packageJson = {
+      name: this.config.packageName,
+      version: '1.0.0',
+      description: 'Auto-generated React Query hooks for RabbitMesh services',
+      main: 'index.js',
+      types: 'index.d.ts',
+      scripts: {
+        build: 'tsc'
+      },
+      dependencies: {
+        axios: '^1.6.0',
+        '@tanstack/react-query': '^5.0.0'
+      },
+      peerDependencies: {
+        react: '>=16.8.0'
+      },
+      devDependencies: {
+        typescript: '^5.0.0',
+        '@types/node': '^20.0.0',
+        '@types/react': '^18.0.0'
+      },
+      keywords: ['rabbitmesh', 'microservices', 'react-query', 'hooks', 'typescript'],
+      author: 'RabbitMesh Client Generator',
+      license: 'MIT'
+    };
+
+    fs.writeFileSync(
+      path.join(this.config.outputDir, 'package.json'), 
+      JSON.stringify(packageJson, null, 2)
+    );
+  }
+
+  private async generateTsConfig(): Promise<void> {
+    const tsConfig = {
+      compilerOptions: {
+        target: 'ES2018',
+        module: 'commonjs',
+        outDir: './',
+        rootDir: './',
+        strict: true,
+        esModuleInterop: true,
+        skipLibCheck: true,
+        forceConsistentCasingInFileNames: true,
+        declaration: true
+      },
+      include: ['*.ts']
+    };
+
+    fs.writeFileSync(
+      path.join(this.config.outputDir, 'tsconfig.json'), 
+      JSON.stringify(tsConfig, null, 2)
+    );
+  }
+
+  private async generateIndex(services: ServiceDefinition[]): Promise<void> {
+    const exports = [
+      "export { RabbitMeshClient } from './client';",
+      "export * from './types';",
+      ...services.map(service => `export { ${this.capitalize(service.name)}Client } from './${service.name}Client';`)
+    ].join('\n');
+
+    fs.writeFileSync(path.join(this.config.outputDir, 'index.ts'), exports + '\n');
+  }
+
+  private capitalize(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+}

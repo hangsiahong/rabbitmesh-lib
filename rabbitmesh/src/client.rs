@@ -111,28 +111,29 @@ impl ServiceClient {
             use futures_util::StreamExt;
             debug!("📤 Response processor started for client: {}", client_name);
             
-            // Process messages from consumer stream
+            // Process messages from consumer stream sequentially to avoid race conditions
             let mut stream = consumer;
             while let Some(delivery_result) = stream.next().await {
                 match delivery_result {
                     Ok(delivery) => {
-                        let rpc_clone = rpc.clone();
-                        tokio::spawn(async move {
-                            let message = crate::message::Message::from_bytes(&delivery.data);
-                            match message {
-                                Ok(message) => {
-                                    if let Err(e) = rpc_clone.handle_response(message).await {
-                                        tracing::error!("Error processing response: {}", e);
-                                    }
-                                }
-                                Err(e) => {
-                                    tracing::error!("Error deserializing response: {}", e);
+                        // Process response synchronously to avoid correlation ID race conditions
+                        let message = crate::message::Message::from_bytes(&delivery.data);
+                        match message {
+                            Ok(message) => {
+                                debug!("Received RPC response for correlation_id: {:?}", message.correlation_id);
+                                if let Err(e) = rpc.handle_response(message).await {
+                                    tracing::error!("Error processing response: {}", e);
                                 }
                             }
-                            
-                            // Always acknowledge
-                            let _ = delivery.ack(lapin::options::BasicAckOptions::default()).await;
-                        });
+                            Err(e) => {
+                                tracing::error!("Error deserializing response: {}", e);
+                            }
+                        }
+                        
+                        // Always acknowledge after processing
+                        if let Err(e) = delivery.ack(lapin::options::BasicAckOptions::default()).await {
+                            tracing::error!("Failed to acknowledge message: {}", e);
+                        }
                     }
                     Err(e) => {
                         tracing::error!("Error receiving response: {}", e);

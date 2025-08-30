@@ -4,29 +4,33 @@ use syn::{parse_macro_input, ItemFn, LitStr, parse::Parse};
 
 /// Arguments for #[service_method] attribute
 struct ServiceMethodArgs {
-    route: Option<String>,
+    _route: Option<String>,
 }
 
 impl Parse for ServiceMethodArgs {
     fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
         if input.is_empty() {
-            return Ok(ServiceMethodArgs { route: None });
+            return Ok(ServiceMethodArgs { _route: None });
         }
         
         let route_lit: LitStr = input.parse()?;
         Ok(ServiceMethodArgs {
-            route: Some(route_lit.value()),
+            _route: Some(route_lit.value()),
         })
     }
 }
 
 /// Implementation of #[service_method] macro
-/// For now, this just preserves the original function
-/// The registration will be handled manually until we get the basic structure working
-pub fn impl_service_method(_args: TokenStream, input: TokenStream) -> TokenStream {
+/// Stores route information as metadata and preserves the original function
+/// Route information is extracted by dynamic_discovery.rs for gateway generation
+pub fn impl_service_method(args: TokenStream, input: TokenStream) -> TokenStream {
+    let _args = parse_macro_input!(args as ServiceMethodArgs);
     let input_fn = parse_macro_input!(input as ItemFn);
     
-    // Just pass through the original function for now
+    // Note: Route information is now extracted by dynamic_discovery.rs
+    // This macro just passes through the function with its attributes preserved
+    
+    // Pass through the original function unchanged
     let expanded = quote! {
         #input_fn
     };

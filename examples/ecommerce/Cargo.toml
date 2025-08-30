@@ -1,0 +1,65 @@
+[workspace]
+resolver = "2"
+members = [
+    "user-service",
+    "auth-service", 
+    "order-service",
+    "gateway"
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["RabbitMesh Example <example@rabbitmesh.dev>"]
+license = "MIT"
+
+[workspace.dependencies]
+# RabbitMesh from local workspace
+rabbitmesh = { path = "../../rabbitmesh" }
+rabbitmesh-macros = { path = "../../rabbitmesh-macros" }
+rabbitmesh-gateway = { path = "../../rabbitmesh-gateway" }
+
+# Core async runtime
+tokio = { version = "1.40", features = ["full"] }
+futures-util = "0.3"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Unique IDs
+uuid = { version = "1.11", features = ["v4", "serde"] }
+
+# Async traits
+async-trait = "0.1"
+
+# Logging and tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# HTTP server for gateway
+axum = { version = "0.8", features = ["macros"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# MongoDB
+mongodb = "3.1"
+
+# Redis
+redis = { version = "0.27", features = ["tokio-comp"] }
+
+# JWT
+jsonwebtoken = "9.3"
+
+# Password hashing
+bcrypt = "0.15"
+
+# Configuration
+config = "0.14"
