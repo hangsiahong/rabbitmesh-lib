@@ -260,3 +260,22 @@
 2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684649Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🔍 Health Check: http://0.0.0.0:3333/health
 2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684650Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 📊 GraphQL Playground: http://0.0.0.0:3333/graphql
 2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684651Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🎯 Available Services: http://0.0.0.0:3333/services
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.242861Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.243231Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.243235Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259723Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259732Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259815Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259817Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259819Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259820Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259821Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259822Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259823Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259824Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259825Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259862Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🚀 Gateway started on 0.0.0.0:3333
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259864Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 📋 API Documentation: http://0.0.0.0:3333/api-docs
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259865Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🔍 Health Check: http://0.0.0.0:3333/health
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259866Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 📊 GraphQL Playground: http://0.0.0.0:3333/graphql
+2025-08-30 17:32:44 +07:00: [2m2025-08-30T10:32:44.259867Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🎯 Available Services: http://0.0.0.0:3333/services

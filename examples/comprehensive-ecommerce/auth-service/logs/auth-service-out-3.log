@@ -108,3 +108,26 @@
 2025-08-30 17:02:16 +07:00: [2m2025-08-30T10:02:16.516024Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for auth-service
 2025-08-30 17:02:16 +07:00: [2m2025-08-30T10:02:16.516017Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
 2025-08-30 17:02:16 +07:00: [2m2025-08-30T10:02:16.516036Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.923243Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Starting Auth Service...
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.923544Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Configuration loaded
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.923546Z[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m 🔗 Creating service client: auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.939599Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.939607Z[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m ✅ Service client connected: auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.944762Z[0m [32m INFO[0m [2mrabbitmesh::client[0m[2m:[0m ✅ Service client ready: auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.944768Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Connected to RabbitMQ for service communication
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.944770Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Auth service initialized
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.944772Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.944774Z[0m [32m INFO[0m [2mauth_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.944775Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.948835Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.948848Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.952338Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.auth-service, rabbitmesh.auth-service.responses
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.952768Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.952786Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.954003Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.auth-service.responses
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.954008Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice auth-service is running and ready to process messages
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.954009Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.954028Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.954032Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for auth-service
+2025-08-30 17:32:42 +07:00: [2m2025-08-30T10:32:42.954039Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for auth-service
+2025-08-30 17:35:38 +07:00: [2m2025-08-30T10:35:38.304763Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: ping

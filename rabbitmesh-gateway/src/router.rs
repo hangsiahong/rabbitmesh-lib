@@ -261,13 +261,13 @@ async fn service_health_check(
 async fn list_services(State(state): State<GatewayState>) -> Json<Value> {
     let mut discovered_services = Vec::new();
     
-    // Known service names to discover
-    let known_services = vec!["auth-service", "todo-service", "notification-service"];
+    // Dynamically discover services from RabbitMQ queues
+    let discovered_service_names = discover_services_from_rabbitmq().await;
     
-    for service_name in known_services {
+    for service_name in discovered_service_names {
         // Try to ping each service to see if it's available
         match state.service_client.call_with_timeout(
-            service_name,
+            &service_name,
             "ping",
             serde_json::json!({}),
             Duration::from_secs(2)
@@ -276,15 +276,15 @@ async fn list_services(State(state): State<GatewayState>) -> Json<Value> {
                 discovered_services.push(serde_json::json!({
                     "name": service_name,
                     "status": "healthy",
-                    "discovered_via": "rabbitmq_ping"
+                    "discovered_via": "rabbitmq_queue_discovery"
                 }));
             }
             Err(_) => {
-                // Service not responding, but we can still list it as known
+                // Service not responding, but queue exists
                 discovered_services.push(serde_json::json!({
                     "name": service_name,
                     "status": "unreachable",
-                    "discovered_via": "rabbitmq_ping"
+                    "discovered_via": "rabbitmq_queue_discovery"
                 }));
             }
         }
@@ -292,9 +292,51 @@ async fn list_services(State(state): State<GatewayState>) -> Json<Value> {
     
     Json(serde_json::json!({ 
         "services": discovered_services,
-        "discovery_method": "rabbitmq_service_ping",
+        "discovery_method": "rabbitmq_queue_discovery",
         "total_discovered": discovered_services.len()
     }))
+}
+
+/// Dynamically discover services by querying RabbitMQ management API
+async fn discover_services_from_rabbitmq() -> Vec<String> {
+    use reqwest;
+    
+    let mut services = Vec::new();
+    
+    // Query RabbitMQ management API for queues
+    let client = reqwest::Client::new();
+    match client
+        .get("http://localhost:15672/api/queues")
+        .basic_auth("guest", Some("guest"))
+        .send()
+        .await
+    {
+        Ok(response) => {
+            if let Ok(queues) = response.json::<Vec<serde_json::Value>>().await {
+                for queue in queues {
+                    if let Some(queue_name) = queue["name"].as_str() {
+                        // Extract service names from queue names
+                        // Format: rabbitmesh.{service-name} or rabbitmesh.{service-name}.responses
+                        if queue_name.starts_with("rabbitmesh.") && !queue_name.ends_with(".responses") {
+                            let service_name = queue_name
+                                .strip_prefix("rabbitmesh.")
+                                .unwrap_or(queue_name);
+                            
+                            // Avoid duplicates
+                            if !services.contains(&service_name.to_string()) {
+                                services.push(service_name.to_string());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Err(e) => {
+            error!("Failed to discover services from RabbitMQ: {}", e);
+        }
+    }
+    
+    services
 }
 
 /// Describe a specific service and its methods

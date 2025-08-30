@@ -88,3 +88,21 @@
 2025-08-30 17:02:16 +07:00: [2m2025-08-30T10:02:16.641725Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
 2025-08-30 17:02:16 +07:00: [2m2025-08-30T10:02:16.641731Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
 2025-08-30 17:02:16 +07:00: [2m2025-08-30T10:02:16.641733Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.853764Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.854114Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.863253Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.863262Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.863287Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.863289Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.863290Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.878694Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.878705Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.886193Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.887164Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.887348Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.891539Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.891549Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.891547Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.891552Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.891556Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-08-30 17:32:43 +07:00: [2m2025-08-30T10:32:43.891581Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
