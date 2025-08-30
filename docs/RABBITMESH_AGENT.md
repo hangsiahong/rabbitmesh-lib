@@ -352,17 +352,24 @@ I provide complete, production-ready implementations for any industry:
 #[service_impl]
 impl ECommerceService {
     #[service_method("POST /api/products")]
-    #[require_auth] #[require_role("merchant")] #[validate] #[transactional] 
+    #[require_auth]
+    #[require_role("merchant")]
+    #[validate] #[transactional] 
     #[metrics] #[audit_log] #[event_publish]
     pub async fn create_product(msg: Message) -> Result<RpcResponse, String>
 
     #[service_method("POST /api/orders")]  
-    #[require_auth] #[validate] #[rate_limit(5, 300)] #[transactional]
+    #[require_auth]
+    #[validate] 
+    #[rate_limit(5, 300)]
+    #[transactional]
     #[webhook("https://warehouse.com/webhook")] #[notification(channels = "email,sms")]
     pub async fn process_order(msg: Message) -> Result<RpcResponse, String>
     
     #[service_method("GET /api/recommendations")]
-    #[require_auth] #[cached(ttl = 1800)] #[metrics]
+    #[require_auth]
+    #[cached(ttl = 1800)]
+    #[metrics]
     pub async fn get_recommendations(msg: Message) -> Result<RpcResponse, String>
 }
 ```

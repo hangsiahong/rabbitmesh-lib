@@ -8,11 +8,30 @@ mod service_definition;
 mod service_method;
 mod dynamic_discovery;
 
+// New modular structure
+mod auth;
+mod validation;
+mod database;
+mod caching;
+mod resilience;
+mod workflow;
+mod eventsourcing;
+mod observability;
+
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, ItemImpl, ImplItem, Type};
 // Note: These imports are used inside the generated code within quote! macros
 // They appear unused to the compiler but are actually needed at macro expansion time
+
+// Import all the new modules
+use auth::*;
+use validation::*;
+use database::*;
+use caching::*;
+use resilience::*;
+use workflow::*;
+use eventsourcing::*;
 
 // Universal JWT validation function - works with ANY project type
 fn generate_jwt_validator() -> proc_macro2::TokenStream {
@@ -406,28 +425,89 @@ pub fn generate_auto_gateway(_input: TokenStream) -> TokenStream {
 
 /// Generate universal wrapper code for a service method
 fn generate_universal_wrapper(_service_name: &str, _method_name: &str, macro_attrs: &[String]) -> proc_macro2::TokenStream {
+    let mut preprocessing_steps: Vec<proc_macro2::TokenStream> = Vec::new();
+    let mut postprocessing_steps: Vec<proc_macro2::TokenStream> = Vec::new();
     
-    // Include JWT validator if authentication is required
-    let jwt_validator = if macro_attrs.iter().any(|attr| matches!(attr.as_str(), "require_auth" | "jwt_auth" | "bearer_auth" | "api_key_auth")) {
-        generate_jwt_validator()
-    } else {
-        quote! {}
-    };
+    // Authentication & Authorization
+    if macro_attrs.iter().any(|attr| matches!(attr.as_str(), "require_auth" | "jwt_auth" | "bearer_auth" | "api_key_auth")) {
+        let jwt_auth = jwt::generate_jwt_auth_preprocessing();
+        preprocessing_steps.push(jwt_auth);
+    }
     
-    // Generate comprehensive preprocessing steps
-    let preprocessing = generate_preprocessing(_service_name, _method_name, macro_attrs);
-    let postprocessing = generate_postprocessing(_service_name, _method_name, macro_attrs);
+    if macro_attrs.iter().any(|attr| matches!(attr.as_str(), "require_role" | "rbac")) {
+        let rbac_auth = rbac::generate_rbac_preprocessing(None, None);
+        preprocessing_steps.push(rbac_auth);
+    }
+    
+    if macro_attrs.iter().any(|attr| matches!(attr.as_str(), "abac" | "authorize")) {
+        let abac_auth = abac::generate_abac_preprocessing(None);
+        preprocessing_steps.push(abac_auth);
+    }
+    
+    // Input Validation
+    if macro_attrs.contains(&"validate".to_string()) {
+        let validation = input::generate_input_validation();
+        preprocessing_steps.push(validation);
+    }
+    
+    // Database Transactions
+    if macro_attrs.contains(&"transactional".to_string()) {
+        let transaction = transaction::generate_transaction_preprocessing(None);
+        preprocessing_steps.push(transaction);
+    }
+    
+    // Caching
+    if macro_attrs.iter().any(|attr| matches!(attr.as_str(), "cached" | "redis_cache")) {
+        let redis_cache = redis::generate_redis_caching_preprocessing(None, None, None);
+        preprocessing_steps.push(redis_cache);
+    }
+    
+    if macro_attrs.contains(&"memory_cache".to_string()) {
+        let memory_cache = memory::generate_memory_caching_preprocessing(None, None, None);
+        preprocessing_steps.push(memory_cache);
+    }
+    
+    // Resilience Patterns
+    if macro_attrs.contains(&"circuit_breaker".to_string()) {
+        let circuit_breaker = circuit_breaker::generate_circuit_breaker_preprocessing(None, None, None);
+        preprocessing_steps.push(circuit_breaker);
+    }
+    
+    if macro_attrs.contains(&"retry".to_string()) {
+        let retry_logic = retry::generate_retry_preprocessing(None, None, None, None);
+        preprocessing_steps.push(retry_logic);
+    }
+    
+    // Workflow & Saga
+    if macro_attrs.contains(&"saga".to_string()) {
+        let saga_pattern = saga::generate_saga_preprocessing(None, None, None);
+        preprocessing_steps.push(saga_pattern);
+    }
+    
+    // Event Sourcing
+    if macro_attrs.contains(&"event_sourcing".to_string()) {
+        let event_sourcing = event_store::generate_event_sourcing_preprocessing(None, None, None);
+        preprocessing_steps.push(event_sourcing);
+    }
+    
+    // Legacy preprocessing for compatibility
+    let legacy_preprocessing = generate_preprocessing(_service_name, _method_name, macro_attrs);
+    let legacy_postprocessing = generate_postprocessing(_service_name, _method_name, macro_attrs);
     
     quote! {
-        // Include JWT validation function if needed
-        #jwt_validator
+        // New modular preprocessing steps
+        #(#preprocessing_steps)*
         
-        // Universal preprocessing
-        #preprocessing
+        // Legacy preprocessing for backward compatibility
+        #legacy_preprocessing
         
         // Business logic execution happens in the original method
-        // Universal postprocessing  
-        #postprocessing
+        
+        // New modular postprocessing steps
+        #(#postprocessing_steps)*
+        
+        // Legacy postprocessing for backward compatibility
+        #legacy_postprocessing
     }
 }
 
