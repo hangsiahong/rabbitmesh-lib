@@ -7,9 +7,9 @@ members = [
 ]
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Hangsia Hong <honghangsia@gmail.com"]
 license = "MIT"
 repository = "https://github.com/hangsihaong/rabbitmesh-rs"
 homepage = "https://github.com/hangsiahong/rabbitmesh-rs"
