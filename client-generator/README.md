@@ -1,46 +1,64 @@
-# RabbitMesh TypeScript Client Generator
+# RabbitMesh React Query Client Generator
 
-Automatically generate TypeScript clients for your RabbitMesh microservices with full type safety and autocomplete support.
+Automatically generate **React Query hooks** for your RabbitMesh microservices with full type safety, caching, and modern React patterns.
 
 ## What This Solves
 
-When you have 100+ microservices with hundreds of endpoints, manually writing API integration code for frontend applications becomes:
-- **Time-consuming** - Writing HTTP requests manually
-- **Error-prone** - Typos in URLs, request/response types
+When you have 100+ microservices with hundreds of endpoints, manually writing API integration code for React applications becomes:
+- **Time-consuming** - Writing HTTP requests and React Query hooks manually
+- **Error-prone** - Typos in URLs, request/response types, cache keys
 - **Unmaintainable** - Hard to keep frontend in sync with backend changes
 - **No IntelliSense** - Missing autocomplete and type checking
+- **Poor caching** - Inconsistent cache key patterns across teams
 
 ## What You Get
 
-✨ **Auto-generated TypeScript client** from your Rust service definitions
-✨ **Full autocomplete support** in VS Code and other editors
-✨ **Type safety** - Compile-time errors for API misuse
-✨ **Zero configuration** - Just import and use
-✨ **Scales automatically** - Works with 1 service or 100+ services
+✨ **Auto-generated React Query hooks** from your live microservices  
+✨ **Dynamic service discovery** - No hardcoded service definitions  
+✨ **Full autocomplete support** in VS Code and other editors  
+✨ **Type safety** - Compile-time errors for API misuse  
+✨ **Optimistic caching** - Built-in cache keys for React Query  
+✨ **Zero configuration** - Just import and use  
+✨ **Scales automatically** - Works with 1 service or 100+ services  
 
 ## Quick Example
 
 **Instead of this:**
 ```typescript
-// Manual HTTP requests - error-prone, no autocomplete
-const response = await fetch('/api/todos', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ title: 'Learn TS', description: 'Master it' })
+// Manual React Query setup - error-prone, inconsistent caching
+const { data } = useQuery(['users', userId], async () => {
+  const response = await fetch(`/api/users/${userId}`);
+  return response.json(); // any type
 });
-const todo = await response.json(); // any type
+
+const mutation = useMutation(async (userData: any) => {
+  const response = await fetch('/api/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData)
+  });
+  return response.json();
+});
 ```
 
 **You get this:**
 ```typescript
-// Generated client - full autocomplete and type safety! ✨
-import { RabbitMeshClient } from '@your-org/rabbitmesh-client'
+// Generated hooks - full autocomplete, proper caching, and type safety! ✨
+import { configureRabbitMeshClient, useGetUser, useCreateUser } from '@your-org/rabbitmesh-client';
 
-const client = new RabbitMeshClient('http://localhost:3000')
-const todo = await client.todo.createTodo({
-  title: "Learn TypeScript", 
-  description: "Master the language"
-}) // todo is fully typed as TodoResponse
+// Configure once in your app
+configureRabbitMeshClient('http://localhost:3333');
+
+// Use in your components
+const { data: user, isLoading } = useGetUser(userId); // ✅ Fully typed
+const createUserMutation = useCreateUser({
+  onSuccess: () => {
+    // ✅ Built-in cache invalidation patterns
+    queryClient.invalidateQueries({ queryKey: userKeys.listUsers() });
+  }
+});
+
+await createUserMutation.mutateAsync({ data: { name: "John", email: "john@example.com" } });
 ```
 
 ## Installation
@@ -52,16 +70,12 @@ npm install
 
 ## Usage
 
-### Generate Client from Running Gateway
+### Generate React Query Client from Running Gateway
+
+The generator **dynamically discovers** your services from your running RabbitMesh gateway:
 
 ```bash
-npm run generate -- --gateway-url http://localhost:3000 --output ./my-client --package-name "@myorg/api-client"
-```
-
-### Generate Client Manually (Recommended for Development)
-
-```bash
-npm run generate -- --manual --output ./my-client --package-name "@myorg/api-client"
+npm run generate -- --gateway-url http://localhost:3333 --output ./my-client --package-name "@myorg/react-query-api"
 ```
 
 ### CLI Options
@@ -70,12 +84,11 @@ npm run generate -- --manual --output ./my-client --package-name "@myorg/api-cli
 npx rabbitmesh-client-generator --help
 
 Options:
-  -u, --gateway-url <url>      Gateway URL (default: "http://localhost:3000")
+  -u, --gateway-url <url>      Gateway URL (default: "http://localhost:8081")
   -o, --output <dir>           Output directory (default: "./generated-client")
   -p, --package-name <name>    Package name (default: "@your-org/rabbitmesh-client")
   --include-services <services> Comma-separated list of services to include
   --exclude-services <services> Comma-separated list of services to exclude
-  --manual                     Use manual service definitions instead of fetching from gateway
   -h, --help                   Display help for command
 ```
 
@@ -83,16 +96,15 @@ Options:
 
 ```
 generated-client/
-├── package.json          # NPM package configuration
+├── package.json          # NPM package with React Query dependencies
 ├── tsconfig.json         # TypeScript configuration
-├── index.ts              # Main exports
-├── types.ts              # All type definitions
-├── client.ts             # Main RabbitMeshClient class
-├── todoClient.ts         # Individual service client
-├── userClient.ts         # Another service client
-├── orderClient.ts        # Yet another service client
-├── example.ts            # Usage examples
-└── README.md             # Usage documentation
+├── index.ts              # Main exports (all hooks and utilities)
+├── types.ts              # All TypeScript type definitions
+├── client.ts             # Configuration utilities
+├── authClient.ts         # Auth service React Query hooks
+├── userClient.ts         # User service React Query hooks
+├── orderClient.ts        # Order service React Query hooks
+└── ...                   # One file per discovered service
 ```
 
 ## Integration Workflow
@@ -101,10 +113,13 @@ generated-client/
 
 ```bash
 # 1. Update your Rust services with new endpoints
-# 2. Regenerate the client
-npm run generate -- --manual --output ./frontend-client
+# 2. Ensure your RabbitMesh gateway is running
+docker-compose up -d
 
-# 3. Build and publish (optional)
+# 3. Regenerate the React Query client
+npm run generate -- --gateway-url http://localhost:3333 --output ./frontend-client
+
+# 4. Build and publish (optional)
 cd frontend-client
 npm run build
 npm publish
@@ -113,33 +128,77 @@ npm publish
 ### 2. Frontend Integration
 
 ```bash
-# In your React/Next.js/Vue project
-npm install @your-org/rabbitmesh-client
+# In your React/Next.js project
+npm install @tanstack/react-query @your-org/rabbitmesh-client
 ```
 
 ```typescript
-// Use in your frontend code
-import { RabbitMeshClient } from '@your-org/rabbitmesh-client'
+// Configure in your App.tsx or main.tsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { configureRabbitMeshClient } from '@your-org/rabbitmesh-client';
 
-const client = new RabbitMeshClient(process.env.REACT_APP_API_URL)
+const queryClient = new QueryClient();
 
-// Full autocomplete for all your services!
-await client.todo.createTodo({ title: "New todo" })
-await client.user.getProfile(userId)
-await client.order.createOrder({ items: [...] })
+// Configure the generated client
+configureRabbitMeshClient({
+  baseURL: process.env.REACT_APP_API_URL,
+  headers: {
+    'Authorization': `Bearer ${getAuthToken()}`
+  }
+});
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <YourApp />
+    </QueryClientProvider>
+  );
+}
+```
+
+```typescript
+// Use in your React components
+import { useGetUser, useCreateUser, useListUsers, userKeys } from '@your-org/rabbitmesh-client';
+
+function UserProfile({ userId }: { userId: string }) {
+  // ✅ GET requests become useQuery hooks
+  const { data: user, isLoading, error } = useGetUser(userId);
+  
+  // ✅ POST/PUT/DELETE requests become useMutation hooks
+  const createUserMutation = useCreateUser({
+    onSuccess: () => {
+      // ✅ Cache keys are auto-generated for proper invalidation
+      queryClient.invalidateQueries({ queryKey: userKeys.listUsers() });
+    }
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <div>
+      <h1>{user?.data?.name}</h1>
+      <button onClick={() => createUserMutation.mutate({ 
+        data: { name: "New User", email: "user@example.com" } 
+      })}>
+        Create User
+      </button>
+    </div>
+  );
+}
 ```
 
 ### 3. CI/CD Integration
 
-Add to your CI pipeline to auto-generate and publish clients:
+Add to your CI pipeline to auto-generate and publish clients when services change:
 
 ```yaml
 # .github/workflows/generate-client.yml
-name: Generate TS Client
+name: Generate React Query Client
 on:
   push:
     branches: [main]
-    paths: ['**/service.rs', '**/models.rs']
+    paths: ['**/service.rs', '**/handler.rs']
 
 jobs:
   generate:
@@ -147,11 +206,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Generate TypeScript client
+      - name: Start services
+        run: docker-compose up -d
+        
+      - name: Wait for gateway
+        run: |
+          timeout 60 bash -c 'until curl -f http://localhost:3333/health; do sleep 2; done'
+      
+      - name: Generate React Query client
         run: |
           cd client-generator
           npm install
-          npm run generate -- --manual --output ./generated-client
+          npm run generate -- --gateway-url http://localhost:3333 --output ./generated-client
           
       - name: Publish client
         run: |
@@ -161,84 +227,159 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
-## Adding New Services
+## Generated React Query Features
 
-When you add a new service with `#[service_definition]`:
+### Query Hooks (GET requests)
 
-```rust
-#[service_definition]
-pub struct UserService;
-
-#[service_impl]
-impl UserService {
-    #[service_method("GET /users/:id")]
-    pub async fn get_user(user_id: String) -> Result<UserResponse, String> {
-        // implementation
-    }
-    
-    #[service_method("POST /users")]
-    pub async fn create_user(request: CreateUserRequest) -> Result<UserResponse, String> {
-        // implementation
-    }
+```typescript
+// Generated from GET endpoints
+export function useGetUser(
+  id: string,
+  options?: Omit<UseQueryOptions<GetUserResponse>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: userKeys.getUser(id),
+    queryFn: async () => {
+      const response = await axios.get(`/api/v1/user-service/users/${id}`);
+      return response.data;
+    },
+    ...options,
+  });
 }
 ```
 
-Regenerate the client and you automatically get:
+### Mutation Hooks (POST/PUT/DELETE requests)
 
 ```typescript
-// Automatically available!
-await client.user.getUser(userId)
-await client.user.createUser({ name: "John", email: "john@example.com" })
+// Generated from POST/PUT/DELETE endpoints
+export function useCreateUser(
+  options?: UseMutationOptions<CreateUserResponse, Error, { data: any }>
+) {
+  return useMutation({
+    mutationFn: async (variables: { data: any }) => {
+      const response = await axios.post(`/api/v1/user-service/users`, variables.data);
+      return response.data;
+    },
+    ...options,
+  });
+}
 ```
+
+### Cache Keys for Optimal Caching
+
+```typescript
+// Auto-generated cache key factories
+export const userKeys = {
+  getUser: (id: string) => ['user', 'getUser', id] as const,
+  listUsers: () => ['user', 'listUsers'] as const,
+  getUserByEmail: (email: string) => ['user', 'getUserByEmail', email] as const,
+} as const;
+```
+
+## Dynamic Service Discovery
+
+The generator **automatically discovers** all your services and endpoints from your running RabbitMesh gateway - no manual configuration required!
+
+1. **Fetches live service registry** from `/api/services` endpoint
+2. **Extracts all endpoints** with HTTP methods and paths
+3. **Infers path parameters** from URL patterns like `/users/{id}`
+4. **Generates appropriate hooks** - queries for GET, mutations for POST/PUT/DELETE
+5. **Creates optimized cache keys** for React Query
 
 ## Architecture
 
 ```mermaid
-graph LR
-    A[Rust Services] --> B[Service Registry]
-    B --> C[Client Generator]
-    C --> D[TypeScript Client]
-    D --> E[React/Next.js Apps]
+graph TB
+    A[RabbitMesh Services] --> B[Dynamic Gateway]
+    B --> C[Service Discovery API]
+    C --> D[Client Generator]
+    D --> E[React Query Hooks]
+    E --> F[React Components]
     
     A1[#service_method] --> A
-    A2[HTTP Routes] --> A
-    A3[Request/Response Types] --> A
+    A2[Auto-registered Routes] --> A
+    D1[Query Hooks] --> D
+    D2[Mutation Hooks] --> D
+    D3[Cache Keys] --> D
+    D4[TypeScript Types] --> D
 ```
 
 ## Benefits
 
-🚀 **Developer Productivity**
-- No manual API client code
-- Full IDE support with autocomplete
-- Immediate feedback on API changes
+🚀 **Modern React Patterns**
+- React Query hooks out of the box
+- Optimistic caching and background refetching
+- Built-in loading/error states
 
 🔒 **Type Safety**
+- Full TypeScript support
+- Auto-generated types from live services
 - Compile-time error checking
-- Prevents runtime API errors
-- Self-documenting code
 
 📈 **Scalability**
-- Works with 1 or 100+ services
-- Auto-discovery of new endpoints
+- Completely dynamic - no hardcoded services
+- Auto-discovers new endpoints
+- Works with any number of services
+
+⚡ **Developer Experience**
+- Zero configuration required
+- Full IDE autocomplete
 - Consistent patterns across all services
 
-🔄 **Maintainability**
-- Single source of truth (Rust service definitions)
-- Automatic synchronization
-- Version tracking
+🔄 **Always Up-to-Date**
+- Generates from live running services
+- No stale API documentation
+- Single source of truth
+
+## Example Generated Usage
+
+```typescript
+import { 
+  useGetUser, useCreateUser, useUpdateUser, useDeleteUser,
+  useGetOrder, useCreateOrder, useConfirmOrder,
+  useLogin, useValidateToken,
+  userKeys, orderKeys, authKeys 
+} from '@myorg/rabbitmesh-client';
+
+function MyComponent() {
+  // ✅ Queries with automatic caching
+  const { data: user } = useGetUser("123");
+  const { data: orders } = useGetUserOrders("123");
+  
+  // ✅ Mutations with proper typing
+  const loginMutation = useLogin();
+  const createOrderMutation = useCreateOrder({
+    onSuccess: () => {
+      // ✅ Invalidate related queries
+      queryClient.invalidateQueries({ queryKey: orderKeys.getUserOrders() });
+    }
+  });
+  
+  return (
+    <div>
+      <h1>{user?.data?.name}</h1>
+      <button onClick={() => createOrderMutation.mutate({ 
+        data: { items: [{ id: 1, quantity: 2 }] }
+      })}>
+        Create Order
+      </button>
+    </div>
+  );
+}
+```
 
 ## Next Steps
 
-1. **Try it out**: Generate a client for your current services
-2. **Integrate**: Use it in a React/Next.js project
+1. **Try it out**: Generate a React Query client for your current services
+2. **Integrate**: Use it in a React/Next.js project with `@tanstack/react-query`
 3. **Automate**: Add to your CI/CD pipeline
-4. **Scale**: As you add more services, they automatically appear in the client!
+4. **Scale**: As you add more services, they automatically appear as hooks!
 
 ## Contributing
 
-This generator can be extended to support:
-- GraphQL endpoints
-- WebSocket connections
-- Different authentication methods
-- Custom serializers
-- OpenAPI/Swagger generation
+The generator can be extended to support:
+- WebSocket subscriptions
+- Server-sent events
+- Custom authentication patterns
+- Optimistic update patterns
+- Advanced cache invalidation strategies
