@@ -2705,14 +2705,14 @@ checksum = "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f"
 
 [[package]]
 name = "rabbitmesh"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "async-trait",
  "chrono",
  "futures-util",
  "lapin",
- "rabbitmesh-macros 0.1.0",
+ "rabbitmesh-macros",
  "serde",
  "serde_json",
  "thiserror 1.0.69",
@@ -2725,37 +2725,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "rabbitmesh"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c9383429a7db61bdaab9ee66ec7b790979798f0253d6ad51b87510975fafe21a"
-dependencies = [
- "anyhow",
- "async-trait",
- "chrono",
- "futures-util",
- "lapin",
- "rabbitmesh-macros 0.1.0",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
- "tokio",
- "tokio-stream",
- "tracing",
- "uuid",
-]
-
-[[package]]
 name = "rabbitmesh-gateway"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "async-graphql",
  "async-graphql-axum",
  "axum",
  "inventory",
- "rabbitmesh 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "rabbitmesh-macros 0.1.0",
+ "rabbitmesh",
+ "rabbitmesh-macros",
  "reqwest",
  "serde",
  "serde_json",
@@ -2765,18 +2744,6 @@ dependencies = [
  "tower-http",
  "tracing",
  "tracing-subscriber",
-]
-
-[[package]]
-name = "rabbitmesh-macros"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e929307ab1e330a36c47a65878fe9d6c84332c620e7ade7878a3607b6b5cec57"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.106",
- "thiserror 1.0.69",
 ]
 
 [[package]]

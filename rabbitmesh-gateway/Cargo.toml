@@ -1,6 +1,6 @@
 [package]
 name = "rabbitmesh-gateway"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["RabbitMesh Team <rabbitmesh@example.com>"]
 description = "Auto-generating API gateway for RabbitMesh microservices"
@@ -13,8 +13,8 @@ categories = ["web-programming::http-server"]
 
 [dependencies]
 # Core framework
-rabbitmesh = "0.1.0"
-rabbitmesh-macros = "0.1.0"
+rabbitmesh = { path = "../rabbitmesh", version = "0.1.1" }
+rabbitmesh-macros = { path = "../rabbitmesh-macros", version = "0.2.0" }
 
 # HTTP server
 axum = { workspace = true }

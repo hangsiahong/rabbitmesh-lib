@@ -1,6 +1,6 @@
 [package]
 name = "rabbitmesh"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["RabbitMesh Team <rabbitmesh@example.com>"]
 description = "Message-driven microservices framework using RabbitMQ for zero-port service mesh"
@@ -42,7 +42,7 @@ anyhow = "1.0"
 chrono = { version = "0.4", features = ["serde"] }
 
 # Proc macros
-rabbitmesh-macros = "0.1.0"
+rabbitmesh-macros = { path = "../rabbitmesh-macros", version = "0.2.0" }
 
 [dev-dependencies]
 tokio-test = { workspace = true }
