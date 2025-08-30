@@ -59,24 +59,24 @@ pub async fn create_auto_router(amqp_url: impl Into<String>) -> Result<Router, R
     let router = Router::new()
         // Health check endpoint
         .route("/health", get(health_check))
-        .route("/health/:service", get(service_health_check))
+        .route("/health/{service}", get(service_health_check))
         
         // Auto-generated REST API routes
         // Pattern: /api/v1/{service}/{method}/{params...}
-        .route("/api/v1/:service/:method", post(handle_rpc_call))
-        .route("/api/v1/:service/:method", get(handle_rpc_call))
-        .route("/api/v1/:service/:method", put(handle_rpc_call))
-        .route("/api/v1/:service/:method", delete(handle_rpc_call))
+        .route("/api/v1/{service}/{method}", post(handle_rpc_call))
+        .route("/api/v1/{service}/{method}", get(handle_rpc_call))
+        .route("/api/v1/{service}/{method}", put(handle_rpc_call))
+        .route("/api/v1/{service}/{method}", delete(handle_rpc_call))
         
         // Parameterized routes: /api/v1/user-service/users/123
-        .route("/api/v1/:service/:method/:param", get(handle_rpc_call_with_param))
-        .route("/api/v1/:service/:method/:param", post(handle_rpc_call_with_param))
-        .route("/api/v1/:service/:method/:param", put(handle_rpc_call_with_param))
-        .route("/api/v1/:service/:method/:param", delete(handle_rpc_call_with_param))
+        .route("/api/v1/{service}/{method}/{param}", get(handle_rpc_call_with_param))
+        .route("/api/v1/{service}/{method}/{param}", post(handle_rpc_call_with_param))
+        .route("/api/v1/{service}/{method}/{param}", put(handle_rpc_call_with_param))
+        .route("/api/v1/{service}/{method}/{param}", delete(handle_rpc_call_with_param))
         
         // Service registry endpoints
         .route("/registry/services", get(list_services))
-        .route("/registry/services/:service", get(describe_service))
+        .route("/registry/services/{service}", get(describe_service))
         
         .with_state(state);
 

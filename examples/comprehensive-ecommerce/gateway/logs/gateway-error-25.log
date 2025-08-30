@@ -1,0 +1,68 @@
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:55:48 +07:00: 
+2025-08-30 16:55:48 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:55:48 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:55:48 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

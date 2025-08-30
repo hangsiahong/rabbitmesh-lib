@@ -1,0 +1,505 @@
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.586122Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.592881Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.592892Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.624854Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.624965Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.624968Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.649726Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.649842Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.649845Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.765828Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.766172Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.766190Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.807845Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.807953Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.807956Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.821767Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.821887Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.821890Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.838766Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.838865Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.838868Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.849946Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.850043Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.850045Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.861137Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.861232Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.861235Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.872403Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.872502Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.872505Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.884388Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.884486Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.884489Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.895747Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.895845Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.895848Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.906171Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.906266Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.906269Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.916926Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.917031Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.917033Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.928152Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.928263Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.928266Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.938612Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.938714Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:56:07 +07:00: [2m2025-08-30T09:56:07.938717Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:56:07 +07:00: 
+2025-08-30 16:56:07 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:62:10:
+2025-08-30 16:56:07 +07:00: Path segments must not start with `:`. For capture groups, use `{capture}`. If you meant to literally match a segment starting with a colon, call `without_v07_checks` on the router.
+2025-08-30 16:56:07 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.624875Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.625253Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.625257Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.642856Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.642866Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.648814Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.648919Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.648922Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.658178Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.658187Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.674350Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.674461Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.674463Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.682643Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.682652Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.694353Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.694463Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.694465Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.701956Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.701965Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.706309Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.706411Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.706413Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.715651Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.715660Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.720754Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.720854Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.720856Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.728496Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.728505Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.734326Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.734498Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.734501Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.770917Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.770932Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.784249Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.784355Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.784358Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.792474Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.792486Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.797372Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.797480Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.797482Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.804178Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.804188Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.809261Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.809363Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.809366Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.815321Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.815330Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.821236Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.821346Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.821349Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.827656Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.827665Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.833480Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.833603Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.833608Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.839890Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.839900Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.845603Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.845708Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.845712Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.852206Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.852213Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.858048Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.858277Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.858282Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.864716Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.864725Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.870596Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.870768Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.870771Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.877412Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.877420Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.883691Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.884168Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.884178Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.890994Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.891001Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.895423Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.895532Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.895534Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.904238Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 16:59:49 +07:00: [2m2025-08-30T09:59:49.904245Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 16:59:49 +07:00: 
+2025-08-30 16:59:49 +07:00: thread 'main' panicked at gateway/src/main.rs:51:10:
+2025-08-30 16:59:49 +07:00: Overlapping method route. Handler for `GET /health` already exists
+2025-08-30 16:59:49 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.946006Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.946420Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.946424Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961054Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961061Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961127Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961128Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961130Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961131Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961132Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961133Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961134Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961135Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.961136Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:48 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.966310Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.966412Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.966415Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972859Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972868Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972905Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972906Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972908Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972910Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972911Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972912Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972913Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972914Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.972915Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:48 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.976876Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.976981Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.976984Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984869Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984877Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984909Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984911Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984912Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984914Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984915Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984916Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984917Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984918Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.984919Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:48 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.993287Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.993405Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.993408Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999663Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999671Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999704Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999706Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999707Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999708Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999709Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999710Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999711Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999712Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:48 +07:00: [2m2025-08-30T10:00:48.999713Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:48 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.004770Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.004979Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.005017Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014334Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014342Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014377Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014378Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014380Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014381Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014382Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014383Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014384Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014385Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.014386Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.019800Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.019902Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.019905Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026220Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026229Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026266Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026267Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026269Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026270Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026271Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026272Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026273Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026274Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.026275Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.031621Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.031725Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.031727Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038057Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038065Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038099Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038101Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038102Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038103Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038105Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038106Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038107Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038108Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.038109Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.043390Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.043544Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.043546Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050518Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050526Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050562Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050563Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050565Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050566Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050567Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050568Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050570Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050571Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.050573Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.055736Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.055847Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.055852Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062154Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062162Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062198Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062200Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062201Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062202Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062203Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062204Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062205Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062206Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.062207Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.067164Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.067269Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.067272Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075731Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075739Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075776Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075777Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075779Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075780Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075781Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075782Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075783Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075784Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.075785Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.081449Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.081561Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.081563Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094768Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094777Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094814Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094816Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094817Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094818Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094819Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094820Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094822Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094823Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.094824Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.100445Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.100551Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.100554Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108712Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108724Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108773Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108775Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108776Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108777Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108779Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108780Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108781Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108782Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.108783Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.114917Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.115026Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.115028Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120590Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120597Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120632Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120633Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120635Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120636Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120637Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120638Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120639Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120640Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.120641Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.125348Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.125450Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.125453Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130837Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130844Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130878Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130880Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130882Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130883Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130884Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130885Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130886Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130887Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.130888Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.135791Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.135897Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.135900Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141765Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141773Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141809Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141811Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141812Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141814Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141815Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141816Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141817Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141818Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.141819Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.147099Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.147230Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.147234Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153480Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153488Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153522Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153523Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153525Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153526Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153527Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153528Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153529Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153530Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:00:49 +07:00: [2m2025-08-30T10:00:49.153531Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:00:49 +07:00: Error: Address already in use (os error 48)

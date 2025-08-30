@@ -1,0 +1,280 @@
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.782645Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.784833Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.784842Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825601Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825608Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825676Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825677Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825679Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825680Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825681Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825683Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825684Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825685Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.825686Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.831538Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.831643Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.831645Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.839973Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.839982Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840017Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840019Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840021Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840022Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840023Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840024Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840025Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840026Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.840027Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 
+2025-08-30 17:01:12 +07:00: 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.845181Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.845290Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.845293Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853476Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853487Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853522Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853524Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853526Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853527Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853528Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853529Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853530Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853531Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.853532Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.858700Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.858808Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.858810Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865134Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865142Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865179Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865181Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865183Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865184Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865185Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865186Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865187Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865188Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.865189Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.869179Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.869292Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.869294Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875745Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875754Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875791Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875793Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875795Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875796Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875797Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875798Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875799Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875800Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.875802Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.884906Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.885012Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.885014Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891717Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891725Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891763Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891764Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891766Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891767Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891768Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891770Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891771Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891772Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.891773Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.896836Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.896941Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.896944Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903326Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903335Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903370Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903372Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903374Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903375Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903377Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903378Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903379Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903380Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.903381Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.907245Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.907347Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.907350Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917211Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917219Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917255Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917256Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917258Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917259Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917260Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917261Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917263Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917264Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.917265Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.923800Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.923916Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.923920Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932135Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932143Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932179Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932181Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932182Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932184Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932185Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932186Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932187Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932188Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.932189Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 
+2025-08-30 17:01:12 +07:00: 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.936955Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.937063Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.937065Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943339Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943347Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943382Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943384Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943385Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943387Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943388Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943389Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943390Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943391Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.943392Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.948355Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.948461Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.948463Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955499Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955508Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955546Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955548Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955549Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955551Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955552Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955553Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955554Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955555Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.955556Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.960498Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.960601Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.960604Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966306Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966316Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966354Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966355Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966357Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966358Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966359Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966360Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966361Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966362Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.966363Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.972250Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.972361Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.972364Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978605Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978616Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978654Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978655Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978657Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978658Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978660Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978661Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978662Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978663Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.978664Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.983821Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.983931Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.983933Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989890Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989898Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989934Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989935Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989937Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989938Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989939Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989941Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989942Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989943Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.989944Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.993982Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.994081Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:12 +07:00: [2m2025-08-30T10:01:12.994084Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002460Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002469Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002506Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002508Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002509Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002511Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002512Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002513Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002514Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002515Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.002516Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:13 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.007451Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.007549Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.007552Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013659Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013666Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013703Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013704Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013706Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013707Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013708Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013709Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013710Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013711Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:01:13 +07:00: [2m2025-08-30T10:01:13.013712Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:01:13 +07:00: Error: Address already in use (os error 48)
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.016825Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.017193Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.017196Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031440Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031448Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031508Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031510Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031511Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031512Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031514Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031518Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031520Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031521Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031522Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031559Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🚀 Gateway started on 0.0.0.0:3333
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031561Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 📋 API Documentation: http://0.0.0.0:3333/api-docs
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031562Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🔍 Health Check: http://0.0.0.0:3333/health
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031564Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 📊 GraphQL Playground: http://0.0.0.0:3333/graphql
+2025-08-30 17:02:17 +07:00: [2m2025-08-30T10:02:17.031565Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🎯 Available Services: http://0.0.0.0:3333/services
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.668758Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Starting RabbitMesh Gateway...
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.668863Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Configuration loaded
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.668865Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m 🌐 Creating auto-router gateway
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684541Z[0m [32m INFO[0m [2mrabbitmesh_gateway::router[0m[2m:[0m ✅ Auto-router created, ready to proxy HTTP -> RabbitMQ -> Microservices
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684551Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Auto-generated router created from service definitions
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684589Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m Gateway configured with the following features:
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684591Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated REST APIs from service definitions
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684593Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Auto-generated GraphQL endpoint at /graphql
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684594Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Service-to-service communication via RabbitMQ
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684595Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Built-in authentication and authorization
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684596Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Rate limiting and caching
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684597Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Request/response validation
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684599Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ Metrics and audit logging
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684600Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m   ✅ CORS support for web applications
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684645Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🚀 Gateway started on 0.0.0.0:3333
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684647Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 📋 API Documentation: http://0.0.0.0:3333/api-docs
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684649Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🔍 Health Check: http://0.0.0.0:3333/health
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684650Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 📊 GraphQL Playground: http://0.0.0.0:3333/graphql
+2025-08-30 17:03:53 +07:00: [2m2025-08-30T10:03:53.684651Z[0m [32m INFO[0m [2mgateway[0m[2m:[0m 🎯 Available Services: http://0.0.0.0:3333/services
