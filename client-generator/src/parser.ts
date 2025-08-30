@@ -67,11 +67,11 @@ export class ServiceParser {
   private inferParametersFromPath(path: string, httpMethod: string): Parameter[] {
     const parameters: Parameter[] = [];
     
-    // Extract path parameters (like :id, :userId, etc.)
-    const pathParamMatches = path.match(/:(\w+)/g);
+    // Extract path parameters (like {id}, {user_id}, etc.)
+    const pathParamMatches = path.match(/\{(\w+)\}/g);
     if (pathParamMatches) {
       for (const match of pathParamMatches) {
-        const paramName = match.substring(1); // Remove the ':'
+        const paramName = match.slice(1, -1); // Remove the '{' and '}'
         parameters.push({
           name: paramName,
           type: 'string',
