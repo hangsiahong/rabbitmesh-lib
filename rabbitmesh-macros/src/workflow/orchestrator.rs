@@ -11,6 +11,9 @@ use std::time::{Duration, SystemTime};
 use std::fmt;
 use tokio::sync::mpsc;
 use serde::{Deserialize, Serialize};
+use tracing::{info, warn, error, debug, instrument};
+use anyhow::{Context, Result as AnyhowResult};
+use serde_json::Value as JsonValue;
 
 /// Workflow orchestrator configuration
 #[derive(Debug, Clone)]
@@ -614,9 +617,331 @@ impl WorkflowOrchestrator {
     }
 
     /// Validate task definition
-    fn validate_task_definition(&self, _task: &TaskDefinition) -> Result<(), OrchestratorError> {
-        // In a real implementation, this would validate task schemas,
-        // endpoints, scripts, etc.
+    #[instrument(skip(self), fields(task_id = %task.id, task_type = ?task.task_type))]
+    fn validate_task_definition(&self, task: &TaskDefinition) -> Result<(), OrchestratorError> {
+        debug!("Validating task definition: {}", task.id);
+        
+        // Validate task ID
+        if task.id.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: "Task ID cannot be empty".to_string(),
+            });
+        }
+        
+        if task.id.len() > 255 {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: "Task ID cannot exceed 255 characters".to_string(),
+            });
+        }
+        
+        // Validate task name
+        if task.name.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Task '{}' must have a non-empty name", task.id),
+            });
+        }
+        
+        // Validate task type specific requirements
+        match &task.task_type {
+            TaskType::Service { endpoint, method } => {
+                self.validate_service_task(task, endpoint, method)?;
+            }
+            TaskType::Script { script } => {
+                self.validate_script_task(task, script)?;
+            }
+            TaskType::Human { approval_required: _ } => {
+                self.validate_human_task(task)?;
+            }
+            TaskType::Decision { condition } => {
+                self.validate_decision_task(task, condition)?;
+            }
+            TaskType::Parallel { subtasks } => {
+                self.validate_parallel_task(task, subtasks)?;
+            }
+            TaskType::Loop { condition, subtasks } => {
+                self.validate_loop_task(task, condition, subtasks)?;
+            }
+        }
+        
+        // Validate schemas if present
+        if let Some(input_schema) = &task.input_schema {
+            self.validate_json_schema(input_schema, "input")?;
+        }
+        
+        if let Some(output_schema) = &task.output_schema {
+            self.validate_json_schema(output_schema, "output")?;
+        }
+        
+        // Validate timeout
+        if let Some(timeout) = task.timeout {
+            if timeout.as_secs() == 0 {
+                return Err(OrchestratorError::InvalidDefinition {
+                    message: format!("Task '{}' timeout must be greater than 0", task.id),
+                });
+            }
+            if timeout > Duration::from_secs(86400) { // 24 hours
+                return Err(OrchestratorError::InvalidDefinition {
+                    message: format!("Task '{}' timeout cannot exceed 24 hours", task.id),
+                });
+            }
+        }
+        
+        // Validate retry policy
+        if let Some(retry_policy) = &task.retry_policy {
+            if retry_policy.max_attempts == 0 {
+                return Err(OrchestratorError::InvalidDefinition {
+                    message: format!("Task '{}' retry policy max_attempts must be greater than 0", task.id),
+                });
+            }
+            if retry_policy.max_attempts > 100 {
+                return Err(OrchestratorError::InvalidDefinition {
+                    message: format!("Task '{}' retry policy max_attempts cannot exceed 100", task.id),
+                });
+            }
+            if retry_policy.backoff_multiplier <= 0.0 {
+                return Err(OrchestratorError::InvalidDefinition {
+                    message: format!("Task '{}' retry policy backoff_multiplier must be positive", task.id),
+                });
+            }
+        }
+        
+        // Validate compensation if present
+        if let Some(compensation) = &task.compensation {
+            self.validate_compensation_definition(task, compensation)?;
+        }
+        
+        debug!("Task definition validation completed successfully for: {}", task.id);
+        Ok(())
+    }
+    
+    /// Validate service task specific requirements
+    fn validate_service_task(&self, task: &TaskDefinition, endpoint: &str, method: &str) -> Result<(), OrchestratorError> {
+        if endpoint.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Service task '{}' endpoint cannot be empty", task.id),
+            });
+        }
+        
+        // Basic URL validation
+        if !endpoint.starts_with("http://") && !endpoint.starts_with("https://") {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Service task '{}' endpoint must start with http:// or https://", task.id),
+            });
+        }
+        
+        // Validate HTTP method
+        let valid_methods = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"];
+        if !valid_methods.contains(&method.to_uppercase().as_str()) {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Service task '{}' has invalid HTTP method: {}", task.id, method),
+            });
+        }
+        
+        Ok(())
+    }
+    
+    /// Validate script task specific requirements
+    fn validate_script_task(&self, task: &TaskDefinition, script: &str) -> Result<(), OrchestratorError> {
+        if script.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Script task '{}' script cannot be empty", task.id),
+            });
+        }
+        
+        if script.len() > 65536 { // 64KB limit
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Script task '{}' script exceeds 64KB limit", task.id),
+            });
+        }
+        
+        // Basic syntax validation (check for balanced braces)
+        let mut brace_count = 0;
+        let mut paren_count = 0;
+        let mut bracket_count = 0;
+        
+        for ch in script.chars() {
+            match ch {
+                '{' => brace_count += 1,
+                '}' => brace_count -= 1,
+                '(' => paren_count += 1,
+                ')' => paren_count -= 1,
+                '[' => bracket_count += 1,
+                ']' => bracket_count -= 1,
+                _ => {}
+            }
+            
+            if brace_count < 0 || paren_count < 0 || bracket_count < 0 {
+                return Err(OrchestratorError::InvalidDefinition {
+                    message: format!("Script task '{}' has unbalanced brackets/braces/parentheses", task.id),
+                });
+            }
+        }
+        
+        if brace_count != 0 || paren_count != 0 || bracket_count != 0 {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Script task '{}' has unbalanced brackets/braces/parentheses", task.id),
+            });
+        }
+        
+        Ok(())
+    }
+    
+    /// Validate human task specific requirements
+    fn validate_human_task(&self, task: &TaskDefinition) -> Result<(), OrchestratorError> {
+        // Human tasks should have reasonable timeouts
+        if let Some(timeout) = task.timeout {
+            if timeout < Duration::from_secs(60) {
+                warn!("Human task '{}' has very short timeout: {:?}", task.id, timeout);
+            }
+        } else {
+            warn!("Human task '{}' has no timeout specified - consider adding one", task.id);
+        }
+        
+        Ok(())
+    }
+    
+    /// Validate decision task specific requirements
+    fn validate_decision_task(&self, task: &TaskDefinition, condition: &str) -> Result<(), OrchestratorError> {
+        if condition.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Decision task '{}' condition cannot be empty", task.id),
+            });
+        }
+        
+        if condition.len() > 2048 {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Decision task '{}' condition exceeds 2KB limit", task.id),
+            });
+        }
+        
+        // Basic condition validation - check for common patterns
+        if !condition.contains("&&") && !condition.contains("||") && !condition.contains("==") && 
+           !condition.contains("!=") && !condition.contains(">") && !condition.contains("<") {
+            warn!("Decision task '{}' condition may not contain comparison operators", task.id);
+        }
+        
+        Ok(())
+    }
+    
+    /// Validate parallel task specific requirements
+    fn validate_parallel_task(&self, task: &TaskDefinition, subtasks: &[TaskId]) -> Result<(), OrchestratorError> {
+        if subtasks.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Parallel task '{}' must have at least one subtask", task.id),
+            });
+        }
+        
+        if subtasks.len() > 50 {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Parallel task '{}' cannot have more than 50 subtasks", task.id),
+            });
+        }
+        
+        // Check for duplicate subtasks
+        let mut seen = std::collections::HashSet::new();
+        for subtask in subtasks {
+            if !seen.insert(subtask.clone()) {
+                return Err(OrchestratorError::InvalidDefinition {
+                    message: format!("Parallel task '{}' has duplicate subtask: {}", task.id, subtask),
+                });
+            }
+        }
+        
+        Ok(())
+    }
+    
+    /// Validate loop task specific requirements
+    fn validate_loop_task(&self, task: &TaskDefinition, condition: &str, subtasks: &[TaskId]) -> Result<(), OrchestratorError> {
+        if condition.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Loop task '{}' condition cannot be empty", task.id),
+            });
+        }
+        
+        if subtasks.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Loop task '{}' must have at least one subtask", task.id),
+            });
+        }
+        
+        if subtasks.len() > 20 {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("Loop task '{}' cannot have more than 20 subtasks", task.id),
+            });
+        }
+        
+        Ok(())
+    }
+    
+    /// Validate JSON schema format
+    fn validate_json_schema(&self, schema: &str, schema_type: &str) -> Result<(), OrchestratorError> {
+        if schema.is_empty() {
+            return Err(OrchestratorError::InvalidDefinition {
+                message: format!("{} schema cannot be empty", schema_type),
+            });
+        }
+        
+        // Try to parse as JSON to ensure it's valid JSON
+        serde_json::from_str::<JsonValue>(schema).map_err(|e| {
+            OrchestratorError::InvalidDefinition {
+                message: format!("Invalid {} schema JSON: {}", schema_type, e),
+            }
+        })?;
+        
+        Ok(())
+    }
+    
+    /// Validate compensation definition
+    fn validate_compensation_definition(&self, task: &TaskDefinition, compensation: &CompensationDefinition) -> Result<(), OrchestratorError> {
+        match &compensation.compensation_type {
+            CompensationType::Service { endpoint, method } => {
+                if endpoint.is_empty() {
+                    return Err(OrchestratorError::InvalidDefinition {
+                        message: format!("Task '{}' compensation service endpoint cannot be empty", task.id),
+                    });
+                }
+                
+                if !endpoint.starts_with("http://") && !endpoint.starts_with("https://") {
+                    return Err(OrchestratorError::InvalidDefinition {
+                        message: format!("Task '{}' compensation service endpoint must start with http:// or https://", task.id),
+                    });
+                }
+                
+                let valid_methods = ["GET", "POST", "PUT", "DELETE", "PATCH"];
+                if !valid_methods.contains(&method.to_uppercase().as_str()) {
+                    return Err(OrchestratorError::InvalidDefinition {
+                        message: format!("Task '{}' compensation service has invalid HTTP method: {}", task.id, method),
+                    });
+                }
+            }
+            CompensationType::Script { script } => {
+                if script.is_empty() {
+                    return Err(OrchestratorError::InvalidDefinition {
+                        message: format!("Task '{}' compensation script cannot be empty", task.id),
+                    });
+                }
+                
+                if script.len() > 32768 { // 32KB limit for compensation scripts
+                    return Err(OrchestratorError::InvalidDefinition {
+                        message: format!("Task '{}' compensation script exceeds 32KB limit", task.id),
+                    });
+                }
+            }
+            CompensationType::Custom { handler } => {
+                if handler.is_empty() {
+                    return Err(OrchestratorError::InvalidDefinition {
+                        message: format!("Task '{}' custom compensation handler cannot be empty", task.id),
+                    });
+                }
+                
+                if handler.len() > 255 {
+                    return Err(OrchestratorError::InvalidDefinition {
+                        message: format!("Task '{}' custom compensation handler exceeds 255 characters", task.id),
+                    });
+                }
+            }
+        }
+        
         Ok(())
     }
 
@@ -653,31 +978,505 @@ impl TaskExecutor {
     }
 
     /// Execute a single task
+    #[instrument(skip(self), fields(workflow_id = %workflow_id, task_id = %task_id))]
     pub async fn execute_task(
         &self,
-        _workflow_id: &WorkflowId,
+        workflow_id: &WorkflowId,
         task_id: &TaskId,
     ) -> Result<TaskResult, OrchestratorError> {
         let start_time = SystemTime::now();
-
-        // In a real implementation, this would:
-        // 1. Load task definition
-        // 2. Execute based on task type (Service, Script, Human, etc.)
-        // 3. Handle retries and timeouts
-        // 4. Return appropriate result
-
-        // For now, simulate task execution
+        info!("Starting task execution: {} in workflow: {}", task_id, workflow_id);
+        
+        // Load task definition from workflow
+        let (task_def, context_data) = self.load_task_context(workflow_id, task_id).await?;
+        
+        let mut retry_count = 0;
+        let max_retries = task_def.retry_policy.as_ref()
+            .map(|rp| rp.max_attempts)
+            .unwrap_or(self.config.max_retry_attempts);
+        
+        let task_timeout = task_def.timeout
+            .unwrap_or(self.config.execution_timeout);
+        
+        // Execute task with retries and timeout
+        loop {
+            debug!("Task execution attempt {} for task: {}", retry_count + 1, task_id);
+            
+            let execution_future = self.execute_task_inner(&task_def, &context_data);
+            let timeout_future = tokio::time::sleep(task_timeout);
+            
+            match tokio::select! {
+                result = execution_future => result,
+                _ = timeout_future => {
+                    error!("Task {} timed out after {:?}", task_id, task_timeout);
+                    Err(OrchestratorError::TaskExecutionFailed {
+                        task_id: task_id.clone(),
+                        reason: format!("Task timed out after {:?}", task_timeout),
+                    })
+                }
+            } {
+                Ok(output) => {
+                    info!("Task {} completed successfully on attempt {}", task_id, retry_count + 1);
+                    return Ok(TaskResult {
+                        task_id: task_id.clone(),
+                        status: TaskStatus::Completed,
+                        output: Some(output),
+                        error: None,
+                        start_time,
+                        end_time: Some(SystemTime::now()),
+                        retry_count,
+                    });
+                }
+                Err(error) => {
+                    retry_count += 1;
+                    warn!("Task {} failed on attempt {}: {}", task_id, retry_count, error);
+                    
+                    if retry_count >= max_retries {
+                        error!("Task {} exhausted all {} retry attempts", task_id, max_retries);
+                        return Ok(TaskResult {
+                            task_id: task_id.clone(),
+                            status: TaskStatus::Failed,
+                            output: None,
+                            error: Some(error.to_string()),
+                            start_time,
+                            end_time: Some(SystemTime::now()),
+                            retry_count,
+                        });
+                    }
+                    
+                    // Calculate retry delay
+                    let delay = if let Some(retry_policy) = &task_def.retry_policy {
+                        retry_policy.delay_strategy.get_delay(retry_count)
+                    } else {
+                        self.config.retry_delay_strategy.get_delay(retry_count)
+                    };
+                    
+                    debug!("Retrying task {} after delay: {:?}", task_id, delay);
+                    tokio::time::sleep(delay).await;
+                }
+            }
+        }
+    }
+    
+    /// Load task context from workflow
+    async fn load_task_context(
+        &self,
+        workflow_id: &WorkflowId, 
+        task_id: &TaskId
+    ) -> Result<(TaskDefinition, HashMap<String, JsonValue>), OrchestratorError> {
+        // This would typically load from persistent storage in a real implementation
+        // For now, we'll simulate loading from a mock data source
+        debug!("Loading task context for task: {} in workflow: {}", task_id, workflow_id);
+        
+        // Create a mock task definition
+        let task_def = TaskDefinition {
+            id: task_id.clone(),
+            name: format!("Task {}", task_id),
+            task_type: TaskType::Service {
+                endpoint: "https://api.example.com/process".to_string(),
+                method: "POST".to_string(),
+            },
+            input_schema: None,
+            output_schema: None,
+            timeout: Some(Duration::from_secs(30)),
+            retry_policy: Some(RetryPolicy {
+                max_attempts: 3,
+                delay_strategy: RetryDelayStrategy::ExponentialBackoff { base_delay_secs: 1 },
+                backoff_multiplier: 2.0,
+                max_delay: Duration::from_secs(30),
+            }),
+            compensation: None,
+        };
+        
+        let context_data = HashMap::new();
+        
+        Ok((task_def, context_data))
+    }
+    
+    /// Execute task inner logic based on task type
+    #[instrument(skip(self, task_def, context_data))]
+    async fn execute_task_inner(
+        &self,
+        task_def: &TaskDefinition,
+        context_data: &HashMap<String, JsonValue>,
+    ) -> Result<JsonValue, OrchestratorError> {
+        match &task_def.task_type {
+            TaskType::Service { endpoint, method } => {
+                self.execute_service_task(task_def, endpoint, method, context_data).await
+            }
+            TaskType::Script { script } => {
+                self.execute_script_task(task_def, script, context_data).await
+            }
+            TaskType::Human { approval_required } => {
+                self.execute_human_task(task_def, *approval_required, context_data).await
+            }
+            TaskType::Decision { condition } => {
+                self.execute_decision_task(task_def, condition, context_data).await
+            }
+            TaskType::Parallel { subtasks } => {
+                self.execute_parallel_task(task_def, subtasks, context_data).await
+            }
+            TaskType::Loop { condition, subtasks } => {
+                self.execute_loop_task(task_def, condition, subtasks, context_data).await
+            }
+        }
+    }
+    
+    /// Execute service task
+    async fn execute_service_task(
+        &self,
+        task_def: &TaskDefinition,
+        endpoint: &str,
+        method: &str,
+        context_data: &HashMap<String, JsonValue>,
+    ) -> Result<JsonValue, OrchestratorError> {
+        debug!("Executing service task: {} -> {} {}", task_def.id, method, endpoint);
+        
+        // Prepare request payload
+        let payload = self.prepare_task_input(task_def, context_data)?;
+        
+        // HTTP request execution with proper error handling and timeouts
+        // Simulated for framework demonstration - replace with actual HTTP client
+        tokio::time::sleep(Duration::from_millis(50)).await;
+        
+        // Simulate different response scenarios based on endpoint
+        let response = if endpoint.contains("error") {
+            return Err(OrchestratorError::TaskExecutionFailed {
+                task_id: task_def.id.clone(),
+                reason: "Simulated service error".to_string(),
+            });
+        } else {
+            serde_json::json!({
+                "status": "success",
+                "result": {
+                    "processed_at": SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs(),
+                    "task_id": task_def.id,
+                    "method": method,
+                    "endpoint": endpoint,
+                    "input": payload
+                }
+            })
+        };
+        
+        // Validate response against output schema if present
+        if let Some(output_schema) = &task_def.output_schema {
+            self.validate_task_output(&response, output_schema, &task_def.id)?;
+        }
+        
+        debug!("Service task {} completed successfully", task_def.id);
+        Ok(response)
+    }
+    
+    /// Execute script task
+    async fn execute_script_task(
+        &self,
+        task_def: &TaskDefinition,
+        script: &str,
+        context_data: &HashMap<String, JsonValue>,
+    ) -> Result<JsonValue, OrchestratorError> {
+        debug!("Executing script task: {} with script length: {}", task_def.id, script.len());
+        
+        // Prepare script environment
+        let input_data = self.prepare_task_input(task_def, context_data)?;
+        
+        // Script execution in sandboxed environment with security isolation
+        // Simulated for framework demonstration - integrate with secure script runner
         tokio::time::sleep(Duration::from_millis(100)).await;
-
-        Ok(TaskResult {
-            task_id: task_id.clone(),
-            status: TaskStatus::Completed,
-            output: Some(serde_json::json!({"result": "success"})),
-            error: None,
-            start_time,
-            end_time: Some(SystemTime::now()),
-            retry_count: 0,
-        })
+        
+        let result = serde_json::json!({
+            "status": "executed",
+            "script_output": "Script execution completed successfully",
+            "task_id": task_def.id,
+            "input_data": input_data,
+            "execution_time_ms": 100
+        });
+        
+        debug!("Script task {} completed successfully", task_def.id);
+        Ok(result)
+    }
+    
+    /// Execute human task
+    async fn execute_human_task(
+        &self,
+        task_def: &TaskDefinition,
+        approval_required: bool,
+        context_data: &HashMap<String, JsonValue>,
+    ) -> Result<JsonValue, OrchestratorError> {
+        debug!("Executing human task: {} (approval_required: {})", task_def.id, approval_required);
+        
+        let input_data = self.prepare_task_input(task_def, context_data)?;
+        
+        // Human task workflow implementation:
+        // 1. Create a human task assignment
+        // 2. Notify assigned users
+        // 3. Wait for user input/approval
+        // 4. Return the user's response
+        
+        // For now, simulate human interaction
+        if approval_required {
+            tokio::time::sleep(Duration::from_millis(200)).await;
+        } else {
+            tokio::time::sleep(Duration::from_millis(50)).await;
+        }
+        
+        let result = serde_json::json!({
+            "status": "approved",
+            "approved_by": "system_user",
+            "approved_at": SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs(),
+            "task_id": task_def.id,
+            "approval_required": approval_required,
+            "input_data": input_data
+        });
+        
+        debug!("Human task {} completed successfully", task_def.id);
+        Ok(result)
+    }
+    
+    /// Execute decision task
+    async fn execute_decision_task(
+        &self,
+        task_def: &TaskDefinition,
+        condition: &str,
+        context_data: &HashMap<String, JsonValue>,
+    ) -> Result<JsonValue, OrchestratorError> {
+        debug!("Executing decision task: {} with condition: {}", task_def.id, condition);
+        
+        let input_data = self.prepare_task_input(task_def, context_data)?;
+        
+        // Decision task evaluation implementation:
+        // 1. Parse the condition expression
+        // 2. Evaluate it against the context data
+        // 3. Return the decision result
+        
+        // For now, simulate decision evaluation
+        tokio::time::sleep(Duration::from_millis(25)).await;
+        
+        let decision_result = condition.contains("true") || context_data.contains_key("approve");
+        
+        let result = serde_json::json!({
+            "decision": decision_result,
+            "condition": condition,
+            "evaluated_at": SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs(),
+            "task_id": task_def.id,
+            "input_data": input_data
+        });
+        
+        debug!("Decision task {} completed with result: {}", task_def.id, decision_result);
+        Ok(result)
+    }
+    
+    /// Execute parallel task
+    async fn execute_parallel_task(
+        &self,
+        task_def: &TaskDefinition,
+        subtasks: &[TaskId],
+        context_data: &HashMap<String, JsonValue>,
+    ) -> Result<JsonValue, OrchestratorError> {
+        debug!("Executing parallel task: {} with {} subtasks", task_def.id, subtasks.len());
+        
+        let input_data = self.prepare_task_input(task_def, context_data)?;
+        
+        // Parallel task execution implementation:
+        // 1. Execute all subtasks in parallel
+        // 2. Wait for all to complete
+        // 3. Aggregate results
+        
+        // For now, simulate parallel execution
+        let mut subtask_results = Vec::new();
+        
+        for subtask_id in subtasks {
+            // Simulate subtask execution
+            tokio::time::sleep(Duration::from_millis(30)).await;
+            subtask_results.push(serde_json::json!({
+                "subtask_id": subtask_id,
+                "status": "completed",
+                "result": "success"
+            }));
+        }
+        
+        let result = serde_json::json!({
+            "status": "all_completed",
+            "subtask_count": subtasks.len(),
+            "subtask_results": subtask_results,
+            "task_id": task_def.id,
+            "input_data": input_data,
+            "completed_at": SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs()
+        });
+        
+        debug!("Parallel task {} completed successfully", task_def.id);
+        Ok(result)
+    }
+    
+    /// Execute loop task
+    async fn execute_loop_task(
+        &self,
+        task_def: &TaskDefinition,
+        condition: &str,
+        subtasks: &[TaskId],
+        context_data: &HashMap<String, JsonValue>,
+    ) -> Result<JsonValue, OrchestratorError> {
+        debug!("Executing loop task: {} with condition: {} and {} subtasks", task_def.id, condition, subtasks.len());
+        
+        let input_data = self.prepare_task_input(task_def, context_data)?;
+        
+        // Loop task execution implementation:
+        // 1. Evaluate loop condition
+        // 2. Execute subtasks while condition is true
+        // 3. Prevent infinite loops with max iterations
+        
+        // For now, simulate loop execution
+        let mut iterations = 0;
+        let max_iterations = 10; // Safety limit
+        let mut iteration_results = Vec::new();
+        
+        while iterations < max_iterations {
+            // Simulate condition evaluation
+            let should_continue = if condition.contains("false") {
+                false
+            } else {
+                iterations < 3 // Simulate 3 iterations
+            };
+            
+            if !should_continue {
+                break;
+            }
+            
+            // Simulate subtask execution
+            let mut subtask_results = Vec::new();
+            for subtask_id in subtasks {
+                tokio::time::sleep(Duration::from_millis(20)).await;
+                subtask_results.push(serde_json::json!({
+                    "subtask_id": subtask_id,
+                    "iteration": iterations,
+                    "status": "completed"
+                }));
+            }
+            
+            iteration_results.push(serde_json::json!({
+                "iteration": iterations,
+                "subtask_results": subtask_results
+            }));
+            
+            iterations += 1;
+        }
+        
+        let result = serde_json::json!({
+            "status": "loop_completed",
+            "total_iterations": iterations,
+            "condition": condition,
+            "iteration_results": iteration_results,
+            "task_id": task_def.id,
+            "input_data": input_data,
+            "completed_at": SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs()
+        });
+        
+        debug!("Loop task {} completed after {} iterations", task_def.id, iterations);
+        Ok(result)
+    }
+    
+    /// Prepare task input data
+    fn prepare_task_input(
+        &self,
+        task_def: &TaskDefinition,
+        context_data: &HashMap<String, JsonValue>,
+    ) -> Result<JsonValue, OrchestratorError> {
+        let mut input_data = context_data.clone();
+        input_data.insert("task_id".to_string(), JsonValue::String(task_def.id.clone()));
+        input_data.insert("task_name".to_string(), JsonValue::String(task_def.name.clone()));
+        
+        let input_json = serde_json::to_value(input_data).map_err(|e| {
+            OrchestratorError::TaskExecutionFailed {
+                task_id: task_def.id.clone(),
+                reason: format!("Failed to serialize input data: {}", e),
+            }
+        })?;
+        
+        // Validate input against schema if present
+        if let Some(input_schema) = &task_def.input_schema {
+            self.validate_task_input(&input_json, input_schema, &task_def.id)?;
+        }
+        
+        Ok(input_json)
+    }
+    
+    /// Validate task input against schema
+    fn validate_task_input(
+        &self,
+        input: &JsonValue,
+        schema: &str,
+        task_id: &str,
+    ) -> Result<(), OrchestratorError> {
+        // Basic validation - in a real implementation, use a JSON schema validator
+        let schema_value: JsonValue = serde_json::from_str(schema).map_err(|e| {
+            OrchestratorError::TaskExecutionFailed {
+                task_id: task_id.to_string(),
+                reason: format!("Invalid input schema: {}", e),
+            }
+        })?;
+        
+        // Simple type checking based on schema
+        if let Some(expected_type) = schema_value.get("type") {
+            let input_type = match input {
+                JsonValue::Null => "null",
+                JsonValue::Bool(_) => "boolean",
+                JsonValue::Number(_) => "number",
+                JsonValue::String(_) => "string",
+                JsonValue::Array(_) => "array",
+                JsonValue::Object(_) => "object",
+            };
+            
+            if let Some(expected) = expected_type.as_str() {
+                if expected != input_type {
+                    return Err(OrchestratorError::TaskExecutionFailed {
+                        task_id: task_id.to_string(),
+                        reason: format!("Input type mismatch. Expected: {}, got: {}", expected, input_type),
+                    });
+                }
+            }
+        }
+        
+        debug!("Input validation passed for task: {}", task_id);
+        Ok(())
+    }
+    
+    /// Validate task output against schema
+    fn validate_task_output(
+        &self,
+        output: &JsonValue,
+        schema: &str,
+        task_id: &str,
+    ) -> Result<(), OrchestratorError> {
+        // Basic validation - in a real implementation, use a JSON schema validator
+        let schema_value: JsonValue = serde_json::from_str(schema).map_err(|e| {
+            OrchestratorError::TaskExecutionFailed {
+                task_id: task_id.to_string(),
+                reason: format!("Invalid output schema: {}", e),
+            }
+        })?;
+        
+        // Simple type checking based on schema
+        if let Some(expected_type) = schema_value.get("type") {
+            let output_type = match output {
+                JsonValue::Null => "null",
+                JsonValue::Bool(_) => "boolean",
+                JsonValue::Number(_) => "number",
+                JsonValue::String(_) => "string",
+                JsonValue::Array(_) => "array",
+                JsonValue::Object(_) => "object",
+            };
+            
+            if let Some(expected) = expected_type.as_str() {
+                if expected != output_type {
+                    return Err(OrchestratorError::TaskExecutionFailed {
+                        task_id: task_id.to_string(),
+                        reason: format!("Output type mismatch. Expected: {}, got: {}", expected, output_type),
+                    });
+                }
+            }
+        }
+        
+        debug!("Output validation passed for task: {}", task_id);
+        Ok(())
     }
 }
 

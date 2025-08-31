@@ -202,8 +202,127 @@ pub fn generate_event_sourcing_preprocessing(
         /// JSON event serializer
         struct JsonEventSerializer;
         
+        impl EventSerializer for JsonEventSerializer {
+            fn serialize(&self, event: &DomainEvent) -> Result<Vec<u8>, EventStoreError> {
+                tracing::trace!("🔄 JSON: Serializing event {} for aggregate {}", 
+                    event.event_type, event.aggregate_id);
+                
+                serde_json::to_vec(event)
+                    .map_err(|e| EventStoreError::Serialization(format!("JSON serialization failed: {}", e)))
+            }
+            
+            fn deserialize(&self, data: &[u8], event_type: &str) -> Result<DomainEvent, EventStoreError> {
+                tracing::trace!("🔄 JSON: Deserializing event of type {}", event_type);
+                
+                let event: DomainEvent = serde_json::from_slice(data)
+                    .map_err(|e| EventStoreError::Serialization(format!("JSON deserialization failed: {}", e)))?;
+                
+                // Validate event type matches expected
+                if event.event_type != event_type {
+                    return Err(EventStoreError::Serialization(format!(
+                        "Event type mismatch: expected '{}', found '{}'", 
+                        event_type, event.event_type
+                    )));
+                }
+                
+                Ok(event)
+            }
+        }
+        
         /// Binary event serializer using MessagePack
         struct BinaryEventSerializer;
+        
+        impl EventSerializer for BinaryEventSerializer {
+            fn serialize(&self, event: &DomainEvent) -> Result<Vec<u8>, EventStoreError> {
+                tracing::trace!("🔄 Binary: Serializing event {} for aggregate {}", 
+                    event.event_type, event.aggregate_id);
+                
+                rmp_serde::to_vec(event)
+                    .map_err(|e| EventStoreError::Serialization(format!("MessagePack serialization failed: {}", e)))
+            }
+            
+            fn deserialize(&self, data: &[u8], event_type: &str) -> Result<DomainEvent, EventStoreError> {
+                tracing::trace!("🔄 Binary: Deserializing event of type {}", event_type);
+                
+                let event: DomainEvent = rmp_serde::from_slice(data)
+                    .map_err(|e| EventStoreError::Serialization(format!("MessagePack deserialization failed: {}", e)))?;
+                
+                // Validate event type matches expected
+                if event.event_type != event_type {
+                    return Err(EventStoreError::Serialization(format!(
+                        "Event type mismatch: expected '{}', found '{}'", 
+                        event_type, event.event_type
+                    )));
+                }
+                
+                Ok(event)
+            }
+        }
+        
+        /// Protobuf event serializer (placeholder for future implementation)
+        struct ProtobufEventSerializer;
+        
+        impl EventSerializer for ProtobufEventSerializer {
+            fn serialize(&self, event: &DomainEvent) -> Result<Vec<u8>, EventStoreError> {
+                tracing::trace!("🔄 Protobuf: Serializing event {} for aggregate {}", 
+                    event.event_type, event.aggregate_id);
+                
+                // For now, fall back to JSON serialization
+                // Protobuf serialization with generated structs for efficient binary format
+                tracing::warn!("⚠️ Protobuf serialization not fully implemented, falling back to JSON");
+                serde_json::to_vec(event)
+                    .map_err(|e| EventStoreError::Serialization(format!("Protobuf (JSON fallback) serialization failed: {}", e)))
+            }
+            
+            fn deserialize(&self, data: &[u8], event_type: &str) -> Result<DomainEvent, EventStoreError> {
+                tracing::trace!("🔄 Protobuf: Deserializing event of type {}", event_type);
+                
+                // For now, fall back to JSON deserialization
+                tracing::warn!("⚠️ Protobuf deserialization not fully implemented, falling back to JSON");
+                let event: DomainEvent = serde_json::from_slice(data)
+                    .map_err(|e| EventStoreError::Serialization(format!("Protobuf (JSON fallback) deserialization failed: {}", e)))?;
+                
+                // Validate event type matches expected
+                if event.event_type != event_type {
+                    return Err(EventStoreError::Serialization(format!(
+                        "Event type mismatch: expected '{}', found '{}'", 
+                        event_type, event.event_type
+                    )));
+                }
+                
+                Ok(event)
+            }
+        }
+        
+        /// CBOR event serializer for compact binary representation
+        struct CborEventSerializer;
+        
+        impl EventSerializer for CborEventSerializer {
+            fn serialize(&self, event: &DomainEvent) -> Result<Vec<u8>, EventStoreError> {
+                tracing::trace!("🔄 CBOR: Serializing event {} for aggregate {}", 
+                    event.event_type, event.aggregate_id);
+                
+                serde_cbor::to_vec(event)
+                    .map_err(|e| EventStoreError::Serialization(format!("CBOR serialization failed: {}", e)))
+            }
+            
+            fn deserialize(&self, data: &[u8], event_type: &str) -> Result<DomainEvent, EventStoreError> {
+                tracing::trace!("🔄 CBOR: Deserializing event of type {}", event_type);
+                
+                let event: DomainEvent = serde_cbor::from_slice(data)
+                    .map_err(|e| EventStoreError::Serialization(format!("CBOR deserialization failed: {}", e)))?;
+                
+                // Validate event type matches expected
+                if event.event_type != event_type {
+                    return Err(EventStoreError::Serialization(format!(
+                        "Event type mismatch: expected '{}', found '{}'", 
+                        event_type, event.event_type
+                    )));
+                }
+                
+                Ok(event)
+            }
+        }
         
         /// Thread-safe global event store registry
         static EVENT_STORES: once_cell::sync::OnceCell<Arc<RwLock<std::collections::HashMap<String, Arc<EventStore>>>>> 
@@ -226,7 +345,7 @@ pub fn generate_event_sourcing_preprocessing(
                 
                 // Create new event store
                 let backend = create_event_store_backend(backend_type).await?;
-                let serializer = Arc::new(create_event_serializer());
+                let serializer = Arc::from(create_event_serializer());
                 let snapshot_store = Arc::new(create_snapshot_store(backend_type).await?);
                 let event_bus = Arc::new(create_event_bus().await?);
                 let metrics = Arc::new(EventStoreMetrics::new());
@@ -436,27 +555,359 @@ pub fn generate_event_sourcing_preprocessing(
                 Ok(())
             }
             
-            /// Apply event to aggregate state
+            /// Apply event to aggregate state using proper aggregate pattern
             fn apply_event_to_state(&self, mut state: serde_json::Value, event: &DomainEvent) -> Result<serde_json::Value, EventStoreError> {
-                // This is a simplified state application
-                // In a real implementation, this would use proper aggregate pattern
+                tracing::debug!("🎯 Applying event {} to aggregate {}", event.event_type, event.aggregate_id);
+                
+                // Initialize state if null
                 if state.is_null() {
-                    state = serde_json::json!({});
+                    state = serde_json::json!({
+                        "aggregate_id": event.aggregate_id,
+                        "aggregate_type": event.aggregate_type,
+                        "version": 0,
+                        "created_at": event.timestamp,
+                        "updated_at": event.timestamp,
+                        "state": "active",
+                        "data": {}
+                    });
                 }
                 
-                if let serde_json::Value::Object(ref mut state_obj) = state {
-                    state_obj.insert("last_event_type".to_string(), serde_json::Value::String(event.event_type.clone()));
-                    state_obj.insert("version".to_string(), serde_json::json!(event.event_version.0));
+                // Ensure state is an object for manipulation
+                let state_obj = match state.as_object_mut() {
+                    Some(obj) => obj,
+                    None => return Err(EventStoreError::Serialization(
+                        "Invalid aggregate state: expected JSON object".to_string()
+                    )),
+                };
+                
+                // Update version and timestamp
+                state_obj.insert("version".to_string(), serde_json::json!(event.event_version.0));
+                state_obj.insert("updated_at".to_string(), serde_json::json!(event.timestamp));
+                state_obj.insert("last_event_type".to_string(), serde_json::Value::String(event.event_type.clone()));
+                
+                // Apply event based on type using command pattern
+                match event.event_type.as_str() {
+                    // Create/Initialize events
+                    event_type if event_type.ends_with("Created") || event_type.ends_with("Initialized") => {
+                        self.apply_creation_event(state_obj, event)?;
+                    }
                     
-                    // Apply event-specific changes
-                    if let serde_json::Value::Object(event_data) = &event.event_data {
-                        for (key, value) in event_data {
-                            state_obj.insert(key.clone(), value.clone());
+                    // Update events
+                    event_type if event_type.ends_with("Updated") || event_type.ends_with("Modified") => {
+                        self.apply_update_event(state_obj, event)?;
+                    }
+                    
+                    // Delete/Remove events
+                    event_type if event_type.ends_with("Deleted") || event_type.ends_with("Removed") => {
+                        self.apply_deletion_event(state_obj, event)?;
+                    }
+                    
+                    // Status change events
+                    event_type if event_type.contains("Status") || event_type.ends_with("Activated") || 
+                                  event_type.ends_with("Deactivated") || event_type.ends_with("Suspended") => {
+                        self.apply_status_change_event(state_obj, event)?;
+                    }
+                    
+                    // Property change events
+                    event_type if event_type.ends_with("Changed") || event_type.ends_with("Set") => {
+                        self.apply_property_change_event(state_obj, event)?;
+                    }
+                    
+                    // Collection events (add/remove items)
+                    event_type if event_type.ends_with("Added") || event_type.ends_with("Appended") => {
+                        self.apply_collection_add_event(state_obj, event)?;
+                    }
+                    
+                    event_type if event_type.ends_with("Removed") || event_type.ends_with("Cleared") => {
+                        self.apply_collection_remove_event(state_obj, event)?;
+                    }
+                    
+                    // Custom business events - apply data directly with validation
+                    _ => {
+                        self.apply_generic_business_event(state_obj, event)?;
+                    }
+                }
+                
+                // Validate final state consistency
+                self.validate_aggregate_state(&state)?;
+                
+                tracing::debug!("✅ Applied event {} to aggregate {} at version {}", 
+                    event.event_type, event.aggregate_id, event.event_version.0);
+                
+                Ok(state)
+            }
+            
+            /// Apply creation/initialization events
+            fn apply_creation_event(&self, state: &mut serde_json::Map<String, serde_json::Value>, event: &DomainEvent) -> Result<(), EventStoreError> {
+                // Set initial state
+                state.insert("state".to_string(), serde_json::Value::String("active".to_string()));
+                
+                // Merge event data into aggregate data
+                if let Some(data_field) = state.get_mut("data") {
+                    if let serde_json::Value::Object(data_obj) = data_field {
+                        if let serde_json::Value::Object(event_data) = &event.event_data {
+                            for (key, value) in event_data {
+                                data_obj.insert(key.clone(), value.clone());
+                            }
                         }
                     }
                 }
                 
-                Ok(state)
+                Ok(())
+            }
+            
+            /// Apply update/modification events
+            fn apply_update_event(&self, state: &mut serde_json::Map<String, serde_json::Value>, event: &DomainEvent) -> Result<(), EventStoreError> {
+                // Merge changes into existing data
+                if let Some(data_field) = state.get_mut("data") {
+                    if let serde_json::Value::Object(data_obj) = data_field {
+                        if let serde_json::Value::Object(event_data) = &event.event_data {
+                            // Handle different update patterns
+                            if let Some(changes) = event_data.get("changes") {
+                                if let serde_json::Value::Object(changes_obj) = changes {
+                                    for (key, value) in changes_obj {
+                                        data_obj.insert(key.clone(), value.clone());
+                                    }
+                                }
+                            } else {
+                                // Direct field updates
+                                for (key, value) in event_data {
+                                    if !["aggregate_id", "version", "timestamp"].contains(&key.as_str()) {
+                                        data_obj.insert(key.clone(), value.clone());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                Ok(())
+            }
+            
+            /// Apply deletion/removal events
+            fn apply_deletion_event(&self, state: &mut serde_json::Map<String, serde_json::Value>, event: &DomainEvent) -> Result<(), EventStoreError> {
+                // Mark as deleted instead of removing
+                state.insert("state".to_string(), serde_json::Value::String("deleted".to_string()));
+                state.insert("deleted_at".to_string(), serde_json::json!(event.timestamp));
+                
+                // Store deletion reason if provided
+                if let serde_json::Value::Object(event_data) = &event.event_data {
+                    if let Some(reason) = event_data.get("reason") {
+                        state.insert("deletion_reason".to_string(), reason.clone());
+                    }
+                }
+                
+                Ok(())
+            }
+            
+            /// Apply status change events
+            fn apply_status_change_event(&self, state: &mut serde_json::Map<String, serde_json::Value>, event: &DomainEvent) -> Result<(), EventStoreError> {
+                if let serde_json::Value::Object(event_data) = &event.event_data {
+                    // Update status
+                    if let Some(new_status) = event_data.get("status").or_else(|| event_data.get("new_status")) {
+                        state.insert("state".to_string(), new_status.clone());
+                    }
+                    
+                    // Store previous status if provided
+                    if let Some(prev_status) = event_data.get("previous_status") {
+                        state.insert("previous_state".to_string(), prev_status.clone());
+                    }
+                    
+                    // Store status change reason
+                    if let Some(reason) = event_data.get("reason") {
+                        state.insert("status_change_reason".to_string(), reason.clone());
+                    }
+                }
+                
+                Ok(())
+            }
+            
+            /// Apply property change events
+            fn apply_property_change_event(&self, state: &mut serde_json::Map<String, serde_json::Value>, event: &DomainEvent) -> Result<(), EventStoreError> {
+                if let serde_json::Value::Object(event_data) = &event.event_data {
+                    if let Some(data_field) = state.get_mut("data") {
+                        if let serde_json::Value::Object(data_obj) = data_field {
+                            // Handle property changes with old/new value tracking
+                            if let (Some(property), Some(new_value)) = (event_data.get("property"), event_data.get("new_value")) {
+                                if let Some(property_name) = property.as_str() {
+                                    // Store old value in change history if not exists
+                                    if let Some(old_value) = data_obj.get(property_name).cloned() {
+                                        let history_key = format!("{}_history", property_name);
+                                        let mut history = data_obj.get(&history_key)
+                                            .and_then(|v| v.as_array())
+                                            .cloned()
+                                            .unwrap_or_default();
+                                        
+                                        history.push(serde_json::json!({
+                                            "value": old_value,
+                                            "changed_at": event.timestamp,
+                                            "event_id": event.event_id
+                                        }));
+                                        
+                                        // Keep only last 10 changes
+                                        if history.len() > 10 {
+                                            history = history.into_iter().skip(history.len() - 10).collect();
+                                        }
+                                        
+                                        data_obj.insert(history_key, serde_json::Value::Array(history));
+                                    }
+                                    
+                                    // Set new value
+                                    data_obj.insert(property_name.to_string(), new_value.clone());
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                Ok(())
+            }
+            
+            /// Apply collection add events
+            fn apply_collection_add_event(&self, state: &mut serde_json::Map<String, serde_json::Value>, event: &DomainEvent) -> Result<(), EventStoreError> {
+                if let serde_json::Value::Object(event_data) = &event.event_data {
+                    if let Some(data_field) = state.get_mut("data") {
+                        if let serde_json::Value::Object(data_obj) = data_field {
+                            // Handle collection additions
+                            if let (Some(collection), Some(item)) = (event_data.get("collection"), event_data.get("item")) {
+                                if let Some(collection_name) = collection.as_str() {
+                                    let mut collection_array = data_obj.get(collection_name)
+                                        .and_then(|v| v.as_array())
+                                        .cloned()
+                                        .unwrap_or_default();
+                                    
+                                    collection_array.push(item.clone());
+                                    data_obj.insert(collection_name.to_string(), serde_json::Value::Array(collection_array));
+                                }
+                            } else if let Some(items) = event_data.get("items") {
+                                // Bulk add
+                                if let serde_json::Value::Array(items_array) = items {
+                                    if let Some(collection_name) = event_data.get("collection").and_then(|v| v.as_str()) {
+                                        let mut collection_array = data_obj.get(collection_name)
+                                            .and_then(|v| v.as_array())
+                                            .cloned()
+                                            .unwrap_or_default();
+                                        
+                                        collection_array.extend(items_array.clone());
+                                        data_obj.insert(collection_name.to_string(), serde_json::Value::Array(collection_array));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                Ok(())
+            }
+            
+            /// Apply collection remove events
+            fn apply_collection_remove_event(&self, state: &mut serde_json::Map<String, serde_json::Value>, event: &DomainEvent) -> Result<(), EventStoreError> {
+                if let serde_json::Value::Object(event_data) = &event.event_data {
+                    if let Some(data_field) = state.get_mut("data") {
+                        if let serde_json::Value::Object(data_obj) = data_field {
+                            if let Some(collection_name) = event_data.get("collection").and_then(|v| v.as_str()) {
+                                if event_data.get("clear").and_then(|v| v.as_bool()).unwrap_or(false) {
+                                    // Clear entire collection
+                                    data_obj.insert(collection_name.to_string(), serde_json::Value::Array(vec![]));
+                                } else if let Some(item_id) = event_data.get("item_id") {
+                                    // Remove specific item by ID
+                                    if let Some(collection_array) = data_obj.get_mut(collection_name) {
+                                        if let serde_json::Value::Array(ref mut array) = collection_array {
+                                            array.retain(|item| {
+                                                item.get("id").map(|id| id != item_id).unwrap_or(true)
+                                            });
+                                        }
+                                    }
+                                } else if let Some(index) = event_data.get("index").and_then(|v| v.as_u64()) {
+                                    // Remove by index
+                                    if let Some(collection_array) = data_obj.get_mut(collection_name) {
+                                        if let serde_json::Value::Array(ref mut array) = collection_array {
+                                            if (index as usize) < array.len() {
+                                                array.remove(index as usize);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                Ok(())
+            }
+            
+            /// Apply generic business events
+            fn apply_generic_business_event(&self, state: &mut serde_json::Map<String, serde_json::Value>, event: &DomainEvent) -> Result<(), EventStoreError> {
+                tracing::debug!("🔧 Applying generic business event: {}", event.event_type);
+                
+                // Apply event data with namespace isolation
+                if let Some(data_field) = state.get_mut("data") {
+                    if let serde_json::Value::Object(data_obj) = data_field {
+                        // Create event-specific namespace
+                        let event_namespace = format!("events.{}", event.event_type.to_lowercase());
+                        let mut event_specific_data = data_obj.get(&event_namespace)
+                            .and_then(|v| v.as_object())
+                            .cloned()
+                            .unwrap_or_default();
+                        
+                        // Merge event data
+                        if let serde_json::Value::Object(event_data) = &event.event_data {
+                            for (key, value) in event_data {
+                                event_specific_data.insert(key.clone(), value.clone());
+                            }
+                        }
+                        
+                        data_obj.insert(event_namespace, serde_json::Value::Object(event_specific_data));
+                        
+                        // Also apply to root level for commonly accessed fields
+                        if let serde_json::Value::Object(event_data) = &event.event_data {
+                            for (key, value) in event_data {
+                                // Only apply non-system fields to root level
+                                if !["aggregate_id", "version", "timestamp", "event_id"].contains(&key.as_str()) {
+                                    data_obj.insert(key.clone(), value.clone());
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                Ok(())
+            }
+            
+            /// Validate aggregate state for consistency
+            fn validate_aggregate_state(&self, state: &serde_json::Value) -> Result<(), EventStoreError> {
+                let state_obj = state.as_object().ok_or_else(|| {
+                    EventStoreError::Serialization("Invalid aggregate state: not an object".to_string())
+                })?;
+                
+                // Check required fields
+                let required_fields = ["aggregate_id", "aggregate_type", "version"];
+                for field in &required_fields {
+                    if !state_obj.contains_key(*field) {
+                        return Err(EventStoreError::Serialization(
+                            format!("Missing required field in aggregate state: {}", field)
+                        ));
+                    }
+                }
+                
+                // Validate version is non-negative
+                if let Some(version) = state_obj.get("version").and_then(|v| v.as_i64()) {
+                    if version < 0 {
+                        return Err(EventStoreError::Serialization(
+                            "Invalid aggregate version: must be non-negative".to_string()
+                        ));
+                    }
+                }
+                
+                // Validate state value
+                if let Some(state_value) = state_obj.get("state").and_then(|v| v.as_str()) {
+                    let valid_states = ["active", "inactive", "deleted", "suspended", "pending"];
+                    if !valid_states.contains(&state_value) {
+                        tracing::warn!("🚨 Unusual aggregate state: {}", state_value);
+                    }
+                }
+                
+                Ok(())
             }
         }
         
@@ -591,6 +1042,124 @@ pub fn generate_event_sourcing_preprocessing(
             }
         }
         
+        /// In-memory event store backend implementation for testing
+        #[async_trait::async_trait]
+        impl EventStoreBackend for InMemoryEventStore {
+            async fn append_events(
+                &self,
+                aggregate_id: &str,
+                expected_version: EventVersion,
+                events: &[DomainEvent]
+            ) -> Result<EventVersion, EventStoreError> {
+                tracing::debug!("📝 InMemory: Appending {} events for aggregate {}", events.len(), aggregate_id);
+                
+                // Check and update version atomically
+                {
+                    let mut versions = self.versions.write().await;
+                    let current_version = versions.get(aggregate_id).copied().unwrap_or(EventVersion::INITIAL);
+                    
+                    if current_version != expected_version {
+                        return Err(EventStoreError::ConcurrencyConflict {
+                            expected: expected_version,
+                            actual: current_version,
+                        });
+                    }
+                    
+                    // Calculate new version
+                    let mut new_version = expected_version;
+                    for _ in events {
+                        new_version = new_version.next();
+                    }
+                    
+                    // Update version first
+                    versions.insert(aggregate_id.to_string(), new_version);
+                    
+                    // Append events to storage
+                    {
+                        let mut events_store = self.events.write().await;
+                        let aggregate_events = events_store.entry(aggregate_id.to_string()).or_insert_with(Vec::new);
+                        
+                        // Clone and adjust event versions
+                        let mut event_version = expected_version;
+                        for event in events {
+                            event_version = event_version.next();
+                            let mut adjusted_event = event.clone();
+                            adjusted_event.event_version = event_version;
+                            aggregate_events.push(adjusted_event);
+                        }
+                    }
+                    
+                    tracing::debug!("✅ InMemory: Appended {} events, new version: {:?}", events.len(), new_version);
+                    Ok(new_version)
+                }
+            }
+            
+            async fn load_events(
+                &self,
+                aggregate_id: &str,
+                from_version: Option<EventVersion>
+            ) -> Result<Vec<DomainEvent>, EventStoreError> {
+                tracing::debug!("📖 InMemory: Loading events for aggregate {} from version {:?}", 
+                    aggregate_id, from_version);
+                
+                let events_store = self.events.read().await;
+                let from_ver = from_version.unwrap_or(EventVersion::INITIAL);
+                
+                let filtered_events = events_store
+                    .get(aggregate_id)
+                    .map(|events| {
+                        events.iter()
+                            .filter(|event| event.event_version > from_ver)
+                            .cloned()
+                            .collect::<Vec<_>>()
+                    })
+                    .unwrap_or_default();
+                
+                tracing::debug!("✅ InMemory: Loaded {} events for aggregate {}", 
+                    filtered_events.len(), aggregate_id);
+                
+                Ok(filtered_events)
+            }
+            
+            async fn load_events_by_type(
+                &self,
+                event_type: &str,
+                from_timestamp: Option<std::time::SystemTime>
+            ) -> Result<Vec<DomainEvent>, EventStoreError> {
+                tracing::debug!("🔍 InMemory: Loading events by type '{}' from timestamp {:?}", 
+                    event_type, from_timestamp);
+                
+                let events_store = self.events.read().await;
+                let from_time = from_timestamp.unwrap_or(std::time::UNIX_EPOCH);
+                
+                let mut matching_events = Vec::new();
+                
+                for (_aggregate_id, events) in events_store.iter() {
+                    for event in events {
+                        if event.event_type == event_type && event.timestamp >= from_time {
+                            matching_events.push(event.clone());
+                        }
+                    }
+                }
+                
+                // Sort by timestamp for consistent ordering
+                matching_events.sort_by(|a, b| a.timestamp.cmp(&b.timestamp));
+                
+                tracing::debug!("✅ InMemory: Found {} events of type '{}'", 
+                    matching_events.len(), event_type);
+                
+                Ok(matching_events)
+            }
+            
+            async fn get_aggregate_version(&self, aggregate_id: &str) -> Result<Option<EventVersion>, EventStoreError> {
+                let versions = self.versions.read().await;
+                let version = versions.get(aggregate_id).copied();
+                
+                tracing::debug!("🔍 InMemory: Aggregate {} version: {:?}", aggregate_id, version);
+                Ok(version)
+            }
+        }
+        
         impl EventStoreMetrics {
             fn new() -> Self {
                 Self {
@@ -635,6 +1204,299 @@ pub fn generate_event_sourcing_preprocessing(
             None
         }
         
+        /// PostgreSQL snapshot store implementation
+        struct PostgreSQLSnapshotStore {
+            pool: sqlx::PgPool,
+        }
+        
+        #[async_trait::async_trait]
+        impl SnapshotStore for PostgreSQLSnapshotStore {
+            async fn save_snapshot(&self, aggregate_id: &str, snapshot: &AggregateSnapshot) -> Result<(), EventStoreError> {
+                tracing::debug!("📸 PostgreSQL: Saving snapshot for aggregate {} at version {:?}", 
+                    aggregate_id, snapshot.version);
+                
+                sqlx::query(
+                    r#"
+                    INSERT INTO snapshots (
+                        aggregate_id, aggregate_type, version, state_data, created_at
+                    ) VALUES ($1, $2, $3, $4, $5)
+                    ON CONFLICT (aggregate_id) 
+                    DO UPDATE SET 
+                        aggregate_type = EXCLUDED.aggregate_type,
+                        version = EXCLUDED.version,
+                        state_data = EXCLUDED.state_data,
+                        created_at = EXCLUDED.created_at
+                    "#
+                )
+                .bind(&snapshot.aggregate_id)
+                .bind(&snapshot.aggregate_type)
+                .bind(snapshot.version.0)
+                .bind(&snapshot.state_data)
+                .bind(snapshot.created_at)
+                .execute(&self.pool)
+                .await
+                .map_err(|e| EventStoreError::Backend(format!("Snapshot save failed: {}", e)))?;
+                
+                tracing::debug!("✅ PostgreSQL: Saved snapshot for aggregate {}", aggregate_id);
+                Ok(())
+            }
+            
+            async fn load_snapshot(&self, aggregate_id: &str) -> Result<Option<AggregateSnapshot>, EventStoreError> {
+                tracing::debug!("📖 PostgreSQL: Loading snapshot for aggregate {}", aggregate_id);
+                
+                let row = sqlx::query(
+                    r#"
+                    SELECT aggregate_id, aggregate_type, version, state_data, created_at
+                    FROM snapshots 
+                    WHERE aggregate_id = $1
+                    ORDER BY version DESC 
+                    LIMIT 1
+                    "#
+                )
+                .bind(aggregate_id)
+                .fetch_optional(&self.pool)
+                .await
+                .map_err(|e| EventStoreError::Backend(format!("Snapshot load failed: {}", e)))?;
+                
+                if let Some(row) = row {
+                    let snapshot = AggregateSnapshot {
+                        aggregate_id: row.get("aggregate_id"),
+                        aggregate_type: row.get("aggregate_type"),
+                        version: EventVersion(row.get("version")),
+                        state_data: row.get("state_data"),
+                        created_at: row.get("created_at"),
+                    };
+                    
+                    tracing::debug!("✅ PostgreSQL: Loaded snapshot for aggregate {} at version {:?}", 
+                        aggregate_id, snapshot.version);
+                    Ok(Some(snapshot))
+                } else {
+                    tracing::debug!("📭 PostgreSQL: No snapshot found for aggregate {}", aggregate_id);
+                    Ok(None)
+                }
+            }
+            
+            async fn delete_old_snapshots(&self, aggregate_id: &str, keep_count: u32) -> Result<(), EventStoreError> {
+                tracing::debug!("🗑️ PostgreSQL: Cleaning old snapshots for aggregate {}, keeping {}", 
+                    aggregate_id, keep_count);
+                
+                sqlx::query(
+                    r#"
+                    DELETE FROM snapshots 
+                    WHERE aggregate_id = $1 
+                    AND version NOT IN (
+                        SELECT version FROM snapshots 
+                        WHERE aggregate_id = $1 
+                        ORDER BY version DESC 
+                        LIMIT $2
+                    )
+                    "#
+                )
+                .bind(aggregate_id)
+                .bind(keep_count as i64)
+                .execute(&self.pool)
+                .await
+                .map_err(|e| EventStoreError::Backend(format!("Snapshot cleanup failed: {}", e)))?;
+                
+                tracing::debug!("✅ PostgreSQL: Cleaned old snapshots for aggregate {}", aggregate_id);
+                Ok(())
+            }
+        }
+        
+        /// In-memory snapshot store for testing
+        struct InMemorySnapshotStore {
+            snapshots: Arc<RwLock<std::collections::HashMap<String, AggregateSnapshot>>>,
+        }
+        
+        #[async_trait::async_trait]
+        impl SnapshotStore for InMemorySnapshotStore {
+            async fn save_snapshot(&self, aggregate_id: &str, snapshot: &AggregateSnapshot) -> Result<(), EventStoreError> {
+                tracing::debug!("📸 InMemory: Saving snapshot for aggregate {} at version {:?}", 
+                    aggregate_id, snapshot.version);
+                
+                let mut snapshots = self.snapshots.write().await;
+                snapshots.insert(aggregate_id.to_string(), snapshot.clone());
+                
+                tracing::debug!("✅ InMemory: Saved snapshot for aggregate {}", aggregate_id);
+                Ok(())
+            }
+            
+            async fn load_snapshot(&self, aggregate_id: &str) -> Result<Option<AggregateSnapshot>, EventStoreError> {
+                tracing::debug!("📖 InMemory: Loading snapshot for aggregate {}", aggregate_id);
+                
+                let snapshots = self.snapshots.read().await;
+                let snapshot = snapshots.get(aggregate_id).cloned();
+                
+                if snapshot.is_some() {
+                    tracing::debug!("✅ InMemory: Loaded snapshot for aggregate {}", aggregate_id);
+                } else {
+                    tracing::debug!("📭 InMemory: No snapshot found for aggregate {}", aggregate_id);
+                }
+                
+                Ok(snapshot)
+            }
+            
+            async fn delete_old_snapshots(&self, aggregate_id: &str, keep_count: u32) -> Result<(), EventStoreError> {
+                tracing::debug!("🗑️ InMemory: Cleaning old snapshots for aggregate {} (keep_count: {} - not applicable for in-memory)", 
+                    aggregate_id, keep_count);
+                
+                // For in-memory store, we only keep one snapshot per aggregate
+                // So this is effectively a no-op but we log it for completeness
+                Ok(())
+            }
+        }
+        
+        /// File-based snapshot store implementation
+        struct FileSnapshotStore {
+            base_path: std::path::PathBuf,
+        }
+        
+        #[async_trait::async_trait]
+        impl SnapshotStore for FileSnapshotStore {
+            async fn save_snapshot(&self, aggregate_id: &str, snapshot: &AggregateSnapshot) -> Result<(), EventStoreError> {
+                tracing::debug!("📸 File: Saving snapshot for aggregate {} at version {:?}", 
+                    aggregate_id, snapshot.version);
+                
+                let snapshot_dir = self.base_path.join("snapshots").join(&snapshot.aggregate_type);
+                tokio::fs::create_dir_all(&snapshot_dir).await
+                    .map_err(|e| EventStoreError::Backend(format!("Failed to create snapshot directory: {}", e)))?;
+                
+                let snapshot_file = snapshot_dir.join(format!("{}.json", aggregate_id));
+                let snapshot_data = serde_json::to_string_pretty(snapshot)
+                    .map_err(|e| EventStoreError::Serialization(format!("Snapshot serialization failed: {}", e)))?;
+                
+                tokio::fs::write(&snapshot_file, snapshot_data).await
+                    .map_err(|e| EventStoreError::Backend(format!("Snapshot file write failed: {}", e)))?;
+                
+                tracing::debug!("✅ File: Saved snapshot for aggregate {} to {:?}", aggregate_id, snapshot_file);
+                Ok(())
+            }
+            
+            async fn load_snapshot(&self, aggregate_id: &str) -> Result<Option<AggregateSnapshot>, EventStoreError> {
+                tracing::debug!("📖 File: Loading snapshot for aggregate {}", aggregate_id);
+                
+                // We need to find the snapshot file, but we don't know the aggregate type
+                // So we'll search in all subdirectories
+                let snapshots_dir = self.base_path.join("snapshots");
+                
+                if !snapshots_dir.exists() {
+                    tracing::debug!("📭 File: Snapshots directory doesn't exist");
+                    return Ok(None);
+                }
+                
+                let mut entries = tokio::fs::read_dir(&snapshots_dir).await
+                    .map_err(|e| EventStoreError::Backend(format!("Failed to read snapshots directory: {}", e)))?;
+                
+                while let Some(entry) = entries.next_entry().await
+                    .map_err(|e| EventStoreError::Backend(format!("Failed to read directory entry: {}", e)))? {
+                    
+                    if entry.file_type().await.map(|ft| ft.is_dir()).unwrap_or(false) {
+                        let snapshot_file = entry.path().join(format!("{}.json", aggregate_id));
+                        
+                        if snapshot_file.exists() {
+                            let content = tokio::fs::read_to_string(&snapshot_file).await
+                                .map_err(|e| EventStoreError::Backend(format!("Failed to read snapshot file: {}", e)))?;
+                            
+                            let snapshot: AggregateSnapshot = serde_json::from_str(&content)
+                                .map_err(|e| EventStoreError::Serialization(format!("Snapshot deserialization failed: {}", e)))?;
+                            
+                            tracing::debug!("✅ File: Loaded snapshot for aggregate {} from {:?}", aggregate_id, snapshot_file);
+                            return Ok(Some(snapshot));
+                        }
+                    }
+                }
+                
+                tracing::debug!("📭 File: No snapshot found for aggregate {}", aggregate_id);
+                Ok(None)
+            }
+            
+            async fn delete_old_snapshots(&self, aggregate_id: &str, keep_count: u32) -> Result<(), EventStoreError> {
+                tracing::debug!("🗑️ File: Cleaning old snapshots for aggregate {} (keep_count: {} - not applicable for file store)", 
+                    aggregate_id, keep_count);
+                
+                // For file-based store, we only keep one snapshot per aggregate
+                // So this is effectively a no-op
+                Ok(())
+            }
+        }
+        
+        /// Redis snapshot store implementation
+        struct RedisSnapshotStore {
+            client: redis::Client,
+        }
+        
+        #[async_trait::async_trait]
+        impl SnapshotStore for RedisSnapshotStore {
+            async fn save_snapshot(&self, aggregate_id: &str, snapshot: &AggregateSnapshot) -> Result<(), EventStoreError> {
+                tracing::debug!("📸 Redis: Saving snapshot for aggregate {} at version {:?}", 
+                    aggregate_id, snapshot.version);
+                
+                let mut conn = self.client.get_async_connection().await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis connection failed: {}", e)))?;
+                
+                let snapshot_data = serde_json::to_string(snapshot)
+                    .map_err(|e| EventStoreError::Serialization(format!("Snapshot serialization failed: {}", e)))?;
+                
+                let key = format!("snapshot:{}", aggregate_id);
+                let _: () = redis::cmd("SET")
+                    .arg(&key)
+                    .arg(&snapshot_data)
+                    .arg("EX")
+                    .arg(86400 * 7) // Expire after 7 days
+                    .query_async(&mut conn)
+                    .await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis SET failed: {}", e)))?;
+                
+                // Also store in a sorted set for easier querying by version
+                let zset_key = format!("snapshots:{}:versions", snapshot.aggregate_type);
+                let _: () = redis::cmd("ZADD")
+                    .arg(&zset_key)
+                    .arg(snapshot.version.0)
+                    .arg(aggregate_id)
+                    .query_async(&mut conn)
+                    .await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis ZADD failed: {}", e)))?;
+                
+                tracing::debug!("✅ Redis: Saved snapshot for aggregate {}", aggregate_id);
+                Ok(())
+            }
+            
+            async fn load_snapshot(&self, aggregate_id: &str) -> Result<Option<AggregateSnapshot>, EventStoreError> {
+                tracing::debug!("📖 Redis: Loading snapshot for aggregate {}", aggregate_id);
+                
+                let mut conn = self.client.get_async_connection().await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis connection failed: {}", e)))?;
+                
+                let key = format!("snapshot:{}", aggregate_id);
+                let result: Option<String> = redis::cmd("GET")
+                    .arg(&key)
+                    .query_async(&mut conn)
+                    .await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis GET failed: {}", e)))?;
+                
+                if let Some(data) = result {
+                    let snapshot: AggregateSnapshot = serde_json::from_str(&data)
+                        .map_err(|e| EventStoreError::Serialization(format!("Snapshot deserialization failed: {}", e)))?;
+                    
+                    tracing::debug!("✅ Redis: Loaded snapshot for aggregate {} at version {:?}", 
+                        aggregate_id, snapshot.version);
+                    Ok(Some(snapshot))
+                } else {
+                    tracing::debug!("📭 Redis: No snapshot found for aggregate {}", aggregate_id);
+                    Ok(None)
+                }
+            }
+            
+            async fn delete_old_snapshots(&self, aggregate_id: &str, keep_count: u32) -> Result<(), EventStoreError> {
+                tracing::debug!("🗑️ Redis: Cleaning old snapshots for aggregate {} (keep_count: {} - not applicable for Redis TTL)", 
+                    aggregate_id, keep_count);
+                
+                // Redis snapshots have TTL, so this is effectively a no-op
+                // But we could implement version-based cleanup if needed
+                Ok(())
+            }
+        }
+        
         /// Create event store backend
         async fn create_event_store_backend(backend_type: &str) -> Result<Arc<dyn EventStoreBackend + Send + Sync>, EventStoreError> {
             match backend_type.to_lowercase().as_str() {
@@ -657,21 +1519,483 @@ pub fn generate_event_sourcing_preprocessing(
             }
         }
         
-        /// Create event serializer
-        fn create_event_serializer() -> JsonEventSerializer {
-            JsonEventSerializer
+        /// Create event serializer based on configuration
+        fn create_event_serializer() -> Box<dyn EventSerializer + Send + Sync> {
+            let serializer_type = std::env::var("EVENT_SERIALIZER_TYPE")
+                .unwrap_or_else(|_| "json".to_string());
+            
+            tracing::debug!("🔄 Creating event serializer for type: {}", serializer_type);
+            
+            match serializer_type.to_lowercase().as_str() {
+                "json" => {
+                    tracing::info!("🔄 Using JSON event serializer");
+                    Box::new(JsonEventSerializer)
+                }
+                "binary" | "messagepack" | "msgpack" => {
+                    tracing::info!("🔄 Using MessagePack binary event serializer");
+                    Box::new(BinaryEventSerializer)
+                }
+                "cbor" => {
+                    tracing::info!("🔄 Using CBOR event serializer");
+                    Box::new(CborEventSerializer)
+                }
+                "protobuf" | "proto" => {
+                    tracing::info!("🔄 Using Protobuf event serializer (with JSON fallback)");
+                    Box::new(ProtobufEventSerializer)
+                }
+                _ => {
+                    tracing::warn!("🚨 Unsupported serializer type '{}', falling back to JSON", serializer_type);
+                    Box::new(JsonEventSerializer)
+                }
+            }
         }
         
         /// Create snapshot store
-        async fn create_snapshot_store(_backend_type: &str) -> Result<Box<dyn SnapshotStore + Send + Sync>, EventStoreError> {
-            // Placeholder implementation
-            Err(EventStoreError::Configuration("Snapshot store not implemented".to_string()))
+        async fn create_snapshot_store(backend_type: &str) -> Result<Box<dyn SnapshotStore + Send + Sync>, EventStoreError> {
+            tracing::debug!("📸 Creating snapshot store for backend: {}", backend_type);
+            
+            match backend_type.to_lowercase().as_str() {
+                "postgres" | "postgresql" => {
+                    let database_url = std::env::var("DATABASE_URL")
+                        .map_err(|_| EventStoreError::Configuration("DATABASE_URL not set for PostgreSQL snapshot store".to_string()))?;
+                    
+                    let pool = sqlx::PgPool::connect(&database_url).await
+                        .map_err(|e| EventStoreError::Backend(format!("PostgreSQL connection failed for snapshot store: {}", e)))?;
+                    
+                    // Create snapshots table if it doesn't exist
+                    sqlx::query(
+                        r#"
+                        CREATE TABLE IF NOT EXISTS snapshots (
+                            aggregate_id VARCHAR PRIMARY KEY,
+                            aggregate_type VARCHAR NOT NULL,
+                            version BIGINT NOT NULL,
+                            state_data JSONB NOT NULL,
+                            created_at TIMESTAMP WITH TIME ZONE NOT NULL
+                        )
+                        "#
+                    )
+                    .execute(&pool)
+                    .await
+                    .map_err(|e| EventStoreError::Backend(format!("Failed to create snapshots table: {}", e)))?;
+                    
+                    // Create index for faster queries
+                    sqlx::query("CREATE INDEX IF NOT EXISTS idx_snapshots_aggregate_type ON snapshots(aggregate_type)")
+                        .execute(&pool)
+                        .await
+                        .map_err(|e| EventStoreError::Backend(format!("Failed to create snapshots index: {}", e)))?;
+                    
+                    tracing::info!("📸 Created PostgreSQL snapshot store");
+                    Ok(Box::new(PostgreSQLSnapshotStore { pool }))
+                }
+                "memory" | "test" => {
+                    tracing::info!("📸 Created in-memory snapshot store");
+                    Ok(Box::new(InMemorySnapshotStore {
+                        snapshots: Arc::new(RwLock::new(std::collections::HashMap::new())),
+                    }))
+                }
+                "file" => {
+                    let base_path = std::env::var("SNAPSHOT_FILE_PATH")
+                        .unwrap_or_else(|_| "./data".to_string());
+                    
+                    let path = std::path::PathBuf::from(base_path);
+                    tokio::fs::create_dir_all(&path).await
+                        .map_err(|e| EventStoreError::Backend(format!("Failed to create snapshot directory: {}", e)))?;
+                    
+                    tracing::info!("📸 Created file-based snapshot store at {:?}", path);
+                    Ok(Box::new(FileSnapshotStore { base_path: path }))
+                }
+                "redis" => {
+                    // Redis snapshot store implementation
+                    let redis_url = std::env::var("REDIS_URL")
+                        .unwrap_or_else(|_| "redis://localhost:6379".to_string());
+                    
+                    let client = redis::Client::open(redis_url.as_str())
+                        .map_err(|e| EventStoreError::Backend(format!("Redis connection failed: {}", e)))?;
+                    
+                    // Test connection
+                    let mut conn = client.get_async_connection().await
+                        .map_err(|e| EventStoreError::Backend(format!("Redis connection test failed: {}", e)))?;
+                    
+                    let _: String = redis::cmd("PING")
+                        .query_async(&mut conn)
+                        .await
+                        .map_err(|e| EventStoreError::Backend(format!("Redis ping failed: {}", e)))?;
+                    
+                    tracing::info!("📸 Created Redis snapshot store");
+                    Ok(Box::new(RedisSnapshotStore { client }))
+                }
+                _ => {
+                    tracing::warn!("🚨 Unsupported snapshot store backend '{}', falling back to in-memory", backend_type);
+                    Ok(Box::new(InMemorySnapshotStore {
+                        snapshots: Arc::new(RwLock::new(std::collections::HashMap::new())),
+                    }))
+                }
+            }
+        }
+        
+        /// RabbitMQ event bus implementation
+        struct RabbitMQEventBus {
+            channel: Arc<tokio::sync::Mutex<lapin::Channel>>,
+            exchange_name: String,
+        }
+        
+        #[async_trait::async_trait]
+        impl EventBus for RabbitMQEventBus {
+            async fn publish_event(&self, event: &DomainEvent) -> Result<(), EventStoreError> {
+                tracing::debug!("📢 RabbitMQ: Publishing event {} for aggregate {}", 
+                    event.event_type, event.aggregate_id);
+                
+                let channel = self.channel.lock().await;
+                
+                // Serialize event
+                let payload = serde_json::to_vec(event)
+                    .map_err(|e| EventStoreError::Serialization(format!("Event serialization failed: {}", e)))?;
+                
+                // Create routing key based on aggregate type and event type
+                let routing_key = format!("{}.{}", event.aggregate_type.to_lowercase(), event.event_type.to_lowercase());
+                
+                // Publish to exchange
+                let publish_result = channel.basic_publish(
+                    &self.exchange_name,
+                    &routing_key,
+                    lapin::options::BasicPublishOptions::default(),
+                    &payload,
+                    lapin::BasicProperties::default()
+                        .with_message_id(event.event_id.clone().into())
+                        .with_correlation_id(event.correlation_id.clone().map(|id| id.into()))
+                        .with_timestamp(event.timestamp.duration_since(std::time::UNIX_EPOCH)
+                            .unwrap_or_default().as_secs())
+                        .with_content_type("application/json".into())
+                        .with_content_encoding("utf-8".into())
+                ).await
+                .map_err(|e| EventStoreError::Backend(format!("RabbitMQ publish failed: {}", e)))?;
+                
+                // Wait for confirmation
+                publish_result.await
+                    .map_err(|e| EventStoreError::Backend(format!("RabbitMQ publish confirmation failed: {}", e)))?;
+                
+                tracing::debug!("✅ RabbitMQ: Published event {} with routing key {}", 
+                    event.event_type, routing_key);
+                Ok(())
+            }
+            
+            async fn publish_events(&self, events: &[DomainEvent]) -> Result<(), EventStoreError> {
+                tracing::debug!("📢 RabbitMQ: Publishing {} events", events.len());
+                
+                for event in events {
+                    self.publish_event(event).await?;
+                }
+                
+                tracing::debug!("✅ RabbitMQ: Published {} events", events.len());
+                Ok(())
+            }
+            
+            async fn subscribe_to_events<F>(&self, event_type: &str, handler: F) -> Result<(), EventStoreError>
+            where
+                F: Fn(DomainEvent) -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> + Send + Sync + 'static,
+            {
+                tracing::debug!("🔔 RabbitMQ: Subscribing to events of type {}", event_type);
+                
+                let channel = self.channel.lock().await;
+                
+                // Create queue for this event type
+                let queue_name = format!("events.{}", event_type.to_lowercase());
+                let queue = channel.queue_declare(
+                    &queue_name,
+                    lapin::options::QueueDeclareOptions {
+                        durable: true,
+                        ..Default::default()
+                    },
+                    lapin::types::FieldTable::default(),
+                ).await
+                .map_err(|e| EventStoreError::Backend(format!("RabbitMQ queue declare failed: {}", e)))?;
+                
+                // Bind queue to exchange with routing pattern
+                let routing_pattern = format!("*.{}", event_type.to_lowercase());
+                channel.queue_bind(
+                    &queue_name,
+                    &self.exchange_name,
+                    &routing_pattern,
+                    lapin::options::QueueBindOptions::default(),
+                    lapin::types::FieldTable::default(),
+                ).await
+                .map_err(|e| EventStoreError::Backend(format!("RabbitMQ queue bind failed: {}", e)))?;
+                
+                // Start consumer
+                let mut consumer = channel.basic_consume(
+                    &queue_name,
+                    &format!("event-consumer-{}", event_type),
+                    lapin::options::BasicConsumeOptions::default(),
+                    lapin::types::FieldTable::default(),
+                ).await
+                .map_err(|e| EventStoreError::Backend(format!("RabbitMQ consume failed: {}", e)))?;
+                
+                tracing::info!("🔔 RabbitMQ: Started consuming events of type {} from queue {}", 
+                    event_type, queue_name);
+                
+                // Spawn consumer task
+                let handler = Arc::new(handler);
+                tokio::spawn(async move {
+                    while let Some(delivery) = consumer.next().await {
+                        match delivery {
+                            Ok(delivery) => {
+                                // Deserialize event
+                                match serde_json::from_slice::<DomainEvent>(&delivery.data) {
+                                    Ok(event) => {
+                                        tracing::debug!("📨 RabbitMQ: Received event {}", event.event_type);
+                                        
+                                        // Call handler
+                                        handler(event).await;
+                                        
+                                        // Acknowledge message
+                                        if let Err(e) = delivery.ack(lapin::options::BasicAckOptions::default()).await {
+                                            tracing::error!("❌ RabbitMQ: Failed to ack message: {}", e);
+                                        }
+                                    }
+                                    Err(e) => {
+                                        tracing::error!("❌ RabbitMQ: Failed to deserialize event: {}", e);
+                                        // Reject and don't requeue malformed messages
+                                        if let Err(e) = delivery.reject(lapin::options::BasicRejectOptions { requeue: false }).await {
+                                            tracing::error!("❌ RabbitMQ: Failed to reject message: {}", e);
+                                        }
+                                    }
+                                }
+                            }
+                            Err(e) => {
+                                tracing::error!("❌ RabbitMQ: Consumer error: {}", e);
+                                break;
+                            }
+                        }
+                    }
+                });
+                
+                Ok(())
+            }
+        }
+        
+        /// In-memory event bus for testing
+        struct InMemoryEventBus {
+            subscribers: Arc<RwLock<std::collections::HashMap<String, Vec<Box<dyn Fn(DomainEvent) + Send + Sync>>>>>,
+            published_events: Arc<RwLock<Vec<DomainEvent>>>,
+        }
+        
+        #[async_trait::async_trait]
+        impl EventBus for InMemoryEventBus {
+            async fn publish_event(&self, event: &DomainEvent) -> Result<(), EventStoreError> {
+                tracing::debug!("📢 InMemory: Publishing event {} for aggregate {}", 
+                    event.event_type, event.aggregate_id);
+                
+                // Store event for debugging
+                {
+                    let mut published = self.published_events.write().await;
+                    published.push(event.clone());
+                }
+                
+                // Call subscribers
+                {
+                    let subscribers = self.subscribers.read().await;
+                    if let Some(handlers) = subscribers.get(&event.event_type) {
+                        for handler in handlers {
+                            handler(event.clone());
+                        }
+                    }
+                    
+                    // Also call wildcard subscribers
+                    if let Some(handlers) = subscribers.get("*") {
+                        for handler in handlers {
+                            handler(event.clone());
+                        }
+                    }
+                }
+                
+                tracing::debug!("✅ InMemory: Published event {}", event.event_type);
+                Ok(())
+            }
+            
+            async fn publish_events(&self, events: &[DomainEvent]) -> Result<(), EventStoreError> {
+                tracing::debug!("📢 InMemory: Publishing {} events", events.len());
+                
+                for event in events {
+                    self.publish_event(event).await?;
+                }
+                
+                tracing::debug!("✅ InMemory: Published {} events", events.len());
+                Ok(())
+            }
+            
+            async fn subscribe_to_events<F>(&self, event_type: &str, handler: F) -> Result<(), EventStoreError>
+            where
+                F: Fn(DomainEvent) -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> + Send + Sync + 'static,
+            {
+                tracing::debug!("🔔 InMemory: Subscribing to events of type {}", event_type);
+                
+                // Note: In-memory implementation is simplified and doesn't support async handlers
+                // This is mainly for testing purposes
+                tracing::warn!("⚠️ InMemory event bus has limited functionality - mainly for testing");
+                
+                Ok(())
+            }
+        }
+        
+        /// Redis event bus implementation using pub/sub
+        struct RedisEventBus {
+            client: redis::Client,
+        }
+        
+        #[async_trait::async_trait]
+        impl EventBus for RedisEventBus {
+            async fn publish_event(&self, event: &DomainEvent) -> Result<(), EventStoreError> {
+                tracing::debug!("📢 Redis: Publishing event {} for aggregate {}", 
+                    event.event_type, event.aggregate_id);
+                
+                let mut conn = self.client.get_async_connection().await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis connection failed: {}", e)))?;
+                
+                // Serialize event
+                let payload = serde_json::to_string(event)
+                    .map_err(|e| EventStoreError::Serialization(format!("Event serialization failed: {}", e)))?;
+                
+                // Create channel name
+                let channel = format!("events.{}", event.event_type.to_lowercase());
+                
+                // Publish to Redis channel
+                let _: i32 = redis::cmd("PUBLISH")
+                    .arg(&channel)
+                    .arg(&payload)
+                    .query_async(&mut conn)
+                    .await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis publish failed: {}", e)))?;
+                
+                tracing::debug!("✅ Redis: Published event {} to channel {}", 
+                    event.event_type, channel);
+                Ok(())
+            }
+            
+            async fn publish_events(&self, events: &[DomainEvent]) -> Result<(), EventStoreError> {
+                tracing::debug!("📢 Redis: Publishing {} events", events.len());
+                
+                for event in events {
+                    self.publish_event(event).await?;
+                }
+                
+                tracing::debug!("✅ Redis: Published {} events", events.len());
+                Ok(())
+            }
+            
+            async fn subscribe_to_events<F>(&self, event_type: &str, handler: F) -> Result<(), EventStoreError>
+            where
+                F: Fn(DomainEvent) -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> + Send + Sync + 'static,
+            {
+                tracing::debug!("🔔 Redis: Subscribing to events of type {}", event_type);
+                
+                let mut pubsub = self.client.get_async_connection().await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis connection failed: {}", e)))?
+                    .into_pubsub();
+                
+                let channel = format!("events.{}", event_type.to_lowercase());
+                pubsub.subscribe(&channel).await
+                    .map_err(|e| EventStoreError::Backend(format!("Redis subscribe failed: {}", e)))?;
+                
+                tracing::info!("🔔 Redis: Subscribed to channel {}", channel);
+                
+                // Spawn subscriber task
+                let handler = Arc::new(handler);
+                tokio::spawn(async move {
+                    let mut stream = pubsub.on_message();
+                    while let Some(msg) = stream.next().await {
+                        let payload: String = msg.get_payload().unwrap_or_default();
+                        match serde_json::from_str::<DomainEvent>(&payload) {
+                            Ok(event) => {
+                                tracing::debug!("📨 Redis: Received event {}", event.event_type);
+                                handler(event).await;
+                            }
+                            Err(e) => {
+                                tracing::error!("❌ Redis: Failed to deserialize event: {}", e);
+                            }
+                        }
+                    }
+                });
+                
+                Ok(())
+            }
         }
         
         /// Create event bus
         async fn create_event_bus() -> Result<Box<dyn EventBus + Send + Sync>, EventStoreError> {
-            // Placeholder implementation  
-            Err(EventStoreError::Configuration("Event bus not implemented".to_string()))
+            let bus_type = std::env::var("EVENT_BUS_TYPE").unwrap_or_else(|_| "rabbitmq".to_string());
+            
+            tracing::debug!("📢 Creating event bus for type: {}", bus_type);
+            
+            match bus_type.to_lowercase().as_str() {
+                "rabbitmq" | "rabbit" => {
+                    let amqp_url = std::env::var("AMQP_URL")
+                        .unwrap_or_else(|_| "amqp://localhost:5672".to_string());
+                    
+                    let connection = lapin::Connection::connect(&amqp_url, lapin::ConnectionProperties::default()).await
+                        .map_err(|e| EventStoreError::Backend(format!("RabbitMQ connection failed: {}", e)))?;
+                    
+                    let channel = connection.create_channel().await
+                        .map_err(|e| EventStoreError::Backend(format!("RabbitMQ channel creation failed: {}", e)))?;
+                    
+                    // Declare exchange for events
+                    let exchange_name = std::env::var("EVENT_EXCHANGE_NAME")
+                        .unwrap_or_else(|_| "domain.events".to_string());
+                    
+                    channel.exchange_declare(
+                        &exchange_name,
+                        lapin::ExchangeKind::Topic,
+                        lapin::options::ExchangeDeclareOptions {
+                            durable: true,
+                            ..Default::default()
+                        },
+                        lapin::types::FieldTable::default(),
+                    ).await
+                    .map_err(|e| EventStoreError::Backend(format!("RabbitMQ exchange declare failed: {}", e)))?;
+                    
+                    // Enable publisher confirms
+                    channel.confirm_select(lapin::options::ConfirmSelectOptions::default()).await
+                        .map_err(|e| EventStoreError::Backend(format!("RabbitMQ confirm select failed: {}", e)))?;
+                    
+                    tracing::info!("📢 Created RabbitMQ event bus with exchange: {}", exchange_name);
+                    Ok(Box::new(RabbitMQEventBus {
+                        channel: Arc::new(tokio::sync::Mutex::new(channel)),
+                        exchange_name,
+                    }))
+                }
+                "redis" => {
+                    let redis_url = std::env::var("REDIS_URL")
+                        .unwrap_or_else(|_| "redis://localhost:6379".to_string());
+                    
+                    let client = redis::Client::open(redis_url.as_str())
+                        .map_err(|e| EventStoreError::Backend(format!("Redis connection failed: {}", e)))?;
+                    
+                    // Test connection
+                    let mut conn = client.get_async_connection().await
+                        .map_err(|e| EventStoreError::Backend(format!("Redis connection test failed: {}", e)))?;
+                    
+                    let _: String = redis::cmd("PING")
+                        .query_async(&mut conn)
+                        .await
+                        .map_err(|e| EventStoreError::Backend(format!("Redis ping failed: {}", e)))?;
+                    
+                    tracing::info!("📢 Created Redis event bus");
+                    Ok(Box::new(RedisEventBus { client }))
+                }
+                "memory" | "test" => {
+                    tracing::info!("📢 Created in-memory event bus");
+                    Ok(Box::new(InMemoryEventBus {
+                        subscribers: Arc::new(RwLock::new(std::collections::HashMap::new())),
+                        published_events: Arc::new(RwLock::new(Vec::new())),
+                    }))
+                }
+                _ => {
+                    tracing::warn!("🚨 Unsupported event bus type '{}', falling back to in-memory", bus_type);
+                    Ok(Box::new(InMemoryEventBus {
+                        subscribers: Arc::new(RwLock::new(std::collections::HashMap::new())),
+                        published_events: Arc::new(RwLock::new(Vec::new())),
+                    }))
+                }
+            }
         }
         
         // Set up event sourcing context

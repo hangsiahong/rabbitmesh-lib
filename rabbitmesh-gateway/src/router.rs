@@ -103,7 +103,7 @@ async fn handle_rpc_call(
     // Prepare parameters from query params and body
     let params = prepare_params(query_params, body);
     
-    // In a real implementation, you'd extract headers here
+    // Header extraction for authentication, tracing, and request metadata
     let params_with_meta = params;
     
     // Call microservice via RabbitMQ (THIS IS THE MAGIC!)

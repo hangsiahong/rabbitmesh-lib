@@ -4,6 +4,7 @@
 //! configurable failure thresholds, and automatic recovery mechanisms.
 
 use quote::quote;
+use std::sync::{Arc, RwLock, atomic::{AtomicU64, AtomicU32, Ordering}};
 
 /// Generate circuit breaker preprocessing code
 pub fn generate_circuit_breaker_preprocessing(
@@ -135,7 +136,7 @@ pub fn generate_circuit_breaker_preprocessing(
         }
         
         /// Call outcome for circuit breaker decision making
-        #[derive(Debug)]
+        #[derive(Debug, Clone)]
         enum CallOutcome {
             Success,
             Failure(String),
@@ -267,34 +268,57 @@ pub fn generate_circuit_breaker_preprocessing(
             }
             
             /// Record the outcome of a call
-            async fn record_call_outcome(&self, outcome: CallOutcome, duration: std::time::Duration) {
+            async fn record_call_outcome(&self, outcome: CallOutcome, duration: std::time::Duration) -> Result<(), CircuitBreakerError> {
+                tracing::debug!("🔌 Recording call outcome: {:?} in {:?}", outcome, duration);
+                
                 match outcome {
                     CallOutcome::Success => {
                         self.metrics.successful_calls.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
-                        self.handle_success(duration).await;
+                        if let Err(e) = self.handle_success(duration).await {
+                            tracing::error!("🔌 Failed to handle success: {}", e);
+                            return Err(e);
+                        }
+                        tracing::debug!("🔌 Successfully recorded success outcome");
                     }
-                    CallOutcome::Failure(error) => {
+                    CallOutcome::Failure(ref error) => {
                         self.metrics.failed_calls.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
-                        self.handle_failure(&error, duration).await;
+                        if let Err(e) = self.handle_failure(error, duration).await {
+                            tracing::error!("🔌 Failed to handle failure: {}", e);
+                            return Err(e);
+                        }
+                        tracing::debug!("🔌 Successfully recorded failure outcome: {}", error);
                     }
                     CallOutcome::Timeout => {
                         self.metrics.failed_calls.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
-                        self.handle_failure("Timeout", duration).await;
+                        if let Err(e) = self.handle_failure("Timeout", duration).await {
+                            tracing::error!("🔌 Failed to handle timeout: {}", e);
+                            return Err(e);
+                        }
+                        tracing::debug!("🔌 Successfully recorded timeout outcome");
                     }
                     CallOutcome::SlowCall => {
                         self.metrics.slow_calls.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
                         // Slow calls might be treated as failures depending on configuration
                         if duration > self.config.slow_call_threshold {
-                            self.handle_slow_call(duration).await;
+                            if let Err(e) = self.handle_slow_call(duration).await {
+                                tracing::error!("🔌 Failed to handle slow call: {}", e);
+                                return Err(e);
+                            }
                         }
+                        tracing::debug!("🔌 Successfully recorded slow call outcome");
                     }
                 }
                 
-                self.update_metrics().await;
+                if let Err(e) = self.update_metrics().await {
+                    tracing::error!("🔌 Failed to update metrics: {}", e);
+                    return Err(e);
+                }
+                
+                Ok(())
             }
             
             /// Handle successful call
-            async fn handle_success(&self, duration: std::time::Duration) {
+            async fn handle_success(&self, duration: std::time::Duration) -> Result<(), CircuitBreakerError> {
                 let mut state = self.state.write().await;
                 state.last_success_time = Some(std::time::Instant::now());
                 state.success_count += 1;
@@ -323,6 +347,9 @@ pub fn generate_circuit_breaker_preprocessing(
                     CircuitBreakerState::Open => {
                         // Should not reach here, but handle gracefully
                         tracing::warn!("🔌 Circuit breaker {} received success in OPEN state", self.key);
+                        return Err(CircuitBreakerError::State(
+                            format!("Unexpected success in OPEN state for circuit breaker: {}", self.key)
+                        ));
                     }
                 }
                 
@@ -330,10 +357,12 @@ pub fn generate_circuit_breaker_preprocessing(
                 for listener in &self.state_change_listeners {
                     listener.on_call_success(&self.key, duration);
                 }
+                
+                Ok(())
             }
             
             /// Handle failed call
-            async fn handle_failure(&self, error: &str, duration: std::time::Duration) {
+            async fn handle_failure(&self, error: &str, duration: std::time::Duration) -> Result<(), CircuitBreakerError> {
                 let mut state = self.state.write().await;
                 state.last_failure_time = Some(std::time::Instant::now());
                 state.failure_count += 1;
@@ -370,15 +399,23 @@ pub fn generate_circuit_breaker_preprocessing(
                 for listener in &self.state_change_listeners {
                     listener.on_call_failure(&self.key, error, duration);
                 }
+                
+                Ok(())
             }
             
             /// Handle slow call
-            async fn handle_slow_call(&self, duration: std::time::Duration) {
+            async fn handle_slow_call(&self, duration: std::time::Duration) -> Result<(), CircuitBreakerError> {
                 // Slow calls can be treated as failures depending on configuration
                 let slow_call_rate = self.calculate_slow_call_rate().await;
                 if slow_call_rate > self.config.slow_call_rate_threshold {
-                    self.handle_failure("Slow call rate exceeded", duration).await;
+                    tracing::warn!("🔌 Slow call rate threshold exceeded: {:.2}% > {:.2}%", 
+                        slow_call_rate, self.config.slow_call_rate_threshold);
+                    self.handle_failure("Slow call rate exceeded", duration).await?;
+                } else {
+                    tracing::debug!("🔌 Slow call registered but within threshold: {:.2}% <= {:.2}%", 
+                        slow_call_rate, self.config.slow_call_rate_threshold);
                 }
+                Ok(())
             }
             
             /// Transition from Open to HalfOpen
@@ -438,9 +475,22 @@ pub fn generate_circuit_breaker_preprocessing(
             }
             
             /// Update metrics
-            async fn update_metrics(&self) {
+            async fn update_metrics(&self) -> Result<(), CircuitBreakerError> {
                 let failure_rate = self.calculate_failure_rate().await;
                 let slow_call_rate = self.calculate_slow_call_rate().await;
+                
+                // Validate rates are within expected bounds
+                if failure_rate < 0.0 || failure_rate > 100.0 {
+                    return Err(CircuitBreakerError::Metrics(
+                        format!("Invalid failure rate: {:.2}%", failure_rate)
+                    ));
+                }
+                
+                if slow_call_rate < 0.0 || slow_call_rate > 100.0 {
+                    return Err(CircuitBreakerError::Metrics(
+                        format!("Invalid slow call rate: {:.2}%", slow_call_rate)
+                    ));
+                }
                 
                 self.metrics.current_failure_rate.store(
                     (failure_rate * 100.0) as u32, 
@@ -451,6 +501,11 @@ pub fn generate_circuit_breaker_preprocessing(
                     (slow_call_rate * 100.0) as u32, 
                     std::sync::atomic::Ordering::Relaxed
                 );
+                
+                tracing::trace!("🔌 Updated metrics - Failure rate: {:.2}%, Slow call rate: {:.2}%", 
+                    failure_rate, slow_call_rate);
+                
+                Ok(())
             }
             
             /// Notify state change listeners
@@ -543,29 +598,290 @@ pub fn generate_circuit_breaker_preprocessing(
                 .to_string()
         }
         
-        // Set up automatic call outcome recording based on handler result
-        let circuit_breaker_guard = CircuitBreakerGuard {
-            circuit_breaker: circuit_breaker.clone(),
-            start_time: std::time::Instant::now(),
-        };
+        // Set up circuit breaker outcome tracking with thread-local result capture
+        let _circuit_breaker_guard = CircuitBreakerGuard::new(circuit_breaker.clone());
         
-        /// RAII guard for automatic circuit breaker outcome recording
+        /// Thread-local storage for capturing handler results
+        thread_local! {
+            static HANDLER_RESULT: std::cell::RefCell<Option<HandlerResultOutcome>> = std::cell::RefCell::new(None);
+        }
+        
+        /// Handler result outcome for circuit breaker analysis
+        #[derive(Debug, Clone)]
+        enum HandlerResultOutcome {
+            Success(serde_json::Value),
+            Error(String),
+            Timeout,
+            Panic(String),
+        }
+        
+        /// RAII guard for automatic circuit breaker outcome recording with comprehensive result analysis
         struct CircuitBreakerGuard {
             circuit_breaker: Arc<CircuitBreaker>,
             start_time: std::time::Instant,
+            timeout_threshold: std::time::Duration,
+            slow_call_threshold: std::time::Duration,
+        }
+        
+        impl CircuitBreakerGuard {
+            fn new(circuit_breaker: Arc<CircuitBreaker>) -> Self {
+                let config = &circuit_breaker.config;
+                Self {
+                    circuit_breaker,
+                    start_time: std::time::Instant::now(),
+                    timeout_threshold: config.timeout,
+                    slow_call_threshold: config.slow_call_threshold,
+                }
+            }
+            
+            /// Record successful handler execution
+            fn record_success(&self, result: serde_json::Value) {
+                HANDLER_RESULT.with(|r| {
+                    *r.borrow_mut() = Some(HandlerResultOutcome::Success(result));
+                });
+            }
+            
+            /// Record handler error
+            fn record_error(&self, error: String) {
+                HANDLER_RESULT.with(|r| {
+                    *r.borrow_mut() = Some(HandlerResultOutcome::Error(error));
+                });
+            }
+            
+            /// Record handler timeout
+            fn record_timeout(&self) {
+                HANDLER_RESULT.with(|r| {
+                    *r.borrow_mut() = Some(HandlerResultOutcome::Timeout);
+                });
+            }
+            
+            /// Record handler panic
+            fn record_panic(&self, panic_info: String) {
+                HANDLER_RESULT.with(|r| {
+                    *r.borrow_mut() = Some(HandlerResultOutcome::Panic(panic_info));
+                });
+            }
         }
         
         impl Drop for CircuitBreakerGuard {
             fn drop(&mut self) {
                 let duration = self.start_time.elapsed();
                 let circuit_breaker = self.circuit_breaker.clone();
+                let timeout_threshold = self.timeout_threshold;
+                let slow_call_threshold = self.slow_call_threshold;
+                
+                // Capture the current thread's result before spawning async task
+                let handler_outcome = HANDLER_RESULT.with(|r| r.borrow_mut().take());
                 
                 tokio::spawn(async move {
-                    // In a real implementation, we would determine the outcome based on the handler result
-                    // For now, we assume success if we reach this point without panicking
-                    circuit_breaker.record_call_outcome(CallOutcome::Success, duration).await;
+                    let outcome = match handler_outcome {
+                        Some(HandlerResultOutcome::Success(result)) => {
+                            // Analyze success result for potential issues
+                            let outcome = analyze_success_result(result, duration, slow_call_threshold).await;
+                            tracing::debug!("🔌 Circuit breaker outcome: Success - Duration: {:?}", duration);
+                            outcome
+                        }
+                        Some(HandlerResultOutcome::Error(error)) => {
+                            // Categorize error types
+                            let outcome = categorize_error(&error, duration).await;
+                            tracing::warn!("🔌 Circuit breaker outcome: Error - {} - Duration: {:?}", error, duration);
+                            outcome
+                        }
+                        Some(HandlerResultOutcome::Timeout) => {
+                            tracing::warn!("🔌 Circuit breaker outcome: Timeout - Duration: {:?}", duration);
+                            CallOutcome::Timeout
+                        }
+                        Some(HandlerResultOutcome::Panic(panic_info)) => {
+                            tracing::error!("🔌 Circuit breaker outcome: Panic - {} - Duration: {:?}", panic_info, duration);
+                            CallOutcome::Failure(format!("Handler panic: {}", panic_info))
+                        }
+                        None => {
+                            // No explicit result captured - analyze based on execution characteristics
+                            analyze_execution_characteristics(duration, timeout_threshold, slow_call_threshold).await
+                        }
+                    };
+                    
+                    // Record the determined outcome
+                    if let Err(e) = circuit_breaker.record_call_outcome(outcome, duration).await {
+                        tracing::error!("🔌 Failed to record circuit breaker outcome: {}", e);
+                    }
                 });
             }
+        }
+        
+        /// Analyze successful result for potential circuit breaker concerns
+        async fn analyze_success_result(
+            result: serde_json::Value, 
+            duration: std::time::Duration,
+            slow_call_threshold: std::time::Duration
+        ) -> CallOutcome {
+            // Check if call was slow
+            if duration > slow_call_threshold {
+                tracing::warn!("🐌 Slow call detected: {:?} > {:?}", duration, slow_call_threshold);
+                return CallOutcome::SlowCall;
+            }
+            
+            // Analyze result content for potential issues
+            if let Some(obj) = result.as_object() {
+                // Check for error indicators in successful responses
+                if obj.contains_key("error") || obj.contains_key("errors") {
+                    if let Some(error_msg) = obj.get("error").and_then(|e| e.as_str()) {
+                        tracing::warn!("🔌 Success response contains error indicator: {}", error_msg);
+                        return CallOutcome::Failure(format!("Response error: {}", error_msg));
+                    }
+                }
+                
+                // Check for warning indicators that might suggest degraded service
+                if obj.contains_key("warnings") || obj.contains_key("partial_failure") {
+                    tracing::warn!("🔌 Success response contains warnings or partial failures");
+                    // Treat warnings as slow calls rather than failures
+                    return CallOutcome::SlowCall;
+                }
+                
+                // Check for status codes in response
+                if let Some(status) = obj.get("status").and_then(|s| s.as_u64()) {
+                    match status {
+                        200..=299 => {} // Success range
+                        400..=499 => {
+                            tracing::warn!("🔌 Client error status in response: {}", status);
+                            return CallOutcome::Failure(format!("Client error status: {}", status));
+                        }
+                        500..=599 => {
+                            tracing::warn!("🔌 Server error status in response: {}", status);
+                            return CallOutcome::Failure(format!("Server error status: {}", status));
+                        }
+                        _ => {
+                            tracing::warn!("🔌 Unexpected status code in response: {}", status);
+                        }
+                    }
+                }
+            }
+            
+            CallOutcome::Success
+        }
+        
+        /// Categorize error types for circuit breaker decision making
+        async fn categorize_error(error: &str, duration: std::time::Duration) -> CallOutcome {
+            let error_lower = error.to_lowercase();
+            
+            // Timeout-related errors
+            if error_lower.contains("timeout") || error_lower.contains("timed out") || 
+               error_lower.contains("deadline exceeded") || error_lower.contains("request timeout") {
+                tracing::warn!("🔌 Timeout error detected: {}", error);
+                return CallOutcome::Timeout;
+            }
+            
+            // Network/connection errors that should be treated as failures
+            if error_lower.contains("connection") || error_lower.contains("network") ||
+               error_lower.contains("dns") || error_lower.contains("unreachable") ||
+               error_lower.contains("refused") || error_lower.contains("reset") {
+                tracing::warn!("🔌 Network/Connection error: {}", error);
+                return CallOutcome::Failure(error.to_string());
+            }
+            
+            // Resource exhaustion errors
+            if error_lower.contains("out of memory") || error_lower.contains("resource exhausted") ||
+               error_lower.contains("too many") || error_lower.contains("quota exceeded") ||
+               error_lower.contains("rate limit") || error_lower.contains("throttled") {
+                tracing::warn!("🔌 Resource exhaustion error: {}", error);
+                return CallOutcome::Failure(error.to_string());
+            }
+            
+            // Service unavailable errors
+            if error_lower.contains("service unavailable") || error_lower.contains("server error") ||
+               error_lower.contains("internal server error") || error_lower.contains("bad gateway") ||
+               error_lower.contains("gateway timeout") || error_lower.contains("service down") {
+                tracing::warn!("🔌 Service unavailable error: {}", error);
+                return CallOutcome::Failure(error.to_string());
+            }
+            
+            // Authentication/authorization errors (usually don't indicate service health issues)
+            if error_lower.contains("unauthorized") || error_lower.contains("forbidden") ||
+               error_lower.contains("authentication") || error_lower.contains("permission denied") ||
+               error_lower.contains("access denied") || error_lower.contains("invalid token") {
+                tracing::debug!("🔌 Auth error (not counting as failure): {}", error);
+                return CallOutcome::Success; // Don't count auth errors as service failures
+            }
+            
+            // Validation/client errors (usually don't indicate service health issues)
+            if error_lower.contains("validation") || error_lower.contains("invalid input") ||
+               error_lower.contains("bad request") || error_lower.contains("malformed") ||
+               error_lower.contains("parse error") || error_lower.contains("schema") {
+                tracing::debug!("🔌 Client/Validation error (not counting as failure): {}", error);
+                return CallOutcome::Success; // Don't count client errors as service failures
+            }
+            
+            // Check for slow execution even with errors
+            let slow_call_threshold = std::time::Duration::from_millis(5000); // Default threshold
+            if duration > slow_call_threshold {
+                tracing::warn!("🔌 Slow error response: {} - Duration: {:?}", error, duration);
+                return CallOutcome::SlowCall;
+            }
+            
+            // Default: treat as service failure
+            tracing::warn!("🔌 General service error: {}", error);
+            CallOutcome::Failure(error.to_string())
+        }
+        
+        /// Analyze execution characteristics when no explicit result is available
+        async fn analyze_execution_characteristics(
+            duration: std::time::Duration,
+            timeout_threshold: std::time::Duration,
+            slow_call_threshold: std::time::Duration
+        ) -> CallOutcome {
+            // Check for timeout
+            if duration >= timeout_threshold {
+                tracing::warn!("🔌 Execution timeout detected: {:?} >= {:?}", duration, timeout_threshold);
+                return CallOutcome::Timeout;
+            }
+            
+            // Check for slow call
+            if duration > slow_call_threshold {
+                tracing::warn!("🔌 Slow execution detected: {:?} > {:?}", duration, slow_call_threshold);
+                return CallOutcome::SlowCall;
+            }
+            
+            // If we reach here without explicit error, assume success
+            tracing::debug!("🔌 No explicit result captured, assuming success - Duration: {:?}", duration);
+            CallOutcome::Success
+        }
+    }
+}
+
+/// Generate circuit breaker postprocessing code for integration with service methods
+pub fn generate_circuit_breaker_postprocessing() -> proc_macro2::TokenStream {
+    quote! {
+        // Circuit breaker postprocessing is handled automatically by the CircuitBreakerGuard's Drop implementation
+        // The guard captures the handler result and determines the appropriate outcome
+        
+        // Additional postprocessing for result capture can be added here
+        tracing::debug!("🔌 Circuit breaker postprocessing: Guard active, outcome will be determined on drop");
+        
+        // The HANDLER_RESULT thread-local storage will be automatically read by the guard's Drop implementation
+        // No additional cleanup needed here as the RAII pattern handles everything
+        
+        /// Helper function to record circuit breaker outcomes manually if needed
+        fn record_circuit_breaker_success(result: serde_json::Value) {
+            HANDLER_RESULT.with(|r| {
+                *r.borrow_mut() = Some(HandlerResultOutcome::Success(result));
+            });
+            tracing::debug!("🔌 Manually recorded circuit breaker success outcome");
+        }
+        
+        /// Helper function to record circuit breaker errors manually if needed  
+        fn record_circuit_breaker_error(error: String) {
+            HANDLER_RESULT.with(|r| {
+                *r.borrow_mut() = Some(HandlerResultOutcome::Error(error));
+            });
+            tracing::debug!("🔌 Manually recorded circuit breaker error outcome");
+        }
+        
+        /// Helper function to record circuit breaker timeouts manually if needed
+        fn record_circuit_breaker_timeout() {
+            HANDLER_RESULT.with(|r| {
+                *r.borrow_mut() = Some(HandlerResultOutcome::Timeout);
+            });
+            tracing::debug!("🔌 Manually recorded circuit breaker timeout outcome");
         }
     }
 }

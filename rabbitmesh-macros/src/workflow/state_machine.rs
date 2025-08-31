@@ -9,6 +9,8 @@ use std::sync::{Arc, RwLock};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::fmt;
 use std::time::Instant;
+use regex::Regex;
+use serde_json::Value;
 
 /// State machine configuration
 #[derive(Debug, Clone)]
@@ -361,24 +363,516 @@ impl StateMachine {
     /// Evaluate guard condition
     async fn evaluate_guard(
         &self,
-        _guard: &str,
-        _event_data: &Context,
+        guard: &str,
+        event_data: &Context,
     ) -> Result<bool, StateMachineError> {
-        // In a real implementation, this would evaluate the guard expression
-        // For now, we assume all guards pass
-        Ok(true)
+        let start_time = Instant::now();
+        
+        tracing::debug!("Evaluating guard expression: {}", guard);
+        
+        // Parse and evaluate the guard expression
+        let result = match self.parse_and_evaluate_expression(guard, event_data).await {
+            Ok(value) => {
+                // Convert value to boolean
+                match value {
+                    Value::Bool(b) => b,
+                    Value::Number(n) => n.as_f64().unwrap_or(0.0) != 0.0,
+                    Value::String(s) => !s.is_empty(),
+                    Value::Array(arr) => !arr.is_empty(),
+                    Value::Object(obj) => !obj.is_empty(),
+                    Value::Null => false,
+                }
+            }
+            Err(e) => {
+                tracing::error!("Guard evaluation failed: {} - Error: {}", guard, e);
+                return Err(StateMachineError::GuardFailed {
+                    transition_id: format!("guard_evaluation_error: {}", e),
+                });
+            }
+        };
+        
+        let evaluation_time = start_time.elapsed();
+        tracing::debug!(
+            "Guard '{}' evaluated to {} in {:?}", 
+            guard, result, evaluation_time
+        );
+        
+        // Update metrics
+        if let Ok(ctx) = self.execution_context.write() {
+            ctx.metrics.total_execution_time_ms.fetch_add(
+                evaluation_time.as_millis() as u64,
+                Ordering::Relaxed
+            );
+        }
+        
+        Ok(result)
     }
 
     /// Execute action
     async fn execute_action(
         &self,
         action: &str,
-        _event_data: &Context,
+        event_data: &Context,
     ) -> Result<(), StateMachineError> {
-        // In a real implementation, this would execute the action
-        // This could involve calling external services, updating databases, etc.
+        let start_time = Instant::now();
+        
         tracing::info!("Executing action: {}", action);
+        
+        // Parse the action and execute it
+        let result = self.parse_and_execute_action(action, event_data).await;
+        
+        let execution_time = start_time.elapsed();
+        
+        match &result {
+            Ok(_) => {
+                tracing::info!(
+                    "Action '{}' executed successfully in {:?}", 
+                    action, execution_time
+                );
+            }
+            Err(e) => {
+                tracing::error!(
+                    "Action '{}' execution failed in {:?}: {}", 
+                    action, execution_time, e
+                );
+            }
+        }
+        
+        // Update metrics
+        if let Ok(ctx) = self.execution_context.write() {
+            ctx.metrics.total_execution_time_ms.fetch_add(
+                execution_time.as_millis() as u64,
+                Ordering::Relaxed
+            );
+        }
+        
+        result
+    }
+
+    /// Parse and evaluate a guard/conditional expression
+    fn parse_and_evaluate_expression<'a>(
+        &'a self,
+        expression: &'a str,
+        context: &'a Context,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Value, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+        Box::pin(async move {
+        let trimmed_expr = expression.trim();
+        
+        // Handle different types of expressions
+        if trimmed_expr.starts_with("context.") {
+            // Context variable access: context.field_name
+            let field_name = &trimmed_expr[8..]; // Remove "context."
+            Ok(context.get(field_name).cloned().unwrap_or(Value::Null))
+        } else if trimmed_expr.contains("==") || trimmed_expr.contains("!=") || 
+                 trimmed_expr.contains("<") || trimmed_expr.contains(">") ||
+                 trimmed_expr.contains("<=") || trimmed_expr.contains(">=") {
+            // Comparison expressions
+            self.evaluate_comparison_expression(trimmed_expr, context).await
+        } else if trimmed_expr.contains("&&") || trimmed_expr.contains("||") {
+            // Logical expressions
+            self.evaluate_logical_expression(trimmed_expr, context).await
+        } else if trimmed_expr.starts_with("regex(") && trimmed_expr.ends_with(")") {
+            // Regex expressions: regex(pattern, text)
+            self.evaluate_regex_expression(trimmed_expr, context).await
+        } else if trimmed_expr == "true" {
+            Ok(Value::Bool(true))
+        } else if trimmed_expr == "false" {
+            Ok(Value::Bool(false))
+        } else if let Ok(num) = trimmed_expr.parse::<f64>() {
+            Ok(Value::Number(serde_json::Number::from_f64(num).unwrap_or_else(|| serde_json::Number::from(0))))
+        } else if trimmed_expr.starts_with('"') && trimmed_expr.ends_with('"') {
+            // String literal
+            let string_value = &trimmed_expr[1..trimmed_expr.len()-1];
+            Ok(Value::String(string_value.to_string()))
+        } else {
+            // Try to parse as JSON or return as string
+            serde_json::from_str(trimmed_expr)
+                .or_else(|_| Ok(Value::String(trimmed_expr.to_string())))
+        }
+        })
+    }
+
+    /// Evaluate comparison expressions (==, !=, <, >, <=, >=)
+    fn evaluate_comparison_expression<'a>(
+        &'a self,
+        expression: &'a str,
+        context: &'a Context,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Value, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+        Box::pin(async move {
+        // Parse comparison operators in order of precedence
+        let operators = ["<=", ">=", "==", "!=", "<", ">"];
+        
+        for op in &operators {
+            if let Some(pos) = expression.find(op) {
+                let left = expression[..pos].trim();
+                let right = expression[pos + op.len()..].trim();
+                
+                let left_val = self.parse_and_evaluate_expression(left, context).await?;
+                let right_val = self.parse_and_evaluate_expression(right, context).await?;
+                
+                let result = match *op {
+                    "==" => self.values_equal(&left_val, &right_val),
+                    "!=" => !self.values_equal(&left_val, &right_val),
+                    "<" => self.compare_values(&left_val, &right_val)? < 0,
+                    ">" => self.compare_values(&left_val, &right_val)? > 0,
+                    "<=" => self.compare_values(&left_val, &right_val)? <= 0,
+                    ">=" => self.compare_values(&left_val, &right_val)? >= 0,
+                    _ => false,
+                };
+                
+                return Ok(Value::Bool(result));
+            }
+        }
+        
+        Err("Invalid comparison expression".into())
+        })
+    }
+
+    /// Evaluate logical expressions (&& and ||)
+    fn evaluate_logical_expression<'a>(
+        &'a self,
+        expression: &'a str,
+        context: &'a Context,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Value, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+        Box::pin(async move {
+        if let Some(pos) = expression.find("&&") {
+            let left = expression[..pos].trim();
+            let right = expression[pos + 2..].trim();
+            
+            let left_val = self.parse_and_evaluate_expression(left, context).await?;
+            let right_val = self.parse_and_evaluate_expression(right, context).await?;
+            
+            let left_bool = self.value_to_bool(&left_val);
+            let right_bool = self.value_to_bool(&right_val);
+            
+            Ok(Value::Bool(left_bool && right_bool))
+        } else if let Some(pos) = expression.find("||") {
+            let left = expression[..pos].trim();
+            let right = expression[pos + 2..].trim();
+            
+            let left_val = self.parse_and_evaluate_expression(left, context).await?;
+            let right_val = self.parse_and_evaluate_expression(right, context).await?;
+            
+            let left_bool = self.value_to_bool(&left_val);
+            let right_bool = self.value_to_bool(&right_val);
+            
+            Ok(Value::Bool(left_bool || right_bool))
+        } else {
+            Err("Invalid logical expression".into())
+        }
+        })
+    }
+
+    /// Evaluate regex expressions
+    fn evaluate_regex_expression<'a>(
+        &'a self,
+        expression: &'a str,
+        context: &'a Context,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<Value, Box<dyn std::error::Error + Send + Sync>>> + Send + 'a>> {
+        Box::pin(async move {
+        // Parse regex(pattern, text) format
+        let inner = &expression[6..expression.len()-1]; // Remove "regex(" and ")"
+        let parts: Vec<&str> = inner.splitn(2, ',').collect();
+        
+        if parts.len() != 2 {
+            return Err("Regex expression must have format: regex(pattern, text)".into());
+        }
+        
+        let pattern = parts[0].trim().trim_matches('"');
+        let text_expr = parts[1].trim();
+        
+        let text_val = self.parse_and_evaluate_expression(text_expr, context).await?;
+        let text = match text_val {
+            Value::String(s) => s,
+            _ => text_val.to_string(),
+        };
+        
+        let regex = Regex::new(pattern)
+            .map_err(|e| format!("Invalid regex pattern '{}': {}", pattern, e))?;
+        
+        Ok(Value::Bool(regex.is_match(&text)))
+        })
+    }
+
+    /// Parse and execute an action
+    async fn parse_and_execute_action(
+        &self,
+        action: &str,
+        context: &Context,
+    ) -> Result<(), StateMachineError> {
+        let trimmed_action = action.trim();
+        
+        if trimmed_action.starts_with("log(") && trimmed_action.ends_with(")") {
+            // Logging action: log(level, message)
+            self.execute_log_action(trimmed_action, context).await
+        } else if trimmed_action.starts_with("set_context(") && trimmed_action.ends_with(")") {
+            // Context update action: set_context(key, value)
+            self.execute_set_context_action(trimmed_action, context).await
+        } else if trimmed_action.starts_with("metrics(") && trimmed_action.ends_with(")") {
+            // Metrics action: metrics(metric_name, value, tags)
+            self.execute_metrics_action(trimmed_action, context).await
+        } else if trimmed_action.starts_with("delay(") && trimmed_action.ends_with(")") {
+            // Delay action: delay(milliseconds)
+            self.execute_delay_action(trimmed_action, context).await
+        } else if trimmed_action.starts_with("notify(") && trimmed_action.ends_with(")") {
+            // Notification action: notify(event_type, data)
+            self.execute_notify_action(trimmed_action, context).await
+        } else {
+            // Generic action execution - log as info and succeed
+            tracing::info!("Executing generic action: {}", trimmed_action);
+            Ok(())
+        }
+    }
+
+    /// Execute logging action
+    async fn execute_log_action(
+        &self,
+        action: &str,
+        context: &Context,
+    ) -> Result<(), StateMachineError> {
+        // Parse log(level, message) format
+        let inner = &action[4..action.len()-1]; // Remove "log(" and ")"
+        let parts: Vec<&str> = inner.splitn(2, ',').collect();
+        
+        if parts.len() != 2 {
+            return Err(StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: "Log action must have format: log(level, message)".to_string(),
+            });
+        }
+        
+        let level = parts[0].trim().trim_matches('"');
+        let message_expr = parts[1].trim();
+        
+        let message_val = self.parse_and_evaluate_expression(message_expr, context).await
+            .map_err(|e| StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: format!("Failed to evaluate message expression: {}", e),
+            })?;
+        
+        let message = match message_val {
+            Value::String(s) => s,
+            _ => message_val.to_string(),
+        };
+        
+        match level.to_lowercase().as_str() {
+            "error" => tracing::error!("{}", message),
+            "warn" => tracing::warn!("{}", message),
+            "info" => tracing::info!("{}", message),
+            "debug" => tracing::debug!("{}", message),
+            "trace" => tracing::trace!("{}", message),
+            _ => tracing::info!("{}", message),
+        }
+        
         Ok(())
+    }
+
+    /// Execute context update action
+    async fn execute_set_context_action(
+        &self,
+        action: &str,
+        context: &Context,
+    ) -> Result<(), StateMachineError> {
+        // Parse set_context(key, value) format
+        let inner = &action[12..action.len()-1]; // Remove "set_context(" and ")"
+        let parts: Vec<&str> = inner.splitn(2, ',').collect();
+        
+        if parts.len() != 2 {
+            return Err(StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: "Set context action must have format: set_context(key, value)".to_string(),
+            });
+        }
+        
+        let key = parts[0].trim().trim_matches('"').to_string();
+        let value_expr = parts[1].trim();
+        
+        let value = self.parse_and_evaluate_expression(value_expr, context).await
+            .map_err(|e| StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: format!("Failed to evaluate value expression: {}", e),
+            })?;
+        
+        // Update execution context
+        if let Ok(mut ctx) = self.execution_context.write() {
+            ctx.context.insert(key.clone(), value.clone());
+            tracing::debug!("Updated context: {} = {:?}", key, value);
+        }
+        
+        Ok(())
+    }
+
+    /// Execute metrics action
+    async fn execute_metrics_action(
+        &self,
+        action: &str,
+        context: &Context,
+    ) -> Result<(), StateMachineError> {
+        // Parse metrics(metric_name, value, tags) format
+        let inner = &action[8..action.len()-1]; // Remove "metrics(" and ")"
+        let parts: Vec<&str> = inner.split(',').collect();
+        
+        if parts.len() < 2 {
+            return Err(StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: "Metrics action must have format: metrics(metric_name, value) or metrics(metric_name, value, tags)".to_string(),
+            });
+        }
+        
+        let metric_name = parts[0].trim().trim_matches('"');
+        let value_expr = parts[1].trim();
+        
+        let value = self.parse_and_evaluate_expression(value_expr, context).await
+            .map_err(|e| StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: format!("Failed to evaluate value expression: {}", e),
+            })?;
+        
+        let numeric_value = match value {
+            Value::Number(n) => n.as_f64().unwrap_or(0.0),
+            Value::Bool(b) => if b { 1.0 } else { 0.0 },
+            Value::String(s) => s.parse::<f64>().unwrap_or(0.0),
+            _ => 0.0,
+        };
+        
+        tracing::info!("Recording metric: {} = {}", metric_name, numeric_value);
+        
+        // Metrics integration - can be extended to push to Prometheus, InfluxDB, etc.
+        // Currently using structured logging which can be consumed by metrics aggregators
+        
+        Ok(())
+    }
+
+    /// Execute delay action
+    async fn execute_delay_action(
+        &self,
+        action: &str,
+        context: &Context,
+    ) -> Result<(), StateMachineError> {
+        // Parse delay(milliseconds) format
+        let inner = &action[6..action.len()-1]; // Remove "delay(" and ")"
+        
+        let delay_val = self.parse_and_evaluate_expression(inner, context).await
+            .map_err(|e| StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: format!("Failed to evaluate delay expression: {}", e),
+            })?;
+        
+        let delay_ms = match delay_val {
+            Value::Number(n) => n.as_u64().unwrap_or(0),
+            Value::String(s) => s.parse::<u64>().unwrap_or(0),
+            _ => 0,
+        };
+        
+        if delay_ms > 0 {
+            tracing::debug!("Executing delay: {}ms", delay_ms);
+            tokio::time::sleep(tokio::time::Duration::from_millis(delay_ms)).await;
+        }
+        
+        Ok(())
+    }
+
+    /// Execute notification action
+    async fn execute_notify_action(
+        &self,
+        action: &str,
+        context: &Context,
+    ) -> Result<(), StateMachineError> {
+        // Parse notify(event_type, data) format
+        let inner = &action[7..action.len()-1]; // Remove "notify(" and ")"
+        let parts: Vec<&str> = inner.splitn(2, ',').collect();
+        
+        if parts.len() != 2 {
+            return Err(StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: "Notify action must have format: notify(event_type, data)".to_string(),
+            });
+        }
+        
+        let event_type = parts[0].trim().trim_matches('"');
+        let data_expr = parts[1].trim();
+        
+        let data = self.parse_and_evaluate_expression(data_expr, context).await
+            .map_err(|e| StateMachineError::ActionFailed {
+                action: action.to_string(),
+                reason: format!("Failed to evaluate data expression: {}", e),
+            })?;
+        
+        tracing::info!("Sending notification: {} with data: {:?}", event_type, data);
+        
+        // Notification system integration - can be extended to use webhooks, message queues, etc.
+        // Currently using structured logging which can trigger external notification systems
+        
+        Ok(())
+    }
+
+    /// Helper method to compare values
+    fn values_equal(&self, left: &Value, right: &Value) -> bool {
+        match (left, right) {
+            (Value::Null, Value::Null) => true,
+            (Value::Bool(a), Value::Bool(b)) => a == b,
+            (Value::Number(a), Value::Number(b)) => {
+                a.as_f64().unwrap_or(0.0) == b.as_f64().unwrap_or(0.0)
+            }
+            (Value::String(a), Value::String(b)) => a == b,
+            (Value::Array(a), Value::Array(b)) => a == b,
+            (Value::Object(a), Value::Object(b)) => a == b,
+            // Cross-type comparisons
+            (Value::Number(n), Value::String(s)) | (Value::String(s), Value::Number(n)) => {
+                s.parse::<f64>().map_or(false, |parsed| parsed == n.as_f64().unwrap_or(0.0))
+            }
+            (Value::Bool(b), Value::Number(n)) | (Value::Number(n), Value::Bool(b)) => {
+                let bool_as_num = if *b { 1.0 } else { 0.0 };
+                bool_as_num == n.as_f64().unwrap_or(0.0)
+            }
+            (Value::Bool(b), Value::String(s)) | (Value::String(s), Value::Bool(b)) => {
+                s.to_lowercase() == if *b { "true" } else { "false" }
+            }
+            _ => false,
+        }
+    }
+
+    /// Helper method to compare values for ordering
+    fn compare_values(&self, left: &Value, right: &Value) -> Result<i8, Box<dyn std::error::Error + Send + Sync>> {
+        match (left, right) {
+            (Value::Number(a), Value::Number(b)) => {
+                let a_val = a.as_f64().unwrap_or(0.0);
+                let b_val = b.as_f64().unwrap_or(0.0);
+                Ok(if a_val < b_val { -1 } else if a_val > b_val { 1 } else { 0 })
+            }
+            (Value::String(a), Value::String(b)) => {
+                Ok(if a < b { -1 } else if a > b { 1 } else { 0 })
+            }
+            (Value::Number(n), Value::String(s)) => {
+                if let Ok(s_num) = s.parse::<f64>() {
+                    let n_val = n.as_f64().unwrap_or(0.0);
+                    Ok(if n_val < s_num { -1 } else if n_val > s_num { 1 } else { 0 })
+                } else {
+                    Err("Cannot compare number with non-numeric string".into())
+                }
+            }
+            (Value::String(s), Value::Number(n)) => {
+                if let Ok(s_num) = s.parse::<f64>() {
+                    let n_val = n.as_f64().unwrap_or(0.0);
+                    Ok(if s_num < n_val { -1 } else if s_num > n_val { 1 } else { 0 })
+                } else {
+                    Err("Cannot compare non-numeric string with number".into())
+                }
+            }
+            _ => Err("Cannot compare these value types".into()),
+        }
+    }
+
+    /// Helper method to convert value to boolean
+    fn value_to_bool(&self, value: &Value) -> bool {
+        match value {
+            Value::Bool(b) => *b,
+            Value::Number(n) => n.as_f64().unwrap_or(0.0) != 0.0,
+            Value::String(s) => !s.is_empty() && s.to_lowercase() != "false" && s != "0",
+            Value::Array(arr) => !arr.is_empty(),
+            Value::Object(obj) => !obj.is_empty(),
+            Value::Null => false,
+        }
     }
 
     /// Get current states

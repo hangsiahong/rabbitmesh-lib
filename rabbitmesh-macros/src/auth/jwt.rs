@@ -209,11 +209,50 @@ pub fn generate_jwt_auth_preprocessing() -> proc_macro2::TokenStream {
         
         // Store user info in message context for use by business logic and authorization
         if let Ok(mut payload) = serde_json::from_value::<serde_json::Map<String, serde_json::Value>>(msg.payload.clone()) {
-            payload.insert("_auth_user".to_string(), serde_json::Value::Object(
-                user_claims.into_iter().collect::<serde_json::Map<String, serde_json::Value>>()
+            // Create structured auth context with all user information
+            let auth_context = serde_json::json!({
+                "user_id": extract_user_id(&user_claims).unwrap_or_else(|| "unknown".to_string()),
+                "roles": extract_user_roles(&user_claims),
+                "attributes": extract_user_attributes(&user_claims),
+                "claims": user_claims,
+                "auth_method": "jwt",
+                "authenticated_at": chrono::Utc::now().timestamp()
+            });
+            
+            payload.insert("_auth_user".to_string(), auth_context);
+            
+            // Update the actual message payload with enhanced auth context
+            msg.payload = serde_json::Value::Object(payload);
+            
+            // Log successful authentication with metrics
+            tracing::info!(
+                user_id = extract_user_id(&user_claims).unwrap_or_else(|| "unknown".to_string()),
+                roles_count = extract_user_roles(&user_claims).len(),
+                attributes_count = extract_user_attributes(&user_claims).len(),
+                "🔐 JWT authentication context added to message"
+            );
+            
+            // Increment authentication success metrics
+            #[cfg(feature = "metrics")]
+            {
+                if let Some(registry) = crate::observability::metrics::get_metrics_registry() {
+                    registry.increment_counter("auth_jwt_success_total", &[]);
+                }
+            }
+        } else {
+            tracing::error!("❌ Failed to parse message payload as JSON object for auth context injection");
+            
+            // Increment authentication error metrics  
+            #[cfg(feature = "metrics")]
+            {
+                if let Some(registry) = crate::observability::metrics::get_metrics_registry() {
+                    registry.increment_counter("auth_jwt_payload_error_total", &[]);
+                }
+            }
+            
+            return Err(rabbitmesh::error::RabbitMeshError::Handler(
+                "Failed to inject authentication context: Invalid message payload format".to_string()
             ));
-            // Update message payload with auth context
-            // Note: In a real implementation, this would update the actual message
         }
     }
 }
