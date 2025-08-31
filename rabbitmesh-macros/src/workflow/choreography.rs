@@ -7,7 +7,7 @@ use quote::quote;
 use std::collections::{HashMap, HashSet, VecDeque};
 use std::sync::{Arc, RwLock, Mutex};
 use std::sync::atomic::{AtomicU64, Ordering};
-use std::time::{Duration, Instant};
+use std::time::{Duration, SystemTime};
 use std::fmt;
 use tokio::sync::mpsc;
 use serde::{Deserialize, Serialize};
@@ -158,7 +158,7 @@ pub struct ChoreographyEvent {
     pub target_participants: Vec<ParticipantId>,
     pub payload: HashMap<String, serde_json::Value>,
     pub correlation_id: String,
-    pub timestamp: Instant,
+    pub timestamp: SystemTime,
     pub retry_count: u32,
     pub metadata: HashMap<String, String>,
 }
@@ -180,7 +180,7 @@ pub struct EventDelivery {
     pub target_participant: ParticipantId,
     pub status: EventDeliveryStatus,
     pub attempt_count: u32,
-    pub last_attempt: Option<Instant>,
+    pub last_attempt: Option<SystemTime>,
     pub error: Option<String>,
 }
 
@@ -191,8 +191,8 @@ pub struct ChoreographyExecution {
     pub definition: ChoreographyDefinition,
     pub status: ChoreographyStatus,
     pub correlation_id: String,
-    pub start_time: Instant,
-    pub end_time: Option<Instant>,
+    pub start_time: SystemTime,
+    pub end_time: Option<SystemTime>,
     pub participants_status: HashMap<ParticipantId, ParticipantStatus>,
     pub event_history: Vec<ChoreographyEvent>,
     pub pending_deliveries: Vec<EventDelivery>,
@@ -367,7 +367,7 @@ impl ChoreographyManager {
             definition,
             status: ChoreographyStatus::Starting,
             correlation_id: initial_event.correlation_id.clone(),
-            start_time: Instant::now(),
+            start_time: SystemTime::now(),
             end_time: None,
             participants_status: HashMap::new(),
             event_history: vec![initial_event.clone()],
@@ -467,7 +467,7 @@ impl ChoreographyManager {
                 target_participants: vec![target.clone()],
                 payload: transformed_payload.clone(),
                 correlation_id: event.correlation_id.clone(),
-                timestamp: Instant::now(),
+                timestamp: SystemTime::now(),
                 retry_count: 0,
                 metadata: event.metadata.clone(),
             };
@@ -533,7 +533,7 @@ impl ChoreographyManager {
 
                 if all_completed {
                     execution.status = ChoreographyStatus::Completed;
-                    execution.end_time = Some(Instant::now());
+                    execution.end_time = Some(SystemTime::now());
                     
                     // Update metrics
                     self.metrics.active_choreographies.fetch_sub(1, Ordering::Relaxed);
@@ -541,7 +541,7 @@ impl ChoreographyManager {
                     
                 } else if any_failed {
                     execution.status = ChoreographyStatus::Failed;
-                    execution.end_time = Some(Instant::now());
+                    execution.end_time = Some(SystemTime::now());
                     
                     // Start compensation if enabled
                     if self.config.enable_compensation_tracking {

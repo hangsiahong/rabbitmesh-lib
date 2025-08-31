@@ -11,7 +11,7 @@ use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 use std::fmt;
 use std::hash::{Hash, Hasher};
 use serde::{Deserialize, Serialize};
-use uuid::Uuid;
+// UUID functionality replaced with simple string IDs
 
 /// Aggregate configuration
 #[derive(Debug, Clone)]
@@ -319,7 +319,14 @@ impl<T: AggregateRoot> AggregateRepository<T> {
             current_version += 1;
             
             let envelope = EventEnvelope {
-                event_id: Uuid::new_v4().to_string(),
+                event_id: {
+                    use std::collections::hash_map::DefaultHasher;
+                    use std::hash::{Hash, Hasher};
+                    let mut hasher = DefaultHasher::new();
+                    event.event_type().hash(&mut hasher);
+                    std::time::SystemTime::now().hash(&mut hasher);
+                    format!("{:x}", hasher.finish())
+                },
                 aggregate_id: aggregate_id.clone(),
                 event_type: event.event_type().to_string(),
                 event_data: event.event_data()?,
@@ -391,6 +398,9 @@ impl<T: AggregateRoot> AggregateRepository<T> {
         // Validate aggregate after applying events
         aggregate.validate()?;
 
+        // Save first before updating cache
+        self.save_aggregate(&mut aggregate, original_version).await?;
+
         // Add events to uncommitted list
         if let Ok(mut cache) = self.aggregate_cache.write() {
             if let Some(instance) = cache.get_mut(aggregate_id) {
@@ -399,9 +409,6 @@ impl<T: AggregateRoot> AggregateRepository<T> {
                 instance.aggregate = aggregate;
             }
         }
-
-        // Save if auto-commit is enabled (in a real implementation, this might be configurable)
-        self.save_aggregate(&mut aggregate, original_version).await?;
 
         self.metrics.commands_handled.fetch_add(1, Ordering::Relaxed);
 
@@ -474,12 +481,14 @@ impl<T: AggregateRoot> AggregateRepository<T> {
 
         // If still too many entries, remove least recently used
         if cache.len() >= self.config.max_aggregate_cache_size {
-            let mut entries: Vec<_> = cache.iter().collect();
-            entries.sort_by_key(|(_, instance)| instance.last_accessed);
+            let mut entries: Vec<_> = cache.iter().map(|(k, v)| (k.clone(), v.last_accessed)).collect();
+            entries.sort_by_key(|(_, last_accessed)| *last_accessed);
             
             let to_remove = cache.len() - self.config.max_aggregate_cache_size / 2;
-            for (id, _) in entries.into_iter().take(to_remove) {
-                cache.remove(id);
+            let keys_to_remove: Vec<_> = entries.into_iter().take(to_remove).map(|(k, _)| k).collect();
+            
+            for id in keys_to_remove {
+                cache.remove(&id);
             }
         }
     }

@@ -105,7 +105,7 @@ pub struct StateTransition {
 }
 
 /// State machine metrics
-#[derive(Debug, Default, Clone)]
+#[derive(Debug, Default)]
 pub struct StateMachineMetrics {
     pub total_transitions: AtomicU64,
     pub successful_transitions: AtomicU64,
@@ -113,6 +113,19 @@ pub struct StateMachineMetrics {
     pub total_execution_time_ms: AtomicU64,
     pub events_processed: AtomicU64,
     pub events_queued: AtomicU64,
+}
+
+impl Clone for StateMachineMetrics {
+    fn clone(&self) -> Self {
+        Self {
+            total_transitions: AtomicU64::new(self.total_transitions.load(std::sync::atomic::Ordering::Relaxed)),
+            successful_transitions: AtomicU64::new(self.successful_transitions.load(std::sync::atomic::Ordering::Relaxed)),
+            failed_transitions: AtomicU64::new(self.failed_transitions.load(std::sync::atomic::Ordering::Relaxed)),
+            total_execution_time_ms: AtomicU64::new(self.total_execution_time_ms.load(std::sync::atomic::Ordering::Relaxed)),
+            events_processed: AtomicU64::new(self.events_processed.load(std::sync::atomic::Ordering::Relaxed)),
+            events_queued: AtomicU64::new(self.events_queued.load(std::sync::atomic::Ordering::Relaxed)),
+        }
+    }
 }
 
 /// State machine errors

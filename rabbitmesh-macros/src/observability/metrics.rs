@@ -16,7 +16,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone)]
 pub struct MetricsConfig {
     /// Metrics collection backend
-    pub backend: MetricsBackend,
+    pub backend: MetricsBackendType,
     /// Collection interval
     pub collection_interval: Duration,
     /// Enable histogram metrics
@@ -40,7 +40,7 @@ pub struct MetricsConfig {
 impl Default for MetricsConfig {
     fn default() -> Self {
         Self {
-            backend: MetricsBackend::Prometheus,
+            backend: MetricsBackendType::Prometheus,
             collection_interval: Duration::from_secs(15),
             enable_histograms: true,
             histogram_buckets: vec![0.001, 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0],
@@ -56,13 +56,13 @@ impl Default for MetricsConfig {
 
 /// Supported metrics backends
 #[derive(Debug, Clone)]
-pub enum MetricsBackend {
+pub enum MetricsBackendType {
     Prometheus,
     StatsD { endpoint: String },
     InfluxDB { endpoint: String, database: String },
     OpenTelemetry { endpoint: String },
     Custom { name: String, config: HashMap<String, String> },
-    Multiple(Vec<MetricsBackend>),
+    Multiple(Vec<MetricsBackendType>),
 }
 
 /// Metric types
@@ -222,27 +222,27 @@ impl MetricsCollector {
     /// Initialize metrics backends
     fn initialize_backends(&mut self) -> Result<(), MetricsError> {
         match &self.config.backend {
-            MetricsBackend::Prometheus => {
+            MetricsBackendType::Prometheus => {
                 let backend = PrometheusBackend::new();
                 self.backends.push(Box::new(backend));
             }
-            MetricsBackend::StatsD { endpoint } => {
+            MetricsBackendType::StatsD { endpoint } => {
                 let backend = StatsDBackend::new(endpoint.clone());
                 self.backends.push(Box::new(backend));
             }
-            MetricsBackend::InfluxDB { endpoint, database } => {
+            MetricsBackendType::InfluxDB { endpoint, database } => {
                 let backend = InfluxDBBackend::new(endpoint.clone(), database.clone());
                 self.backends.push(Box::new(backend));
             }
-            MetricsBackend::OpenTelemetry { endpoint } => {
+            MetricsBackendType::OpenTelemetry { endpoint } => {
                 let backend = OpenTelemetryBackend::new(endpoint.clone());
                 self.backends.push(Box::new(backend));
             }
-            MetricsBackend::Custom { name, config } => {
+            MetricsBackendType::Custom { name, config } => {
                 let backend = CustomBackend::new(name.clone(), config.clone());
                 self.backends.push(Box::new(backend));
             }
-            MetricsBackend::Multiple(backends) => {
+            MetricsBackendType::Multiple(backends) => {
                 for backend_config in backends {
                     // Recursively initialize multiple backends
                     // In a real implementation, this would handle the recursion properly
@@ -667,24 +667,24 @@ pub fn generate_metrics_preprocessing(
     custom_metrics: Option<&[&str]>
 ) -> proc_macro2::TokenStream {
     let backend_config = match metrics_backend {
-        Some("prometheus") => quote! { rabbitmesh_macros::observability::metrics::MetricsBackend::Prometheus },
+        Some("prometheus") => quote! { rabbitmesh_macros::observability::metrics::MetricsBackendType::Prometheus },
         Some("statsd") => quote! { 
-            rabbitmesh_macros::observability::metrics::MetricsBackend::StatsD { 
+            rabbitmesh_macros::observability::metrics::MetricsBackendType::StatsD { 
                 endpoint: env::var("RABBITMESH_STATSD_ENDPOINT").unwrap_or_else(|_| "localhost:8125".to_string()) 
             }
         },
         Some("influxdb") => quote! { 
-            rabbitmesh_macros::observability::metrics::MetricsBackend::InfluxDB { 
+            rabbitmesh_macros::observability::metrics::MetricsBackendType::InfluxDB { 
                 endpoint: env::var("RABBITMESH_INFLUXDB_ENDPOINT").unwrap_or_else(|_| "http://localhost:8086".to_string()),
                 database: env::var("RABBITMESH_INFLUXDB_DATABASE").unwrap_or_else(|_| "rabbitmesh".to_string())
             }
         },
         Some("opentelemetry") => quote! { 
-            rabbitmesh_macros::observability::metrics::MetricsBackend::OpenTelemetry { 
+            rabbitmesh_macros::observability::metrics::MetricsBackendType::OpenTelemetry { 
                 endpoint: env::var("RABBITMESH_OTEL_ENDPOINT").unwrap_or_else(|_| "http://localhost:4317".to_string()) 
             }
         },
-        _ => quote! { rabbitmesh_macros::observability::metrics::MetricsBackend::Prometheus },
+        _ => quote! { rabbitmesh_macros::observability::metrics::MetricsBackendType::Prometheus },
     };
 
     quote! {

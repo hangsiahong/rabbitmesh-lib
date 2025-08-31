@@ -12,7 +12,7 @@ use std::time::{Duration, Instant, SystemTime};
 use std::fmt;
 use tokio::sync::mpsc;
 use serde::{Deserialize, Serialize};
-use uuid::Uuid;
+// UUID functionality replaced with simple string IDs
 
 /// CQRS configuration
 #[derive(Debug, Clone)]

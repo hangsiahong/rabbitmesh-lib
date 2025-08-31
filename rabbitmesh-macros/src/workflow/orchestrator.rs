@@ -7,7 +7,7 @@ use quote::quote;
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, RwLock, Mutex};
 use std::sync::atomic::{AtomicU64, Ordering};
-use std::time::{Duration, Instant};
+use std::time::{Duration, SystemTime};
 use std::fmt;
 use tokio::sync::mpsc;
 use serde::{Deserialize, Serialize};
@@ -41,7 +41,7 @@ impl Default for OrchestratorConfig {
             enable_persistence: true,
             enable_retry: true,
             max_retry_attempts: 3,
-            retry_delay_strategy: RetryDelayStrategy::ExponentialBackoff { base_delay: Duration::from_secs(1) },
+            retry_delay_strategy: RetryDelayStrategy::ExponentialBackoff { base_delay_secs: 1 },
             enable_versioning: true,
             execution_timeout: Duration::from_secs(300), // 5 minutes
         }
@@ -49,12 +49,29 @@ impl Default for OrchestratorConfig {
 }
 
 /// Retry delay strategy
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum RetryDelayStrategy {
-    Fixed { delay: Duration },
-    LinearBackoff { base_delay: Duration },
-    ExponentialBackoff { base_delay: Duration },
-    Custom { delays: Vec<Duration> },
+    Fixed { delay_secs: u64 },
+    LinearBackoff { base_delay_secs: u64 },
+    ExponentialBackoff { base_delay_secs: u64 },
+    Custom { delay_secs_list: Vec<u64> },
+}
+
+impl RetryDelayStrategy {
+    pub fn get_delay(&self, attempt: u32) -> Duration {
+        match self {
+            Self::Fixed { delay_secs } => Duration::from_secs(*delay_secs),
+            Self::LinearBackoff { base_delay_secs } => Duration::from_secs(base_delay_secs * attempt as u64),
+            Self::ExponentialBackoff { base_delay_secs } => {
+                let delay = base_delay_secs * 2_u64.pow(attempt.saturating_sub(1));
+                Duration::from_secs(delay)
+            }
+            Self::Custom { delay_secs_list } => {
+                let index = (attempt as usize).saturating_sub(1).min(delay_secs_list.len().saturating_sub(1));
+                Duration::from_secs(delay_secs_list.get(index).copied().unwrap_or(1))
+            }
+        }
+    }
 }
 
 /// Workflow identifier
@@ -158,8 +175,8 @@ pub struct WorkflowExecution {
     pub failed_tasks: Vec<TaskId>,
     pub task_results: HashMap<TaskId, TaskResult>,
     pub context_data: HashMap<String, serde_json::Value>,
-    pub start_time: Instant,
-    pub end_time: Option<Instant>,
+    pub start_time: SystemTime,
+    pub end_time: Option<SystemTime>,
     pub retry_count: u32,
     pub execution_history: Vec<ExecutionEvent>,
 }
@@ -171,8 +188,8 @@ pub struct TaskResult {
     pub status: TaskStatus,
     pub output: Option<serde_json::Value>,
     pub error: Option<String>,
-    pub start_time: Instant,
-    pub end_time: Option<Instant>,
+    pub start_time: SystemTime,
+    pub end_time: Option<SystemTime>,
     pub retry_count: u32,
 }
 
@@ -182,7 +199,7 @@ pub struct ExecutionEvent {
     pub event_type: ExecutionEventType,
     pub workflow_id: WorkflowId,
     pub task_id: Option<TaskId>,
-    pub timestamp: Instant,
+    pub timestamp: SystemTime,
     pub data: HashMap<String, serde_json::Value>,
 }
 
@@ -325,7 +342,7 @@ impl WorkflowOrchestrator {
             failed_tasks: Vec::new(),
             task_results: HashMap::new(),
             context_data: input_data,
-            start_time: Instant::now(),
+            start_time: SystemTime::now(),
             end_time: None,
             retry_count: 0,
             execution_history: Vec::new(),
@@ -341,7 +358,7 @@ impl WorkflowOrchestrator {
             event_type: ExecutionEventType::WorkflowStarted,
             workflow_id: workflow_id.clone(),
             task_id: None,
-            timestamp: Instant::now(),
+            timestamp: SystemTime::now(),
             data: HashMap::new(),
         });
 
@@ -371,7 +388,7 @@ impl WorkflowOrchestrator {
                                 if next_tasks.is_empty() {
                                     // All tasks completed
                                     execution.status = WorkflowStatus::Completed;
-                                    execution.end_time = Some(Instant::now());
+                                    execution.end_time = Some(SystemTime::now());
                                     false
                                 } else {
                                     execution.current_tasks = next_tasks;
@@ -457,9 +474,10 @@ impl WorkflowOrchestrator {
         for task_id in current_tasks {
             let executor = self.task_executor.clone();
             let workflow_id = workflow_id.clone();
+            let task_id_clone = task_id.clone();
             
             let handle = tokio::spawn(async move {
-                executor.execute_task(&workflow_id, &task_id).await
+                executor.execute_task(&workflow_id, &task_id_clone).await
             });
             
             task_handles.push((task_id, handle));
@@ -640,7 +658,7 @@ impl TaskExecutor {
         _workflow_id: &WorkflowId,
         task_id: &TaskId,
     ) -> Result<TaskResult, OrchestratorError> {
-        let start_time = Instant::now();
+        let start_time = SystemTime::now();
 
         // In a real implementation, this would:
         // 1. Load task definition
@@ -657,7 +675,7 @@ impl TaskExecutor {
             output: Some(serde_json::json!({"result": "success"})),
             error: None,
             start_time,
-            end_time: Some(Instant::now()),
+            end_time: Some(SystemTime::now()),
             retry_count: 0,
         })
     }
@@ -730,7 +748,7 @@ pub fn generate_orchestrator_preprocessing() -> proc_macro2::TokenStream {
                 enable_retry,
                 max_retry_attempts,
                 retry_delay_strategy: rabbitmesh_macros::workflow::orchestrator::RetryDelayStrategy::ExponentialBackoff {
-                    base_delay: Duration::from_secs(1)
+                    base_delay_secs: 1
                 },
                 enable_versioning: true,
                 execution_timeout: Duration::from_secs(execution_timeout_secs),

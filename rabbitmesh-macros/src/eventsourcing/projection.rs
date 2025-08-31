@@ -353,12 +353,12 @@ pub enum ProjectionError {
     OutputWriteFailed { reason: String },
     #[error("Query execution failed: {reason}")]
     QueryExecutionFailed { reason: String },
-    #[error("Serialization error: {source}")]
-    SerializationError { source: String },
+    #[error("Serialization error: {message}")]
+    SerializationError { message: String },
     #[error("Configuration error: {message}")]
     ConfigurationError { message: String },
-    #[error("Projection error: {source}")]
-    ProjectionError { source: String },
+    #[error("Projection error: {message}")]
+    ProjectionError { message: String },
 }
 
 /// Main projection manager
