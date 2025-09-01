@@ -205,7 +205,7 @@ ${mutationHooks}`;
     
     return `export function ${hookName}(
   ${params}
-  options?: Omit<UseQueryOptions<${responseType}>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<Types.${responseType}>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery({
     queryKey: ${serviceName}Keys.${method.name}(${this.getQueryKeyParamsUsage(method).slice(2)}),
@@ -233,7 +233,7 @@ ${mutationHooks}`;
     const responseType = this.getResponseTypeName(method.name, serviceName);
     
     return `export function ${hookName}(
-  options?: UseMutationOptions<${responseType}, Error, ${variablesType}>
+  options?: UseMutationOptions<Types.${responseType}, Error, ${variablesType}>
 ) {
   return useMutation({
     mutationFn: async (variables: ${variablesType}) => {
@@ -424,15 +424,17 @@ export function configureRabbitMeshClient(config: RabbitMeshClientConfig | strin
       compilerOptions: {
         target: 'ES2018',
         module: 'commonjs',
-        outDir: './',
+        outDir: './dist',
         rootDir: './',
         strict: true,
         esModuleInterop: true,
         skipLibCheck: true,
         forceConsistentCasingInFileNames: true,
-        declaration: true
+        declaration: true,
+        declarationDir: './dist'
       },
-      include: ['*.ts']
+      include: ['*.ts'],
+      exclude: ['node_modules', 'dist']
     };
 
     fs.writeFileSync(
@@ -443,9 +445,10 @@ export function configureRabbitMeshClient(config: RabbitMeshClientConfig | strin
 
   private async generateIndex(services: ServiceDefinition[]): Promise<void> {
     const exports = [
-      "export { RabbitMeshClient } from './client';",
+      "// Re-export all hooks and utilities",
+      "export * from './client';",
       "export * from './types';",
-      ...services.map(service => `export { ${this.capitalize(service.name)}Client } from './${service.name}Client';`)
+      ...services.map(service => `export * from './${service.name}Client';`)
     ].join('\n');
 
     fs.writeFileSync(path.join(this.config.outputDir, 'index.ts'), exports + '\n');

@@ -12,12 +12,5 @@ export declare class ServiceParser {
     private parseHttpRoute;
     private mapRustTypeToTypeScript;
     private toCamelCase;
-    getManualTodoAppServices(): ServiceDefinition[];
-    getManualBlogPlatformServices(): ServiceDefinition[];
-    getManualAuthService(): ServiceDefinition;
-    getManualBlogService(): ServiceDefinition;
-    getManualTodoService(): ServiceDefinition;
-    getManualTodoAppService(): ServiceDefinition;
-    getManualNotificationService(): ServiceDefinition;
 }
 //# sourceMappingURL=parser.d.ts.map
