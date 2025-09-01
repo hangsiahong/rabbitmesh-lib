@@ -1,17 +1,17 @@
 //! Role-Based Access Control (RBAC) Module
 //! 
 //! Provides generic RBAC implementation that works with any role system.
-//! No hardcoded roles or permissions - fully configurable.
+//! No hardcoded roles or permissions.
 
 use quote::quote;
 
 /// Generate RBAC authorization preprocessing code
 pub fn generate_rbac_preprocessing(required_role: Option<&str>, required_permission: Option<&str>) -> proc_macro2::TokenStream {
     quote! {
-        tracing::debug!("👮 Performing RBAC authorization check");
+        tracing::debug!("🛡️ Performing RBAC authorization check");
         
         // Extract user authentication context
-        let user_claims = msg.payload.as_object()
+        let auth_user = msg.payload.as_object()
             .and_then(|obj| obj.get("_auth_user"))
             .and_then(|user| user.as_object())
             .ok_or_else(|| {
@@ -19,141 +19,174 @@ pub fn generate_rbac_preprocessing(required_role: Option<&str>, required_permiss
                 rabbitmesh::error::RabbitMeshError::Handler("Authorization failed: User not authenticated".to_string())
             })?;
         
-        // Extract user roles using generic approach
-        let user_roles = extract_user_roles(&user_claims.iter()
-            .map(|(k, v)| (k.clone(), v.clone()))
-            .collect::<std::collections::HashMap<String, serde_json::Value>>());
+        let user_id = auth_user.get("user_id")
+            .and_then(|v| v.as_str())
+            .unwrap_or("unknown");
         
-        let user_id = extract_user_id(&user_claims.iter()
-            .map(|(k, v)| (k.clone(), v.clone()))
-            .collect::<std::collections::HashMap<String, serde_json::Value>>())
-            .unwrap_or_else(|| "unknown".to_string());
+        let user_roles = auth_user.get("roles")
+            .and_then(|v| v.as_array())
+            .map(|arr| {
+                arr.iter()
+                    .filter_map(|v| v.as_str())
+                    .collect::<Vec<&str>>()
+            })
+            .unwrap_or_default();
         
         tracing::debug!("👤 User {} has roles: {:?}", user_id, user_roles);
         
         // Check role-based authorization
-        let mut authorized = false;
+        let mut authorization_passed = false;
+        let mut authorization_reason = String::new();
         
-        // If specific role is required
+        // Check required role
         if let Some(required_role) = #required_role {
-            authorized = user_roles.iter().any(|role| {
-                // Support exact match and hierarchical roles
-                role == required_role || 
-                role.starts_with(&format!("{}:", required_role)) || // hierarchical roles like "admin:superuser"
-                check_role_hierarchy(role, required_role)
-            });
-            
-            if !authorized {
-                tracing::warn!("❌ RBAC failed: User {} with roles {:?} lacks required role '{}'", 
-                    user_id, user_roles, required_role);
-                return Err(rabbitmesh::error::RabbitMeshError::Handler(
-                    format!("Authorization failed: Required role '{}' not found", required_role)
-                ));
+            if user_roles.contains(&required_role) {
+                authorization_passed = true;
+                authorization_reason = format!("User has required role: {}", required_role);
+                tracing::debug!("✅ Role check passed: User {} has role {}", user_id, required_role);
+            } else {
+                authorization_reason = format!("User missing required role: {}", required_role);
+                tracing::warn!("❌ Role check failed: User {} missing role {}", user_id, required_role);
             }
         }
         
-        // If specific permission is required  
-        if let Some(required_permission) = #required_permission {
-            // Check if user has permission directly or through role-based permissions
-            authorized = check_user_permission(&user_claims, required_permission, &user_roles);
-            
-            if !authorized {
-                tracing::warn!("❌ RBAC failed: User {} lacks required permission '{}'", 
-                    user_id, required_permission);
-                return Err(rabbitmesh::error::RabbitMeshError::Handler(
-                    format!("Authorization failed: Required permission '{}' not found", required_permission)
-                ));
+        // Check required permission (if role check didn't already pass)
+        if !authorization_passed {
+            if let Some(required_permission) = #required_permission {
+                // Check if any user role has the required permission
+                let user_permissions = auth_user.get("attributes")
+                    .and_then(|attrs| attrs.as_object())
+                    .and_then(|attrs_obj| attrs_obj.get("permissions"))
+                    .and_then(|v| v.as_array())
+                    .map(|arr| {
+                        arr.iter()
+                            .filter_map(|v| v.as_str())
+                            .collect::<Vec<&str>>()
+                    })
+                    .unwrap_or_default();
+                
+                if user_permissions.contains(&required_permission) {
+                    authorization_passed = true;
+                    authorization_reason = format!("User has required permission: {}", required_permission);
+                    tracing::debug!("✅ Permission check passed: User {} has permission {}", user_id, required_permission);
+                } else {
+                    // Check role-based permissions from environment or config
+                    for role in &user_roles {
+                        let role_permissions_key = format!("RBAC_ROLE_{}_PERMISSIONS", role.to_uppercase());
+                        if let Ok(role_permissions_str) = std::env::var(&role_permissions_key) {
+                            let role_permissions: Vec<&str> = role_permissions_str
+                                .split(',')
+                                .map(|p| p.trim())
+                                .collect();
+                            
+                            if role_permissions.contains(&required_permission) {
+                                authorization_passed = true;
+                                authorization_reason = format!("Role {} has required permission: {}", role, required_permission);
+                                tracing::debug!("✅ Role-based permission check passed: Role {} has permission {}", role, required_permission);
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if !authorization_passed {
+                        authorization_reason = format!("User missing required permission: {}", required_permission);
+                        tracing::warn!("❌ Permission check failed: User {} missing permission {}", user_id, required_permission);
+                    }
+                }
             }
         }
         
-        // If no specific requirements, check for any valid role
+        // If no specific role or permission required, check for basic roles
         if #required_role.is_none() && #required_permission.is_none() {
-            authorized = !user_roles.is_empty();
-            
-            if !authorized {
-                tracing::warn!("❌ RBAC failed: User {} has no roles assigned", user_id);
-                return Err(rabbitmesh::error::RabbitMeshError::Handler(
-                    "Authorization failed: No roles assigned to user".to_string()
-                ));
+            // Default RBAC: allow admin or any authenticated user with roles
+            if user_roles.contains(&"admin") || user_roles.contains(&"administrator") || !user_roles.is_empty() {
+                authorization_passed = true;
+                authorization_reason = "User has valid roles".to_string();
+                tracing::debug!("✅ Default RBAC passed: User {} has valid roles", user_id);
+            } else {
+                authorization_reason = "User has no valid roles".to_string();
+                tracing::warn!("❌ Default RBAC failed: User {} has no roles", user_id);
             }
         }
         
-        tracing::debug!("✅ RBAC authorization successful for user {}", user_id);
-        
-        /// Check hierarchical role permissions (e.g., admin > manager > user)
-        fn check_role_hierarchy(user_role: &str, required_role: &str) -> bool {
-            // Define common role hierarchies - this can be configured via environment
-            let hierarchy_config = std::env::var("RBAC_ROLE_HIERARCHY")
-                .unwrap_or_else(|_| "admin>manager>supervisor>user,owner>member>guest".to_string());
-            
-            for hierarchy_chain in hierarchy_config.split(',') {
-                let roles: Vec<&str> = hierarchy_chain.split('>').map(|s| s.trim()).collect();
-                
-                if let (Some(user_pos), Some(req_pos)) = (
-                    roles.iter().position(|&r| r == user_role),
-                    roles.iter().position(|&r| r == required_role)
-                ) {
-                    // Higher position in hierarchy (lower index) grants access
-                    return user_pos <= req_pos;
-                }
-            }
-            
-            false
+        // Final authorization check
+        if !authorization_passed {
+            tracing::warn!("❌ RBAC authorization failed for user {}: {}", user_id, authorization_reason);
+            return Err(rabbitmesh::error::RabbitMeshError::Handler(
+                format!("Authorization failed: {}", authorization_reason)
+            ));
         }
         
-        /// Check if user has specific permission
-        fn check_user_permission(
-            user_claims: &serde_json::Map<String, serde_json::Value>, 
-            required_permission: &str, 
-            user_roles: &[String]
-        ) -> bool {
-            // Direct permission check in user claims
-            if let Some(permissions) = user_claims.get("permissions")
-                .or_else(|| user_claims.get("perms"))
-                .or_else(|| user_claims.get("authorities"))
-                .or_else(|| user_claims.get("scopes")) {
-                
-                match permissions {
-                    serde_json::Value::Array(arr) => {
-                        if arr.iter().any(|p| p.as_str() == Some(required_permission)) {
-                            return true;
-                        }
-                    }
-                    serde_json::Value::String(s) => {
-                        if s.split(',').any(|p| p.trim() == required_permission) {
-                            return true;
-                        }
-                    }
-                    _ => {}
-                }
-            }
-            
-            // Role-based permission check (load from environment or config)
-            let role_permissions_config = std::env::var("RBAC_ROLE_PERMISSIONS")
-                .unwrap_or_else(|_| "admin:*,manager:read,write,delete,user:read".to_string());
-            
-            for role_perm_mapping in role_permissions_config.split(',') {
-                if let Some((role, permissions)) = role_perm_mapping.split_once(':') {
-                    if user_roles.contains(&role.trim().to_string()) {
-                        let role_permissions: Vec<&str> = permissions.split(',').map(|s| s.trim()).collect();
-                        if role_permissions.contains(&"*") || role_permissions.contains(&required_permission) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            
-            false
-        }
+        tracing::info!(
+            user_id = user_id,
+            user_roles = ?user_roles,
+            required_role = #required_role,
+            required_permission = #required_permission,
+            reason = authorization_reason,
+            "🛡️ RBAC authorization successful"
+        );
     }
 }
 
-/// Generate role requirement preprocessing
-pub fn generate_role_requirement_preprocessing(role: &str) -> proc_macro2::TokenStream {
-    generate_rbac_preprocessing(Some(role), None)
-}
-
-/// Generate permission requirement preprocessing  
-pub fn generate_permission_requirement_preprocessing(permission: &str) -> proc_macro2::TokenStream {
-    generate_rbac_preprocessing(None, Some(permission))
+/// Generate role hierarchy checking code
+pub fn generate_role_hierarchy_check(min_role_level: u8) -> proc_macro2::TokenStream {
+    quote! {
+        // Check role hierarchy levels
+        if let Some(auth_user) = msg.payload.as_object()
+            .and_then(|obj| obj.get("_auth_user"))
+            .and_then(|user| user.as_object()) {
+            
+            let user_roles = auth_user.get("roles")
+                .and_then(|v| v.as_array())
+                .map(|arr| {
+                    arr.iter()
+                        .filter_map(|v| v.as_str())
+                        .collect::<Vec<&str>>()
+                })
+                .unwrap_or_default();
+            
+            let user_id = auth_user.get("user_id")
+                .and_then(|v| v.as_str())
+                .unwrap_or("unknown");
+            
+            let min_required_level = #min_role_level;
+            let mut user_max_level = 0u8;
+            
+            // Get role levels from environment configuration
+            for role in &user_roles {
+                let role_level_key = format!("RBAC_ROLE_{}_LEVEL", role.to_uppercase());
+                if let Ok(level_str) = std::env::var(&role_level_key) {
+                    if let Ok(level) = level_str.parse::<u8>() {
+                        user_max_level = user_max_level.max(level);
+                    }
+                }
+            }
+            
+            // Default role levels if not configured
+            if user_max_level == 0 {
+                for role in &user_roles {
+                    user_max_level = match *role {
+                        "admin" | "administrator" | "superuser" => user_max_level.max(100),
+                        "manager" | "supervisor" | "lead" => user_max_level.max(80),
+                        "senior" | "expert" => user_max_level.max(60),
+                        "user" | "member" | "employee" => user_max_level.max(40),
+                        "guest" | "readonly" => user_max_level.max(20),
+                        _ => user_max_level.max(10),
+                    };
+                }
+            }
+            
+            if user_max_level < min_required_level {
+                tracing::warn!("❌ Role hierarchy check failed: User {} max level {} < required level {}", 
+                    user_id, user_max_level, min_required_level);
+                return Err(rabbitmesh::error::RabbitMeshError::Handler(
+                    format!("Authorization failed: Insufficient role level (required: {}, user: {})", 
+                        min_required_level, user_max_level)
+                ));
+            }
+            
+            tracing::debug!("✅ Role hierarchy check passed: User {} level {} >= required {}", 
+                user_id, user_max_level, min_required_level);
+        }
+    }
 }

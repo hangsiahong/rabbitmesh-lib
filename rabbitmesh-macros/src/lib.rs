@@ -214,7 +214,7 @@ pub fn generate_auto_gateway(_input: TokenStream) -> TokenStream {
 /// Generate universal wrapper code for a service method
 fn generate_universal_wrapper(_service_name: &str, _method_name: &str, macro_attrs: &[String]) -> proc_macro2::TokenStream {
     let mut preprocessing_steps: Vec<proc_macro2::TokenStream> = Vec::new();
-    let mut postprocessing_steps: Vec<proc_macro2::TokenStream> = Vec::new();
+    let postprocessing_steps: Vec<proc_macro2::TokenStream> = Vec::new();
     
     // Authentication & Authorization
     if macro_attrs.iter().any(|attr| matches!(attr.as_str(), "require_auth" | "jwt_auth" | "bearer_auth" | "api_key_auth")) {
@@ -278,14 +278,20 @@ fn generate_universal_wrapper(_service_name: &str, _method_name: &str, macro_att
         preprocessing_steps.push(event_sourcing);
     }
     
-    quote! {
-        // Modular preprocessing steps
-        #(#preprocessing_steps)*
-        
-        // Business logic execution happens in the original method
-        
-        // Modular postprocessing steps  
-        #(#postprocessing_steps)*
+    if preprocessing_steps.is_empty() {
+        // No preprocessing needed, just return empty
+        quote! {
+            // No preprocessing steps required for this method
+        }
+    } else {
+        quote! {
+            // Execute preprocessing steps for cross-cutting concerns
+            {
+                #(#preprocessing_steps)*
+            }
+            
+            // Continue to business logic execution
+        }
     }
 }
 
