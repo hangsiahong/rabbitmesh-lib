@@ -16,3 +16,203 @@
 2025-08-30 17:01:12 +07:00: Error: Address already in use (os error 48)
 2025-08-30 17:01:13 +07:00: Error: Address already in use (os error 48)
 2025-08-30 17:01:13 +07:00: Error: Address already in use (os error 48)
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:14 +07:00: 
+2025-09-01 22:44:14 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:14 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:14 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:15 +07:00: 
+2025-09-01 22:44:15 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:15 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:15 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:15 +07:00: 
+2025-09-01 22:44:15 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:15 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:15 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:15 +07:00: 
+2025-09-01 22:44:15 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:15 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:15 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:15 +07:00: 
+2025-09-01 22:44:15 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:15 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:15 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:15 +07:00: 
+2025-09-01 22:44:15 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:15 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:15 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:15 +07:00: 
+2025-09-01 22:44:15 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:15 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:15 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:15 +07:00: 
+2025-09-01 22:44:15 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:15 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:15 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:44:15 +07:00: 
+2025-09-01 22:44:15 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:79:10:
+2025-09-01 22:44:15 +07:00: Invalid route "/api/v1/{service}/{method}/{param}": Insertion failed due to conflict with previously registered route: /api/v1/{service}/{prefix}/{method}
+2025-09-01 22:44:15 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:28 +07:00: 
+2025-09-01 22:59:28 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:28 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:28 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+2025-09-01 22:59:40 +07:00: 
+2025-09-01 22:59:40 +07:00: thread 'main' panicked at /Users/hangsia/projects/side/rabbitmq-microservice/rabbitmesh-lib/rabbitmesh-gateway/src/router.rs:66:10:
+2025-09-01 22:59:40 +07:00: Path segments must not start with `*`. For wildcard capture, use `{*wildcard}`. If you meant to literally match a segment starting with an asterisk, call `without_v07_checks` on the router.
+2025-09-01 22:59:40 +07:00: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

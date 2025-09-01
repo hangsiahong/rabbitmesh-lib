@@ -1,6 +1,7 @@
 // Re-export all hooks and utilities
 export * from './client';
-export * from './types';
+// Export types (avoiding conflicts)
+export type { ApiResponse } from './types';
 export * from './authClient';
 export * from './orderClient';
 export * from './userClient';

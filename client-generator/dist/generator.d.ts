@@ -24,6 +24,7 @@ export declare class ClientGenerator {
     private buildQueryConfig;
     private generateMethodParams;
     private generateMainClient;
+    private generateAuthManager;
     private generatePackageJson;
     private generateTsConfig;
     private generateIndex;

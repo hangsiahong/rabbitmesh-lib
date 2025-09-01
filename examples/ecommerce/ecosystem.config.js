@@ -15,12 +15,14 @@ module.exports = {
         USER_SERVICE_DATABASE_NAME: 'ecommerce',
         USER_SERVICE_RABBITMQ_URL: 'amqp://guest:guest@localhost:5672/%2f',
         USER_SERVICE_SERVICE_NAME: 'user-service',
-        USER_SERVICE_SERVICE_VERSION: '0.1.0'
+        USER_SERVICE_SERVICE_VERSION: '0.1.0',
+        JWT_SECRET: 'your-super-secret-jwt-key-change-in-production'
       },
       env_production: {
         RUST_LOG: 'user_service=warn,rabbitmesh=warn',
         USER_SERVICE_DATABASE_URL: 'mongodb://mongodb:27017',
-        USER_SERVICE_RABBITMQ_URL: 'amqp://guest:guest@rabbitmq:5672/%2f'
+        USER_SERVICE_RABBITMQ_URL: 'amqp://guest:guest@rabbitmq:5672/%2f',
+        JWT_SECRET: process.env.JWT_SECRET || 'change-this-in-production'
       },
       log_file: './logs/user-service.log',
       error_file: './logs/user-service-error.log',
@@ -75,13 +77,15 @@ module.exports = {
         ORDER_SERVICE_REDIS_CACHE_TTL_SECONDS: '300',
         ORDER_SERVICE_RABBITMQ_URL: 'amqp://guest:guest@localhost:5672/%2f',
         ORDER_SERVICE_SERVICE_NAME: 'order-service',
-        ORDER_SERVICE_SERVICE_VERSION: '0.1.0'
+        ORDER_SERVICE_SERVICE_VERSION: '0.1.0',
+        JWT_SECRET: 'your-super-secret-jwt-key-change-in-production'
       },
       env_production: {
         RUST_LOG: 'order_service=warn,rabbitmesh=warn',
         ORDER_SERVICE_DATABASE_URL: 'mongodb://mongodb:27017',
         ORDER_SERVICE_REDIS_URL: 'redis://redis:6379',
-        ORDER_SERVICE_RABBITMQ_URL: 'amqp://guest:guest@rabbitmq:5672/%2f'
+        ORDER_SERVICE_RABBITMQ_URL: 'amqp://guest:guest@rabbitmq:5672/%2f',
+        JWT_SECRET: process.env.JWT_SECRET || 'change-this-in-production'
       },
       log_file: './logs/order-service.log',
       error_file: './logs/order-service-error.log',

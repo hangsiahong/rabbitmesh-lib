@@ -163,7 +163,20 @@ impl OrderService {
     #[rate_limit(50, 60)]
     #[metrics]
     pub async fn get_user_orders(msg: Message) -> Result<Value, String> {
+        // Check for user_id in multiple places due to gateway forwarding
         let user_id = msg.metadata.get("user_id")
+            .map(|s| s.clone())
+            .or_else(|| {
+                // Check in payload for path parameters forwarded by gateway
+                if let Some(payload_obj) = msg.payload.as_object() {
+                    payload_obj.get("user_id")
+                        .or_else(|| payload_obj.get("_metadata_user_id"))
+                        .and_then(|v| v.as_str())
+                        .map(|s| s.to_string())
+                } else {
+                    None
+                }
+            })
             .ok_or("User ID not found in request")?;
 
         let limit = msg.metadata.get("limit")

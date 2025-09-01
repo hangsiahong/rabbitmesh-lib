@@ -509,3 +509,832 @@
 2025-09-01 21:51:16 +07:00: [2m2025-09-01T14:51:16.452762Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
 2025-09-01 21:51:16 +07:00: [2m2025-09-01T14:51:16.452766Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
 2025-09-01 21:51:16 +07:00: [2m2025-09-01T14:51:16.452788Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:06:08 +07:00: [2m2025-09-01T15:06:08.802699Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: orders
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.959203Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.959290Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972269Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972285Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972298Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972313Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972318Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972321Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972338Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972341Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972342Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972344Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972349Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972351Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972352Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972354Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972355Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972357Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972359Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972361Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972363Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972364Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972366Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972367Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972369Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972370Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972372Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972374Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972375Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972377Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972378Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972380Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.972383Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.982351Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.982382Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.989008Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.990378Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.990415Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.992580Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.992585Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.992587Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.992590Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.992596Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.992603Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:27:31 +07:00: [2m2025-09-01T15:27:31.244126Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: orders
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.221340Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.221542Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231128Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231150Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231159Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231177Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231181Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231184Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231187Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231190Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231193Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231196Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231209Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231213Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231216Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231220Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231223Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231226Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231231Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231234Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231237Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231241Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231244Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231247Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231251Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231254Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231258Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231261Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231264Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231267Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231270Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231273Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.231280Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.241556Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.241573Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.249207Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.250224Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.250277Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.252735Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.252746Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.252750Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.252755Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.252764Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.252771Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:36:19 +07:00: [2m2025-09-01T15:36:19.833118Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: orders
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.654451Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.654651Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663517Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663523Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663527Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663534Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663536Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663537Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663539Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663540Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663541Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663542Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663548Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663550Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663552Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663553Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663555Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663556Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663558Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663559Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663560Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663562Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663564Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663565Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663567Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663568Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663570Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663571Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663572Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663573Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663574Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663575Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.663578Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.677453Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.677460Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.683724Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.686005Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.686043Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.691108Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.691116Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.691118Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.691124Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.691131Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.691140Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.487284Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.487494Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494577Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494597Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494607Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494625Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494629Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494633Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494636Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494640Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494643Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494646Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494659Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494663Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494667Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494671Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494674Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494678Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494682Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494686Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494690Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494694Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494698Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494701Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494705Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494709Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494713Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494717Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494720Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494723Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494727Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494730Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.494737Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.503463Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.503483Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.510266Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.511560Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.511596Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.514713Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.514726Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.514730Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.514738Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.514747Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.514743Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.807047Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.807158Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819702Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819715Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819719Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819727Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819729Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819730Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819732Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819733Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819735Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819736Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819741Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819743Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819745Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819746Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819747Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819749Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819751Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819752Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819754Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819755Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819757Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819758Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819759Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819761Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819763Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819764Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819766Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819767Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819768Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819769Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.819772Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.828531Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.828558Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.836636Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.837509Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.837519Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.841460Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.841481Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.841486Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.841484Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.841507Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.841518Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:37:39 +07:00: [2m2025-09-01T15:37:39.480778Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: orders
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.766100Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.767623Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791092Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791110Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791838Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791856Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791863Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791866Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791869Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791874Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791877Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791880Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791886Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791890Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791894Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791897Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791901Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791904Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791908Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791911Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791916Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791920Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791923Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791927Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791931Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791934Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791938Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791941Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791944Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791947Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791950Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791954Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.791959Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.808846Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.808870Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.816105Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.816942Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.817046Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.819143Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.819150Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.819149Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.819157Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.819152Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:40:16 +07:00: [2m2025-09-01T15:40:16.819157Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.447096Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.447380Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454624Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454631Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454656Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454659Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454660Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454662Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454663Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454664Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454665Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454667Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454679Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454681Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454683Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454684Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454685Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454687Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454688Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454690Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454691Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454693Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454694Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454695Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454697Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454698Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454700Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454701Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454702Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454704Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454705Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454706Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.454708Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.465394Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.465406Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.469886Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.470495Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.470616Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.472251Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.472256Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.472258Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.472289Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.472300Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:44:14 +07:00: [2m2025-09-01T15:44:14.472325Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.185098Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.185418Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192074Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192082Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192395Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192408Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192413Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192416Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192419Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192423Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192425Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192428Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192437Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192441Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192444Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192448Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192451Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192454Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192458Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192462Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192466Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192469Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192473Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192476Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192480Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192483Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192491Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192494Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192498Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192501Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192504Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192507Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.192510Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.202360Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.202407Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.209818Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.211050Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.211077Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.214510Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.214526Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.214530Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.214562Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.214566Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:45:39 +07:00: [2m2025-09-01T15:45:39.214646Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:46:13 +07:00: [2m2025-09-01T15:46:13.715438Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: orders
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.843101Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.843404Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849877Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849886Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849921Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849924Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849926Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849927Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849928Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849929Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849930Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849932Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849944Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849946Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849947Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849948Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849950Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849951Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849953Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849955Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849956Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849957Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849959Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849960Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849961Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849963Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849964Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849966Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849967Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849968Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849969Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849971Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.849972Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.858205Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.858224Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.861689Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.862988Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.863077Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.864901Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.864906Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.864908Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.864923Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.864929Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:59:27 +07:00: [2m2025-09-01T15:59:27.864931Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.121697Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.121808Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130179Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130194Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130205Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130214Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130219Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130222Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130225Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130229Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130232Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130235Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130244Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130248Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130251Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130255Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130258Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130262Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130267Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130270Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130274Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130278Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130281Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130285Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130288Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130291Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130296Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130299Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130303Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130306Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130309Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130312Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.130316Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.176498Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.176518Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.190967Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.192763Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.192830Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.199072Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.199079Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.199081Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.199153Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.199160Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.199162Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.252404Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.252898Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259440Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259445Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259451Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259453Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259455Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259456Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259457Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259458Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259459Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259461Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259499Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259501Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259503Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259504Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259505Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259506Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259508Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259510Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259511Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259512Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259514Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259515Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259516Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259517Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259519Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259520Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259522Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259523Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259524Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259525Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.259527Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.270397Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.270412Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.276715Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.277569Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.277685Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.279999Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.280003Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.280005Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.280035Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.280038Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.280039Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 23:00:50 +07:00: [2m2025-09-01T16:00:50.406420Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:00:50 +07:00: [2m2025-09-01T16:00:50.406431Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:08:05 +07:00: [2m2025-09-01T16:08:05.127361Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:08:05 +07:00: [2m2025-09-01T16:08:05.127383Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:08:06 +07:00: [2m2025-09-01T16:08:06.958200Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:08:06 +07:00: [2m2025-09-01T16:08:06.958212Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:09:10 +07:00: [2m2025-09-01T16:09:10.965219Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:09:10 +07:00: [2m2025-09-01T16:09:10.965238Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:11:47 +07:00: [2m2025-09-01T16:11:47.795891Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:11:47 +07:00: [2m2025-09-01T16:11:47.795911Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:11:50 +07:00: [2m2025-09-01T16:11:50.712624Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:11:50 +07:00: [2m2025-09-01T16:11:50.712646Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.328394Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.328637Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338944Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338949Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338963Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338967Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338968Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338970Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338971Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338972Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338973Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338975Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338977Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338979Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338981Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338982Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338983Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338984Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338986Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338988Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338989Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338991Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338992Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338993Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338995Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338996Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338998Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.338999Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.339001Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.339002Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.339003Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.339005Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.339006Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.347562Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.347583Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.351573Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.352277Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.352298Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.354887Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.354892Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.354894Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.354898Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.354914Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 23:12:47 +07:00: [2m2025-09-01T16:12:47.354932Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 23:14:27 +07:00: [2m2025-09-01T16:14:27.230051Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:14:27 +07:00: [2m2025-09-01T16:14:27.230068Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:14:40 +07:00: [2m2025-09-01T16:14:40.703442Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:14:40 +07:00: [2m2025-09-01T16:14:40.703457Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:14:50 +07:00: [2m2025-09-01T16:14:50.240608Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:14:50 +07:00: [2m2025-09-01T16:14:50.240621Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:15:06 +07:00: [2m2025-09-01T16:15:06.143505Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:15:06 +07:00: [2m2025-09-01T16:15:06.143517Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:15:13 +07:00: [2m2025-09-01T16:15:13.529766Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:15:13 +07:00: [2m2025-09-01T16:15:13.529787Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:16:44 +07:00: [2m2025-09-01T16:16:44.866561Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:16:44 +07:00: [2m2025-09-01T16:16:44.866572Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:16:57 +07:00: [2m2025-09-01T16:16:57.930070Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:16:57 +07:00: [2m2025-09-01T16:16:57.930090Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:17:09 +07:00: [2m2025-09-01T16:17:09.939805Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:17:09 +07:00: [2m2025-09-01T16:17:09.939817Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:18:06 +07:00: [2m2025-09-01T16:18:06.653967Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:18:06 +07:00: [2m2025-09-01T16:18:06.654004Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:18:18 +07:00: [2m2025-09-01T16:18:18.803695Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:18:18 +07:00: [2m2025-09-01T16:18:18.803712Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:18:19 +07:00: [2m2025-09-01T16:18:19.192789Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:18:19 +07:00: [2m2025-09-01T16:18:19.192806Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:18:21 +07:00: [2m2025-09-01T16:18:21.563867Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:18:21 +07:00: [2m2025-09-01T16:18:21.563883Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:18:25 +07:00: [2m2025-09-01T16:18:25.123166Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:18:25 +07:00: [2m2025-09-01T16:18:25.123182Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:18:31 +07:00: [2m2025-09-01T16:18:31.891686Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:18:31 +07:00: [2m2025-09-01T16:18:31.891709Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for create_order: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.131830Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.132222Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140288Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140292Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140330Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140336Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140338Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140340Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140342Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140344Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140346Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140348Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140368Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140372Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140374Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140376Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140378Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140380Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140383Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140385Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140387Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140389Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140391Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140393Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140395Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140396Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140399Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140401Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140403Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140405Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140407Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140408Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.140410Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.149737Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.149753Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.155487Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.156480Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.156508Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.158594Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.158598Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.158600Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.158600Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.158613Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 23:24:55 +07:00: [2m2025-09-01T16:24:55.158624Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.939154Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.939338Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952361Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952368Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952372Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952375Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952377Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952378Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952379Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952380Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952381Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952382Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952387Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952388Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952390Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952391Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952392Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952394Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952396Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952397Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952398Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952400Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952401Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952403Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952404Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952406Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952407Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952409Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952410Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952411Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952413Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952414Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.952415Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.967094Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.967104Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.977066Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.980981Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.981052Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.985047Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.985054Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.985056Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.985180Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.985188Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.985194Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 23:27:37 +07:00: [2m2025-09-01T16:27:37.776782Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:27:37 +07:00: [2m2025-09-01T16:27:37.776798Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for get_user_orders: Service handler error: User ID not found in request
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.385816Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting Order Service...
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.386105Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395349Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Connected to MongoDB and Redis
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395354Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Order service initialized
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395359Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: order-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395362Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395363Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395364Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395366Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395367Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395368Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395369Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395372Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395374Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: create_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395375Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395376Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395378Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395379Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: update_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395381Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395382Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: delete_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395384Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395385Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_user_orders
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395386Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395387Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: get_orders_by_status
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395389Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395390Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: confirm_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395392Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395393Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Registered RPC handler for method: cancel_order
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395394Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395395Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Auto-generated schema method registered for service: order-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395397Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395398Z[0m [32m INFO[0m [2morder_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.395399Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: order-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.410002Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.410012Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.413682Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.order-service, rabbitmesh.order-service.responses
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.414444Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.order-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.414463Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for order-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.420918Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.order-service.responses
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.420926Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for order-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.420928Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice order-service is running and ready to process messages
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.420933Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.420963Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for order-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.420974Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for order-service
+2025-09-01 23:35:02 +07:00: [2m2025-09-01T16:35:02.968082Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:35:02 +07:00: [2m2025-09-01T16:35:02.968111Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Getting orders for user: test-user-123 with limit: 20, skip: 0
+2025-09-01 23:37:24 +07:00: [2m2025-09-01T16:37:24.150553Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:37:24 +07:00: [2m2025-09-01T16:37:24.150652Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"04057170-2ae4-46a8-a58a-a8e302ed7723" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:37:24 +07:00: [2m2025-09-01T16:37:24.150676Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 7c6a1876-6774-4a30-82ed-a94e6720b839 for user: test-user-123
+2025-09-01 23:38:20 +07:00: [2m2025-09-01T16:38:20.885969Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:20 +07:00: [2m2025-09-01T16:38:20.886065Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"05fdd15d-443d-43df-90f8-f1122a4b475d" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:20 +07:00: [2m2025-09-01T16:38:20.886086Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 6e308367-0331-40fc-81b4-aad016ed46ad for user: test-user-123
+2025-09-01 23:38:21 +07:00: [2m2025-09-01T16:38:21.283419Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:21 +07:00: [2m2025-09-01T16:38:21.283548Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"6c1b722d-ded3-4072-bca4-3f963c045051" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:21 +07:00: [2m2025-09-01T16:38:21.283589Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 64120c29-56a8-4c23-87eb-2c78919f63ae for user: test-user-123
+2025-09-01 23:38:21 +07:00: [2m2025-09-01T16:38:21.687201Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:21 +07:00: [2m2025-09-01T16:38:21.687292Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"1205e679-f33f-4139-aec1-44ae6ba617e0" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:21 +07:00: [2m2025-09-01T16:38:21.687316Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 01f459a5-d156-4b91-969c-9f6de74b59bb for user: test-user-123
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.088519Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.088631Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"cf5ce27b-5527-40ba-b699-8223939c4543" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.088703Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 1cb0eaf0-ea97-442e-a031-71ca1ecf1222 for user: test-user-123
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.501991Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.502082Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"b234afb6-95ca-4c46-a7c1-0cce45a8dccf" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.502104Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: e52022c0-801b-4deb-a5f3-073e5dff0f7b for user: test-user-123
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.909710Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.909802Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"80bf8e97-404f-4952-b0ed-7748a09c939b" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:22 +07:00: [2m2025-09-01T16:38:22.909823Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: ca9b249f-ca08-4c5b-9743-9efaa9756862 for user: test-user-123
+2025-09-01 23:38:23 +07:00: [2m2025-09-01T16:38:23.325008Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:23 +07:00: [2m2025-09-01T16:38:23.325094Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"d2a297e1-c17b-4cd7-b79d-a552d1e0ce3a" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:23 +07:00: [2m2025-09-01T16:38:23.325115Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: e00fe160-bcb6-440e-b2ec-f84e38b0519d for user: test-user-123
+2025-09-01 23:38:23 +07:00: [2m2025-09-01T16:38:23.745163Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:23 +07:00: [2m2025-09-01T16:38:23.745255Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"8cf1e605-b3aa-4ab0-a021-c4593f02db5a" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:23 +07:00: [2m2025-09-01T16:38:23.745277Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: cc46a175-65c6-4b21-a540-ce5a4729c13b for user: test-user-123
+2025-09-01 23:38:24 +07:00: [2m2025-09-01T16:38:24.160166Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:24 +07:00: [2m2025-09-01T16:38:24.160254Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"f55923d5-edb2-4ca8-aba9-043920134a70" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:24 +07:00: [2m2025-09-01T16:38:24.160277Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 34ad6eeb-eac8-4d96-83ef-6cbb573a3ce6 for user: test-user-123
+2025-09-01 23:38:24 +07:00: [2m2025-09-01T16:38:24.887641Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:24 +07:00: [2m2025-09-01T16:38:24.887738Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"df89713f-e923-45a1-a6ea-780c7fe7b960" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:24 +07:00: [2m2025-09-01T16:38:24.887760Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 1e7b6ade-4d66-43d3-9d5c-c822dd1d0065 for user: test-user-123
+2025-09-01 23:38:50 +07:00: [2m2025-09-01T16:38:50.818406Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:50 +07:00: [2m2025-09-01T16:38:50.818513Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"775e8cfc-e49c-4a49-b78c-3dba3bf295e8" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:50 +07:00: [2m2025-09-01T16:38:50.818536Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: e9670be0-a431-4a74-b85b-d01a99e084b4 for user: test-user-123
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.187858Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.187958Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"a25c133d-0035-47c2-829e-62ceef4145e2" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.187981Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: c0d9e710-de22-4e57-93a0-02e92e00c715 for user: test-user-123
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.535885Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.535950Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"27dc94bc-2d72-41ae-bea9-61b63490b304" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.535965Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 69d6d8f8-7747-4845-8ba5-649e8e2b07c8 for user: test-user-123
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.918051Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.918142Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"58de1473-e979-4c1a-a91a-fc47d0551bc4" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:51 +07:00: [2m2025-09-01T16:38:51.918164Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: c3f9fb90-05f8-4adc-bfd3-d9b043d41cfb for user: test-user-123
+2025-09-01 23:38:52 +07:00: [2m2025-09-01T16:38:52.286853Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:52 +07:00: [2m2025-09-01T16:38:52.286956Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"86f4cd1c-6ce5-4adb-983a-5fd863b1df91" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:52 +07:00: [2m2025-09-01T16:38:52.286982Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: a5ac8ca1-c971-4530-b874-5265b4d7b17c for user: test-user-123
+2025-09-01 23:38:52 +07:00: [2m2025-09-01T16:38:52.661751Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:52 +07:00: [2m2025-09-01T16:38:52.661874Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"aef54544-45c0-40a9-b8cc-9eb48ec9fcc3" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:52 +07:00: [2m2025-09-01T16:38:52.661899Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 0da7c97f-5fb4-4274-b398-1e153651c1b4 for user: test-user-123
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.050070Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.050159Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"86566e89-a3fa-4c7d-92ea-e35625a50f4f" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.050180Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 9e7025e1-1048-4777-aeec-c80fc233d0ff for user: test-user-123
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.467285Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.467382Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"4141b9ef-32ac-4e12-995e-e2c02bc6ec32" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.467406Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 5d9ed09d-6d44-40f6-921d-07120fd24d28 for user: test-user-123
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.836140Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.836234Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"009fabde-abf8-48cc-a880-49eeecc4bf1c" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:53 +07:00: [2m2025-09-01T16:38:53.836255Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: ea62af07-44e6-4eb4-8cc9-2e8278de03fd for user: test-user-123
+2025-09-01 23:38:54 +07:00: [2m2025-09-01T16:38:54.237484Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:54 +07:00: [2m2025-09-01T16:38:54.237719Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"055ed9e1-f4c1-42b6-b347-518fdcedc4bb" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:54 +07:00: [2m2025-09-01T16:38:54.237747Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 60d3fa9e-fede-4392-972c-ca0644a47fa9 for user: test-user-123
+2025-09-01 23:38:54 +07:00: [2m2025-09-01T16:38:54.656948Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:54 +07:00: [2m2025-09-01T16:38:54.657037Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"b1c2ce1f-fea2-40dd-9b57-ddc0c826739f" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:54 +07:00: [2m2025-09-01T16:38:54.657059Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: fa4abcdc-4015-4c35-9148-952c6bf4ba29 for user: test-user-123
+2025-09-01 23:38:55 +07:00: [2m2025-09-01T16:38:55.083754Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:55 +07:00: [2m2025-09-01T16:38:55.083847Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"fce0c4a2-c084-4cad-8c32-3755719c5411" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:55 +07:00: [2m2025-09-01T16:38:55.083869Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 3c5d779c-d399-4223-b50e-2a98767805a6 for user: test-user-123
+2025-09-01 23:38:55 +07:00: [2m2025-09-01T16:38:55.558657Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:55 +07:00: [2m2025-09-01T16:38:55.558751Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"7ee9e271-9712-4a64-bc71-cbd55af3f394" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:55 +07:00: [2m2025-09-01T16:38:55.558772Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 2c359f88-c1a1-436c-83dd-1550a441204e for user: test-user-123
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.056263Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.056352Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"200f2294-78b2-4a43-92bc-81cc6275b631" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.056374Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 4b843cec-4d40-4fd3-8b29-b37939ecf6b5 for user: test-user-123
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.520906Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.520962Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"99f23839-d933-47d6-8566-2e0186dcdec2" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.520973Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 0c84054c-de1f-4213-8364-bb295d1fa97c for user: test-user-123
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.971682Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.971772Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"f9ebac6f-d9ba-45e6-ae64-26793043340f" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:56 +07:00: [2m2025-09-01T16:38:56.971794Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 94bc4026-7a7e-4b4d-8159-961bb69ffd23 for user: test-user-123
+2025-09-01 23:38:57 +07:00: [2m2025-09-01T16:38:57.602937Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:57 +07:00: [2m2025-09-01T16:38:57.603047Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"8dbdc8da-8a99-467d-a930-82c0e5f90312" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:57 +07:00: [2m2025-09-01T16:38:57.603078Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 16eec355-81e0-4661-b1ff-44b81586f55b for user: test-user-123
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.020829Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.020935Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"54668ce5-5253-4616-8d84-2acf97d644c4" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.020962Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 3755540e-130b-47fc-8353-3b9711eff041 for user: test-user-123
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.470149Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.470249Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"e1560e35-89ae-4343-8fb1-915fd2c7bbd2" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.470280Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: d55155f7-66e4-4e5e-a474-88c134c40553 for user: test-user-123
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.851547Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.851640Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"6c5d2a5a-3807-494b-a06b-2fb45331b648" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:58 +07:00: [2m2025-09-01T16:38:58.851663Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 90c680df-31cc-4445-9c38-057d1bc4fbe5 for user: test-user-123
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.251718Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.251833Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"0b634adc-bf1d-4299-a5f8-e8bda086f8f2" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.251860Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: a19aa349-3383-48ec-8cbc-727f1d4881ec for user: test-user-123
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.639260Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.639357Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"cdab4c4b-001a-4b78-99ad-b94e7fd9c039" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.639379Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: b5155a0d-aaa1-4c1c-9c8e-909c47cf3665 for user: test-user-123
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.977817Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.977917Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"5941af24-212e-4d7b-b8d9-fa28c2d62bb7" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:38:59 +07:00: [2m2025-09-01T16:38:59.977939Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 436e0270-0bb5-45e3-bd82-f6ce5255ae8a for user: test-user-123
+2025-09-01 23:39:00 +07:00: [2m2025-09-01T16:39:00.371051Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:39:00 +07:00: [2m2025-09-01T16:39:00.371145Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"5f278245-0250-44b5-97ac-b5dc2ba8c1c6" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:39:00 +07:00: [2m2025-09-01T16:39:00.371172Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 06684687-7ea6-49d6-b566-109f824d19fd for user: test-user-123
+2025-09-01 23:39:00 +07:00: [2m2025-09-01T16:39:00.732203Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:39:00 +07:00: [2m2025-09-01T16:39:00.732355Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"ba26e1d2-aa04-434b-86b3-ad96b32ec13b" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:39:00 +07:00: [2m2025-09-01T16:39:00.732383Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 19c6973b-3532-4bb8-9600-c3c0af293845 for user: test-user-123
+2025-09-01 23:39:01 +07:00: [2m2025-09-01T16:39:01.152321Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:39:01 +07:00: [2m2025-09-01T16:39:01.152425Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"6589ea7f-af3b-46f7-a138-5d662d1b99cb" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:39:01 +07:00: [2m2025-09-01T16:39:01.152448Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: 21429c79-22de-4c2f-ab98-eedbfc02b309 for user: test-user-123
+2025-09-01 23:39:01 +07:00: [2m2025-09-01T16:39:01.565911Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:39:01 +07:00: [2m2025-09-01T16:39:01.565966Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m 🔄 Database transaction context established [3mtransaction_id[0m[2m=[0m"01e13feb-ca77-472c-9fa1-79808e3fa9ee" [3misolation_level[0m[2m=[0m"READ_COMMITTED" [3mdatabase_type[0m[2m=[0m"postgresql"
+2025-09-01 23:39:01 +07:00: [2m2025-09-01T16:39:01.565984Z[0m [32m INFO[0m [2morder_service::service[0m[2m:[0m Created order: e20a33fd-d013-49e9-abe5-c7c0b9275194 for user: test-user-123
+2025-09-01 23:39:25 +07:00: [2m2025-09-01T16:39:25.770823Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:39:25 +07:00: [2m2025-09-01T16:39:25.770910Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for create_order: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:39:26 +07:00: [2m2025-09-01T16:39:26.285754Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:39:26 +07:00: [2m2025-09-01T16:39:26.285784Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for create_order: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:39:26 +07:00: [2m2025-09-01T16:39:26.683102Z[0m [33m WARN[0m [2morder_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:39:26 +07:00: [2m2025-09-01T16:39:26.683125Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for create_order: Service handler error: Authentication required: Missing JWT token

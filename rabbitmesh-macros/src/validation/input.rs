@@ -108,7 +108,7 @@ pub fn generate_input_validation() -> proc_macro2::TokenStream {
                 return Err(format!("Field name '{}' is too long (max: 100 chars)", key));
             }
             
-            if !key.chars().all(|c| c.is_alphanumeric() || c == '_' || c == '-') {
+            if !key.chars().all(|c| c.is_alphanumeric() || c == '_' || c == '-' || c == '[' || c == ']' || c == '.') {
                 return Err(format!("Field name '{}' contains invalid characters", key));
             }
             

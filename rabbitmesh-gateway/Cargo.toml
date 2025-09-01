@@ -45,5 +45,8 @@ anyhow = { workspace = true }
 # HTTP client for RabbitMQ API
 reqwest = { version = "0.12", features = ["json"] }
 
+# Regex for generic path parameter conversion
+regex = "1.0"
+
 [dev-dependencies]
 tracing-subscriber = { workspace = true }

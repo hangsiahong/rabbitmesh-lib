@@ -484,3 +484,567 @@
 2025-09-01 21:51:16 +07:00: [2m2025-09-01T14:51:16.432916Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
 2025-09-01 21:51:16 +07:00: [2m2025-09-01T14:51:16.432977Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
 2025-09-01 21:51:16 +07:00: [2m2025-09-01T14:51:16.436863Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:06:08 +07:00: [2m2025-09-01T15:06:08.797586Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:22:49 +07:00: [2m2025-09-01T15:22:49.037995Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:23:05 +07:00: [2m2025-09-01T15:23:05.811129Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953511Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953588Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953668Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953670Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953674Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953680Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953681Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953682Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953683Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953685Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953686Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953687Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953690Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953691Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953693Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953694Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953695Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953697Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953699Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953700Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953702Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953703Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953704Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953706Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953707Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953709Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953710Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953713Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.953715Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.966575Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.966608Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.977335Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.979244Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.979283Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.984605Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.984618Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.984621Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.984635Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.984642Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:24:01 +07:00: [2m2025-09-01T15:24:01.984645Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 22:26:29 +07:00: [2m2025-09-01T15:26:29.739819Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:26:31 +07:00: [2m2025-09-01T15:26:31.433369Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:26:43 +07:00: [2m2025-09-01T15:26:43.954669Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:28:00 +07:00: [2m2025-09-01T15:28:00.457591Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079473Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079654Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079799Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079804Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079812Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079829Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079833Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079836Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079840Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079843Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079846Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079849Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079854Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079858Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079862Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079866Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079869Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079873Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079877Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079880Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079884Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079887Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079890Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079894Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079897Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079900Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079903Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079909Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.079912Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.094514Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.094536Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.102595Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.104269Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.104306Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.108188Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.108189Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.108232Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.108238Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.108246Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:35:16 +07:00: [2m2025-09-01T15:35:16.108259Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 22:35:40 +07:00: [2m2025-09-01T15:35:40.462590Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:35:49 +07:00: [2m2025-09-01T15:35:49.570740Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648620Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648705Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648782Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648784Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648788Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648794Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648796Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648797Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648799Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648800Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648801Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648802Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648805Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648807Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648808Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648809Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648811Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648812Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648814Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648815Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648816Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648818Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648819Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648820Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648821Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648822Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648824Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648826Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.648827Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.662375Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.662387Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.670037Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.674516Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.674597Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.680115Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.680129Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.680160Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.680166Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.680169Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:36:30 +07:00: [2m2025-09-01T15:36:30.680177Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.349987Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350128Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350241Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350245Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350250Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350264Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350267Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350269Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350272Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350274Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350276Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350278Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350282Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350285Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350288Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350290Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350293Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350295Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350299Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350301Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350303Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350306Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350308Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350310Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350313Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350315Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350317Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350322Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.350324Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.359164Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.359200Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.364977Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.366224Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.366251Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.370654Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.370663Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.370717Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.370726Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.370726Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 22:37:11 +07:00: [2m2025-09-01T15:37:11.370746Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802356Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802471Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802663Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802669Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802674Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802690Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802693Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802694Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802696Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802697Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802699Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802700Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802703Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802705Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802707Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802708Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802710Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802711Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802713Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802714Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802716Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802718Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802720Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802721Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802723Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802724Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802726Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802729Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.802730Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.820147Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.820162Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.828246Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.829928Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.830003Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.835720Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.835733Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.835736Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.835758Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.835764Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 22:37:24 +07:00: [2m2025-09-01T15:37:24.835749Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 22:37:29 +07:00: [2m2025-09-01T15:37:29.381729Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:38:50 +07:00: [2m2025-09-01T15:38:50.927357Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:38:51 +07:00: [2m2025-09-01T15:38:51.168169Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:38:51 +07:00: [2m2025-09-01T15:38:51.397144Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:38:51 +07:00: [2m2025-09-01T15:38:51.541933Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:38:51 +07:00: [2m2025-09-01T15:38:51.792749Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.656263Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.656518Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657688Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657694Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657746Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657827Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657830Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657831Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657833Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657835Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657837Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657838Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657841Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.657894Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658009Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658013Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658015Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658017Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658019Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658021Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658023Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658025Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658027Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658029Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658031Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658032Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658034Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658036Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.658038Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.671022Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.671027Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.676571Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.677270Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.677309Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.678894Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.678898Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.678900Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.678920Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.678925Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:44:13 +07:00: [2m2025-09-01T15:44:13.678927Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.549094Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.549403Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.549938Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.549942Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.549983Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550053Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550054Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550056Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550057Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550058Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550059Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550060Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550062Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550079Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550081Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550082Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550084Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550085Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550086Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550088Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550089Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550090Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550092Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550093Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550094Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550095Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550097Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550098Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.550099Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.561118Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.561136Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.564556Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.565193Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.565228Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.566747Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.566753Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.566755Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.566766Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.566772Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:45:38 +07:00: [2m2025-09-01T15:45:38.566775Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 22:45:48 +07:00: [2m2025-09-01T15:45:48.093905Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:46:37 +07:00: [2m2025-09-01T15:46:37.862934Z[0m [33m WARN[0m [2mrabbitmesh::rpc[0m[2m:[0m No handler found for method: users
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117491Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117588Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117656Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117659Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117664Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117669Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117670Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117671Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117672Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117673Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117675Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117676Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117679Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117682Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117683Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117684Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117686Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117687Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117689Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117690Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117691Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117692Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117694Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117695Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117696Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117698Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117699Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117700Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.117701Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.138971Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.138986Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.183729Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.188888Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.188908Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.192141Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.192153Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.192155Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.192362Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.192383Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 22:59:40 +07:00: [2m2025-09-01T15:59:40.192391Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.028997Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.029427Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030282Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030291Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030350Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030538Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030544Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030546Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030547Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030548Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030549Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030551Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030553Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030572Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030575Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030576Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030578Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030579Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030581Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030582Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030583Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030585Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030586Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030587Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030589Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030590Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030591Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030592Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.030594Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.041882Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.041895Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.044980Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.045567Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.045610Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.046786Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.046790Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.046792Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.046815Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.046819Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 23:00:45 +07:00: [2m2025-09-01T16:00:45.046822Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 23:00:50 +07:00: [2m2025-09-01T16:00:50.406413Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:00:50 +07:00: [2m2025-09-01T16:00:50.406424Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:00:51 +07:00: [2m2025-09-01T16:00:51.442398Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:00:51 +07:00: [2m2025-09-01T16:00:51.442421Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:08:05 +07:00: [2m2025-09-01T16:08:05.127332Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:08:05 +07:00: [2m2025-09-01T16:08:05.127359Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:08:06 +07:00: [2m2025-09-01T16:08:06.168245Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:08:06 +07:00: [2m2025-09-01T16:08:06.168255Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:09:14 +07:00: [2m2025-09-01T16:09:14.774217Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Created user: 702b944a-3306-4e6b-bb45-b5a37390bf91
+2025-09-01 23:11:52 +07:00: [2m2025-09-01T16:11:52.257487Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Created user: dbcaee68-f829-4c2e-905b-13c7569ad369
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.590707Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591043Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591682Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591686Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591740Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591787Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591791Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591793Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591794Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591795Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591796Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591797Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591800Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591833Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591836Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591838Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591839Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591841Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591842Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591844Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591845Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591847Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591848Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591850Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591851Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591852Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591853Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591855Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.591856Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.604605Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.604634Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.608650Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.609361Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.609446Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.611541Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.611561Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.611566Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.611573Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.611586Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 23:12:46 +07:00: [2m2025-09-01T16:12:46.611592Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 23:16:57 +07:00: [2m2025-09-01T16:16:57.930161Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:16:57 +07:00: [2m2025-09-01T16:16:57.930183Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:16:58 +07:00: [2m2025-09-01T16:16:58.967765Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:16:58 +07:00: [2m2025-09-01T16:16:58.967800Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:17:09 +07:00: [2m2025-09-01T16:17:09.940091Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:17:09 +07:00: [2m2025-09-01T16:17:09.940101Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:17:10 +07:00: [2m2025-09-01T16:17:10.975490Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:17:10 +07:00: [2m2025-09-01T16:17:10.975529Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:17:13 +07:00: [2m2025-09-01T16:17:13.237237Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Created user: 419b56de-6fe3-41e3-8621-a83c38b21d48
+2025-09-01 23:18:24 +07:00: [2m2025-09-01T16:18:24.086283Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:18:24 +07:00: [2m2025-09-01T16:18:24.086301Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:18:25 +07:00: [2m2025-09-01T16:18:25.122921Z[0m [33m WARN[0m [2muser_service::service[0m[2m:[0m ❌ JWT authentication failed: Missing or invalid Authorization header/token
+2025-09-01 23:18:25 +07:00: [2m2025-09-01T16:18:25.122938Z[0m [31mERROR[0m [2mrabbitmesh::rpc[0m[2m:[0m Handler error for list_users: Service handler error: Authentication required: Missing JWT token
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.631750Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.632301Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633247Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633318Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633329Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633388Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633390Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633392Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633393Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633395Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633397Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633398Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633401Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633428Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633430Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633432Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633434Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633435Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633437Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633439Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633441Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633443Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633444Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633446Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633448Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633450Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633451Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633453Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.633454Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.645690Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.645705Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.649651Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.650301Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.650341Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.651892Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.651900Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.651899Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.651901Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.651904Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 23:24:54 +07:00: [2m2025-09-01T16:24:54.651907Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.931926Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932025Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932129Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932132Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932138Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932143Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932144Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932145Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932146Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932148Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932149Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932150Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932153Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932155Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932157Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932158Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932159Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932161Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932163Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932164Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932166Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932167Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932168Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932170Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932171Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932172Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932173Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932175Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.932176Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.954918Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.954937Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.969087Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.971988Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.972303Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.981075Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.981087Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.981089Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.981939Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.981949Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 23:27:33 +07:00: [2m2025-09-01T16:27:33.981953Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 23:27:37 +07:00: [2m2025-09-01T16:27:37.776419Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:27:37 +07:00: [2m2025-09-01T16:27:37.776435Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Listing users with limit: 50, skip: 0
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.044680Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting User Service...
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.044999Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Configuration loaded
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045560Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Connected to MongoDB
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045564Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m User service initialized
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045628Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🚀 Creating microservice: user-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045671Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🌟 Registering service methods with Universal Macro Framework...
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045676Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 Authorization: RBAC, ABAC, Hybrid patterns supported
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045677Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 💾 Database: Universal transactions for SQL/NoSQL/Graph/TimeSeries
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045679Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ⚡ Caching: Multi-level intelligent caching with domain optimizations
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045680Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✅ Validation: Comprehensive input validation + security + compliance
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045681Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 📊 Observability: Complete metrics, tracing, logging, monitoring
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045682Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🎭 Workflows: State machines, sagas, approvals, event sourcing, CQRS
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045684Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045693Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: create_user
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045695Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045696Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045697Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045699Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: update_user
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045700Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045701Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: delete_user
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045703Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045704Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: list_users
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045705Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045707Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Registered RPC handler for method: get_user_by_email
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045708Z[0m [32m INFO[0m [2mrabbitmesh::rpc[0m[2m:[0m Registered RPC handler for method: schema
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045709Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Auto-generated schema method registered for service: user-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045710Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m ✨ All service methods registered with enterprise-grade features!
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045711Z[0m [32m INFO[0m [2muser_service[0m[2m:[0m Starting microservice on RabbitMQ: amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.045712Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🏁 Starting microservice: user-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.058513Z[0m [32m INFO[0m [2mrabbitmesh::connection[0m[2m:[0m Successfully connected to RabbitMQ at amqp://guest:guest@localhost:5672/%2f
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.058531Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Connected to RabbitMQ
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.063402Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Declared queues: rabbitmesh.user-service, rabbitmesh.user-service.responses
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.064322Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Request processor spawned for queue: rabbitmesh.user-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.064358Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📥 Request processor started for user-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.066939Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m ✅ Response processor spawned for queue: rabbitmesh.user-service.responses
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.066944Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🎯 Microservice user-service is running and ready to process messages
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.066946Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📊 Max concurrent messages: 100
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.066980Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 📤 Response processor started for user-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.066989Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 🧹 Cleanup task started for user-service
+2025-09-01 23:34:59 +07:00: [2m2025-09-01T16:34:59.066995Z[0m [32m INFO[0m [2mrabbitmesh::service[0m[2m:[0m 💓 Health check task started for user-service
+2025-09-01 23:35:02 +07:00: [2m2025-09-01T16:35:02.968062Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m 🔐 JWT authentication successful - context established [3muser_id[0m[2m=[0m"user123" [3mroles_count[0m[2m=[0m1 [3mattributes_count[0m[2m=[0m0
+2025-09-01 23:35:02 +07:00: [2m2025-09-01T16:35:02.968091Z[0m [32m INFO[0m [2muser_service::service[0m[2m:[0m Listing users with limit: 50, skip: 0
